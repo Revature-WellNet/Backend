@@ -1,12 +1,10 @@
 package com.revature.models;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
-@Component
+@Entity
 public class Patient {
 
     @Id
@@ -32,7 +30,7 @@ public class Patient {
     private List<Allergy> allergies;
     @ManyToMany
     @JoinTable(
-            name = "patient_allergies",
+            name = "patient_vaccinations",
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "vaccination_id")
     )
