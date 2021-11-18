@@ -1,11 +1,12 @@
-package models;
+package com.revature.models;
+
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 import javax.persistence.*;
 
-@Entity
+@Component
 public class DiagnosisForm {
 	
 	@Id
@@ -15,7 +16,9 @@ public class DiagnosisForm {
 	private boolean resolutionStatus;
 	private Timestamp checkIn;
 	private Timestamp checkOut;
-//	private Patient patient;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "patient_id")
+	private Patient patient;
 //	private Room room;
 //	private User nurse;
 //	private User doctor;
@@ -88,13 +91,13 @@ public class DiagnosisForm {
 		this.checkOut = checkOut;
 	}
 
-//	public Patient getPatient() {
-//		return patient;
-//	}
-//
-//	public void setPatient(Patient patient) {
-//		this.patient = patient;
-//	}
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 //
 //	public Room getRoom() {
 //		return room;
