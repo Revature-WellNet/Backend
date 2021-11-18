@@ -6,8 +6,10 @@
 
 ## Images
 
+### Entity Relationship Diagram
 ![image](https://user-images.githubusercontent.com/69606065/142472217-562ffb56-8ff4-4917-b6b7-4a1304301eb9.png)
 
+> [Back To Top](#backend)
 
 ### Use Case Diagram
 ![image](https://user-images.githubusercontent.com/69606065/142472470-b9a2004d-4fc1-4d2e-9f29-c23fdaf7eac1.png)
