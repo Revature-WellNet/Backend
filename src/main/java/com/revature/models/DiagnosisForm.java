@@ -1,12 +1,9 @@
 package com.revature.models;
 
-import org.springframework.stereotype.Component;
-
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-import javax.persistence.*;
-
-@Component
+@Entity
 public class DiagnosisForm {
 	
 	@Id

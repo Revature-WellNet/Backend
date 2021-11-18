@@ -1,13 +1,12 @@
 package com.revature.models;
 
-import org.springframework.stereotype.Component;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-@Component
+@Entity
 public class Allergy {
 
     @Id
