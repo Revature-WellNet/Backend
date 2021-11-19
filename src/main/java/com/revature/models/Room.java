@@ -22,9 +22,10 @@ public class Room {
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private Area area;
 
-    public Room(int id, int roomNumber, int bedsAvailable){
+    public Room(int id, int roomNumber, Area area){
         this.roomId = id;
         this.roomNumber = roomNumber;
+        this.area = area;
     }
 
     public Room(){}
