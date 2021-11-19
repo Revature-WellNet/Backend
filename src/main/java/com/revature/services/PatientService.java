@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.sql.Date;// may have to change to .util 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class PatientService {
 
 	public Patient findPatientByName(String firstname, String lastname) {
 		return patientDAO.findByName(firstname, lastname).get();
+	}
+	public Patient findPatientByName(String firstname, String lastname, Date dob) {
+		return patientDAO.findByName(firstname, lastname,dob).get();
 	}
 	
 	public Boolean addPatient (Patient patient) {
