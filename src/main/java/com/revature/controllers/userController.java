@@ -58,7 +58,10 @@ public class userController {
 	
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User user){
+<<<<<<< HEAD:WellNet/src/main/java/com/revature/controllers/userController.java
 
+=======
+>>>>>>> 400dc4bb4527d8281c0fb7067d6180ae2aca07f3:src/main/java/com/revature/controllers/userController.java
 		String id = user.getId();
 		
 		if(id != null) {
