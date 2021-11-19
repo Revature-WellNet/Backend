@@ -23,5 +23,37 @@ public class PatientService {
 	public Patient findPatientByName(String firstname, String lastname) {
 		return patientDAO.findByName(firstname, lastname).get();
 	}
+	
+	public Boolean addPatient (Patient patient) {
+		try {
+			patientDAO.save(patient);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			return false;
+		}
+	}
+	public Boolean updatePatient (Patient patient) {
+		try {
+			patientDAO.save(patient);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			return false;
+		}
+	}
+	
+	public Boolean deletePatient (int  patientId) {
+		try {
+			Patient patient = findPatientById(patientId);
+			if(patient == null) return false;
+			patientDAO.delete(patient);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			return false;
+		}
+	}
+	
 
 }
