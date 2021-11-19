@@ -1,10 +1,14 @@
 package com.revature.models;
 
 import javax.persistence.*;
+
+import org.springframework.stereotype.Component;
+
 import java.sql.Date;
 import java.util.List;
 
 @Entity
+@Component
 public class Patient {
 
     @Id
