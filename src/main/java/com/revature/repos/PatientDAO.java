@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.revature.models.Patient;
 
 @Repository
-
 public interface PatientDAO extends JpaRepository<Patient, Integer> {
+	
 	@Query("SELECT patient FROM Patient WHERE Patient.firstName = ?1")
 	Optional<Patient> findByName(String firstname);
 
@@ -19,3 +19,4 @@ public interface PatientDAO extends JpaRepository<Patient, Integer> {
 	Optional<Patient> findByName(String firstname, String lastname);
 
 }
+
