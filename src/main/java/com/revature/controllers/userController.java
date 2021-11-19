@@ -56,17 +56,17 @@ public class userController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping
-	public ResponseEntity<User> insert(@RequestBody User user){
-		int String = user.getId();
-		
-		if(id!=null) {
-			return ResponseEntity.badRequest().build();
-		}
-		
-		userService.addOrUpdateUser(user);
-		return ResponseEntity.status(201).body(user);
-	}
+//	@PostMapping
+//	public ResponseEntity<User> insert(@RequestBody User user){
+//		int String = user.getId();
+//		
+//		if(id!=null) {
+//			return ResponseEntity.badRequest().build();
+//		}
+//		
+//		userService.addOrUpdateUser(user);
+//		return ResponseEntity.status(201).body(user);
+//	}
 	
 	
 	
