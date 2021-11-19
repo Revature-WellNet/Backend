@@ -1,6 +1,8 @@
 package com.revature.services;
 
 import java.sql.Date;// may have to change to .util 
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +62,12 @@ public class PatientService {
 		}
 	}
 	
+	public Optional<List<Patient>> findPatientByName(String firstname) {
+		return patientDAO.findByFirstName(firstname);
+	}
+
+//	public Optional<List<Patient>> findPatientByName(String firstname, String lastname) {
+//		return patientDAO.findByFirstNameLastName(firstname, lastname);
+//	}
 
 }

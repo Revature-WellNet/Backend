@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private String userId;
 	
 //	private String username;
 //	private String password;
@@ -22,10 +21,10 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 	
-	public int getId() {
+	public String getId() {
 		return userId;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.userId = id;
 	}
 	public String getFirstname() {
@@ -64,7 +63,7 @@ public class User {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + userId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
@@ -106,7 +105,7 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(int id, String firstname, String lastname, String email, Role role) {
+	public User(String id, String firstname, String lastname, String email, Role role) {
 		super();
 		this.userId = id;
 		this.firstname = firstname;
