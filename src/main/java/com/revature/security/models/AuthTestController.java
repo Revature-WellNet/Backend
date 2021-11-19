@@ -16,5 +16,12 @@ public class AuthTestController {
     	System.out.println("user: " + user.getEmail());
         return ResponseEntity.ok(user);
     }
+    
+    @GetMapping("random")
+    public ResponseEntity<AuthUser> getRandom(@AuthenticationPrincipal AuthUser user)
+    {
+    	System.out.println("user: " + user.getUid());
+        return ResponseEntity.ok(user);
+    }
 
 }
