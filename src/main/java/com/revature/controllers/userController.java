@@ -58,10 +58,6 @@ public class userController {
 	
 	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
-<<<<<<< HEAD
-		String id = user.getId();
-=======
->>>>>>> Sprint1
 		
 		String id = user.getId();
 		
