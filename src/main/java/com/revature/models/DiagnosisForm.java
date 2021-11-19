@@ -20,8 +20,11 @@ public class DiagnosisForm {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+	@OneToOne
 	private Room room;
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User nurse;
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User doctor;
 	
 	public DiagnosisForm() {
