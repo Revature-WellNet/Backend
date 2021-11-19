@@ -58,9 +58,9 @@ public class userController {
 	
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User user){
-		int id = user.getId();
+		String id = user.getId();
 		
-		if(id!=0) {
+		if(id != null) {
 			return ResponseEntity.badRequest().build();
 		}
 		
