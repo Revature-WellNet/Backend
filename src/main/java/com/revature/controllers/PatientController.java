@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.sql.Date;// may have to change to .util
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +35,12 @@ public class PatientController {
 	public Patient getPatient(@PathVariable("id")int id) {
 		return patientService.findPatientById(id);
 	}
+	@GetMapping(value = "/{firstName}")
+	public List<Patient> getPatient(@PathVariable("firstname")String firstName){
+		return patientService.findPatientByName(firstName);
+	}
 	@GetMapping(value = "/{firstName}/{lastName}")
-	public Patient getPatient(@PathVariable("firstname")String firstName,
+	public List<Patient> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName) {
 		return patientService.findPatientByName(firstName,lastName);
 	}

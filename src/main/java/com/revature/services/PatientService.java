@@ -20,11 +20,11 @@ public class PatientService {
 		return patientDAO.findById(id).get();
 	}
 
-	public Patient findPatientByName(String firstname) {
+	public List<Patient> findPatientByName(String firstname) {
 		return patientDAO.findByName(firstname).get();
 	}
 
-	public Patient findPatientByName(String firstname, String lastname) {
+	public List<Patient> findPatientByName(String firstname, String lastname) {
 		return patientDAO.findByName(firstname, lastname).get();
 	}
 	public Patient findPatientByName(String firstname, String lastname, Date dob) {
@@ -62,9 +62,9 @@ public class PatientService {
 		}
 	}
 	
-	public Optional<List<Patient>> findPatientByName(String firstname) {
-		return patientDAO.findByFirstName(firstname);
-	}
+//	public Optional<List<Patient>> findPatientByName(String firstname) {
+//		return patientDAO.findByFirstName(firstname);
+//	}
 
 //	public Optional<List<Patient>> findPatientByName(String firstname, String lastname) {
 //		return patientDAO.findByFirstNameLastName(firstname, lastname);
