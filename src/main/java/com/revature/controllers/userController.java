@@ -56,7 +56,7 @@ public class userController {
 	
 	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
-		
+	
 		String id = user.getId();
 		
 		System.out.println("ID : " + id);
