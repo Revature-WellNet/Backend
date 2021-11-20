@@ -58,17 +58,13 @@ public class userController {
 	
 	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
-<<<<<<< HEAD
-		String id = user.getId();
-=======
->>>>>>> Sprint1
 		
 		String id = user.getId();
 		
 		System.out.println("ID : " + id);
 		System.out.println("User : " + user);
 		
-		if(id ==null) {
+		if(id == null) {
 			
 			System.out.println("Bad Request");
 			
