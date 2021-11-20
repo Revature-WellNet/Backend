@@ -29,20 +29,31 @@ public class DiagnosisFormService {
 	}
 	
 	public Optional<List<DiagnosisForm>> findDiagnosisFormByPatient(int patientId) {
-		Patient patient = patientDAO.findById(patientId).get();
+		Optional<Patient> patient = patientDAO.findById(patientId);
+		if(patient.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByPatient(patient.get());
+			return list;
+			}
+		return null;
 		
-		Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByPatient(patient);
-		return list;
 	}
 	
 	public Optional<List<DiagnosisForm>> findDiagnosisFormByNurse(String nurseId) {
-		User nurse = userDAO.findById(nurseId).get();
-		return diagnosisFormDAO.findByNurse(nurse);
+		Optional<User> nurse = userDAO.findById(nurseId);
+		if(nurse.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByNurse(nurse.get());
+			return list;
+		}
+		return null;
 	}
 	
 	public Optional<List<DiagnosisForm>> findDiagnosisFormByDoctor(String doctorId) {
-		User doctor = userDAO.findById(doctorId).get();
-		return diagnosisFormDAO.findByDoctor(doctor);
+		Optional<User> doctor = userDAO.findById(doctorId);
+		if(doctor.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByDoctor(doctor.get());
+			return list;
+		}
+		return null;
 	}
 
 

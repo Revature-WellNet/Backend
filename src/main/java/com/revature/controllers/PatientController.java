@@ -23,7 +23,7 @@ import com.revature.services.PatientService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping(value="/diagnosis/patient")
+@RequestMapping(value="/patient")
 public class PatientController {
 	private PatientService patientService;
 	
@@ -43,10 +43,9 @@ public class PatientController {
 		return ResponseEntity.ok(all);
 	}
 	
-	@GetMapping(value = "/{id}")
-	
-	public ResponseEntity<Patient> getPatient(@PathVariable("id")int id) {
-		
+	@GetMapping(value = "/id/{id}")
+	public ResponseEntity<Patient> getPatient(@PathVariable("id") int id) {
+		System.out.println("In get int id.");
 		Optional<Patient> patient = patientService.findPatientById(id);
 		if(patient.isPresent()) {
 			return ResponseEntity.ok(patient.get());
@@ -55,8 +54,9 @@ public class PatientController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/{firstName}")
+	@GetMapping(value = "/firstname/{firstName}")
 	public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname")String firstName){
+		System.out.println("In get string firstName.");
 		Optional<List<Patient>> list =  patientService.findPatientByName(firstName);
 		if(list.isPresent()) {
 			return ResponseEntity.ok(list.get());
@@ -64,7 +64,7 @@ public class PatientController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/{firstName}/{lastName}")
+	@GetMapping(value = "/fullname/{firstName}/{lastName}")
 	public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName) {
 		Optional<List<Patient>> list =  patientService.findPatientByName(firstName,lastName);
@@ -74,7 +74,7 @@ public class PatientController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/{firstName}/{lastName}/{dob}")
+	@GetMapping(value = "/fullnamedob/{firstName}/{lastName}/{dob}")
 	public ResponseEntity<Patient> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName,
 			                 @PathVariable("dob")Date dob) {

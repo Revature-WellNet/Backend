@@ -52,7 +52,7 @@ public class DiagnosisFormController {
 	@GetMapping(value = "/patientId/{patientId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId")int patientId) {
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patientId);
-		if(diags.isPresent()) {
+		if(diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
 		return ResponseEntity.noContent().build();
@@ -61,7 +61,7 @@ public class DiagnosisFormController {
 	@GetMapping(value = "/nurseId/{nurseId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByNurseId(@PathVariable("nurseId")String nurseId) {
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurseId);
-		if(diags.isPresent()) {
+		if(diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
 		return ResponseEntity.noContent().build();
@@ -70,7 +70,7 @@ public class DiagnosisFormController {
 	@GetMapping(value = "/doctorId/{doctorId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
-		if(diags.isPresent()) {
+		if(diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
 		return ResponseEntity.noContent().build();
