@@ -20,6 +20,8 @@ public class DiagnosisForm {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "room_id")
 	private Room room;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
