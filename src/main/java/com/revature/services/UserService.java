@@ -18,12 +18,17 @@ public class UserService {
 	private RoleDAO roleDAO;
 	
 	@Autowired
-	public UserService(UserDAO userDAO){
+	public UserService(UserDAO userDAO, RoleDAO roleDAO){
 		super();
 		this.userDAO = userDAO;
+		this.roleDAO = roleDAO;
 	}
 	
 	public void addOrUpdateUser(User user) {
+		
+		System.out.println("Adding User : " + user);
+		
+		roleDAO.save(user.getRole());
 		userDAO.save(user);
 	}
 	
