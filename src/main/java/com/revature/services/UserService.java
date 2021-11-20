@@ -28,7 +28,9 @@ public class UserService {
 		
 		System.out.println("Adding User : " + user);
 		
-		roleDAO.save(user.getRole());
+		
+		
+		//roleDAO.save(user.getRole());
 		userDAO.save(user);
 	}
 	
