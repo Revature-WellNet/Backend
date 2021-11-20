@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.DiagnosisForm;
+import com.revature.models.User;
 import com.revature.services.DiagnosisFormService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
@@ -24,6 +25,19 @@ public class DiagnosisFormController {
 	
 	@Autowired
 	private DiagnosisFormService diagnosisFormService;
+	
+	@GetMapping
+	public ResponseEntity<List<DiagnosisForm>> findAllDiagnosisForm(){
+		List<DiagnosisForm> all = diagnosisFormService.findAllDiagnosis();
+		
+		if(all.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		
+		return ResponseEntity.ok(all);
+	}
+	
+	
 	
 	@GetMapping(value = "/{diagId}")
 	public DiagnosisForm getDiagnosisFormById(@PathVariable("diagId")int diagId) {
@@ -36,12 +50,12 @@ public class DiagnosisFormController {
 	}
 	
 	@GetMapping(value = "/nurseId/{nurseId}")
-	public List<DiagnosisForm> getDiagnosisFormByNurseId(@PathVariable("nurseId")int nurseId) {
+	public List<DiagnosisForm> getDiagnosisFormByNurseId(@PathVariable("nurseId")String nurseId) {
 		return diagnosisFormService.findDiagnosisFormByNurse(nurseId);
 	}
 	
 	@GetMapping(value = "/doctorId/{doctorId}")
-	public List<DiagnosisForm> getDiagnosisFormByDoctorId(@PathVariable("doctorId")int doctorId) {
+	public List<DiagnosisForm> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
 		return diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
 	}
 	

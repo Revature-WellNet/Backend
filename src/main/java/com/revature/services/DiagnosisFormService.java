@@ -33,14 +33,14 @@ public class DiagnosisFormService {
 		return list;
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByNurse(int nurseId) {
+	public List<DiagnosisForm> findDiagnosisFormByNurse(String nurseId) {
 		User nurse = userDAO.findById(nurseId).get();
 		
 		List<DiagnosisForm> list = diagnosisFormDAO.findByNurse(nurse).get();
 		return list;
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByDoctor(int doctorId) {
+	public List<DiagnosisForm> findDiagnosisFormByDoctor(String doctorId) {
 		User doctor = userDAO.findById(doctorId).get();
 		
 		List<DiagnosisForm> list = diagnosisFormDAO.findByDoctor(doctor).get();
@@ -77,6 +77,11 @@ public class DiagnosisFormService {
 			System.out.println(e.getStackTrace());
 			return false;
 		}
+	}
+
+	public List<DiagnosisForm> findAllDiagnosis() {
+		
+		return  diagnosisFormDAO.findAll();
 	}
 	
 	

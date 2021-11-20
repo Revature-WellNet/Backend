@@ -61,6 +61,11 @@ public class PatientService {
 			return false;
 		}
 	}
+
+	public List<Patient> findAllPatients() {
+	
+		return patientDAO.findAll();
+	}
 	
 //	public Optional<List<Patient>> findPatientByName(String firstname) {
 //		return patientDAO.findByFirstName(firstname);

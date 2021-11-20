@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Patient;
+import com.revature.models.Patient;
 import com.revature.services.PatientService;
 
 
@@ -29,6 +30,19 @@ public class PatientController {
 	public PatientController(PatientService patientService) {
 		this.patientService= patientService;
 	}
+	
+	
+	@GetMapping
+	public ResponseEntity<List<Patient>> findAllPatient(){
+		List<Patient> all = patientService.findAllPatients();
+		
+		if(all.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		
+		return ResponseEntity.ok(all);
+	}
+	
 	
 	@GetMapping(value = "/{id}")
 	

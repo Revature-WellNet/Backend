@@ -43,7 +43,7 @@ public class userController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findById(@PathVariable("id") int id ){
+	public ResponseEntity<User> findById(@PathVariable("id") String id ){
 		Optional<User> optional = userService.findById(id);
 		
 		if(optional.isPresent())
