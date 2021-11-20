@@ -20,7 +20,7 @@ public class DiagnosisForm {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
-//	private Room room;
+	private Room room;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "nurse_id")
@@ -44,29 +44,30 @@ public class DiagnosisForm {
 		this.checkOut = checkOut;
 	}
 	
-//	public DiagnosisForm(int diagId, String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut,
-//	Patient patient, Room room, User nurse, User doctor) {
-//		super();
-//		this.diagId = diagId;
-//		this.diagnosis = diagnosis;
-//		this.resolutionStatus = resolutionStatus;
-//		this.checkIn = checkIn;
-//		this.checkOut = checkOut;
-//		this.patient = patient;
-//		this.room = room;
-//		this.nurse = nurse;
-//		this.doctor = doctor; 
-//	}
+	public DiagnosisForm(int diagId, String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut,
+	Patient patient, Room room, User nurse, User doctor) {
+		super();
+		this.diagId = diagId;
+		this.diagnosis = diagnosis;
+		this.resolutionStatus = resolutionStatus;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.patient = patient;
+		this.room = room;
+		this.nurse = nurse;
+		this.doctor = doctor; 
+	}
 	
 
 	public DiagnosisForm(String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut, Patient patient,
-		User nurse, User doctor) {
+			Room room,User nurse, User doctor) {
 		super();
 		this.diagnosis = diagnosis;
 		this.resolutionStatus = resolutionStatus;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.patient = patient;
+		this.room = room;
 		this.nurse = nurse;
 		this.doctor = doctor;
 	}
@@ -120,15 +121,15 @@ public class DiagnosisForm {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-//
-//	public Room getRoom() {
-//		return room;
-//	}
-//
-//	public void setRoom(Room room) {
-//		this.room = room;
-//	}
-//
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
 	public User getNurse() {
 		return nurse;
 	}
@@ -144,10 +145,6 @@ public class DiagnosisForm {
 	public void setDoctor(User doctor) {
 		this.doctor = doctor;
 	}
-	
-	
-	
-	
 	
 		
 }

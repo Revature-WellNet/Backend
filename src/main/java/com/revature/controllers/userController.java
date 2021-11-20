@@ -31,8 +31,6 @@ public class userController {
 	}
 	
 	
-
-
 	@GetMapping
 	public ResponseEntity<List<User>> findAllUsers(){
 		List<User> all = userService.findAllUsers();
@@ -67,7 +65,6 @@ public class userController {
 		userService.addOrUpdateUser(user);
 		return ResponseEntity.status(201).body(user);
 	}
-	
 	
 	
 }
