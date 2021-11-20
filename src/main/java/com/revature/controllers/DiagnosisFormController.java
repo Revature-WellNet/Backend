@@ -30,17 +30,17 @@ public class DiagnosisFormController {
 		return diagnosisFormService.findDiagnosisFormById(diagId);
 	}
 	
-	@GetMapping(value = "/{patientId}")
+	@GetMapping(value = "/patientId/{patientId}")
 	public List<DiagnosisForm> getDiagnosisFormByPatientId(@PathVariable("patientId")int patientId) {
 		return diagnosisFormService.findDiagnosisFormByPatient(patientId);
 	}
 	
-	@GetMapping(value = "/{nurseId}")
+	@GetMapping(value = "/nurseId/{nurseId}")
 	public List<DiagnosisForm> getDiagnosisFormByNurseId(@PathVariable("nurseId")int nurseId) {
 		return diagnosisFormService.findDiagnosisFormByNurse(nurseId);
 	}
 	
-	@GetMapping(value = "/{doctorId}")
+	@GetMapping(value = "/doctorId/{doctorId}")
 	public List<DiagnosisForm> getDiagnosisFormByDoctorId(@PathVariable("doctorId")int doctorId) {
 		return diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
 	}
