@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.sql.Date;// may have to change to .util
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,31 +39,50 @@ public class PatientController {
 		
 		if(all.isEmpty()) {
 			return ResponseEntity.noContent().build();
-		}
-		
+		}	
 		return ResponseEntity.ok(all);
 	}
 	
-	
 	@GetMapping(value = "/{id}")
 	
-	public Patient getPatient(@PathVariable("id")int id) {
-		return patientService.findPatientById(id);
+	public ResponseEntity<Patient> getPatient(@PathVariable("id")int id) {
+		
+		Optional<Patient> patient = patientService.findPatientById(id);
+		if(patient.isPresent()) {
+			return ResponseEntity.ok(patient.get());
+		}
+		
+		return ResponseEntity.noContent().build();
 	}
+	
 	@GetMapping(value = "/{firstName}")
-	public List<Patient> getPatient(@PathVariable("firstname")String firstName){
-		return patientService.findPatientByName(firstName);
+	public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname")String firstName){
+		Optional<List<Patient>> list =  patientService.findPatientByName(firstName);
+		if(list.isPresent()) {
+			return ResponseEntity.ok(list.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
+	
 	@GetMapping(value = "/{firstName}/{lastName}")
-	public List<Patient> getPatient(@PathVariable("firstname")String firstName,
+	public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName) {
-		return patientService.findPatientByName(firstName,lastName);
+		Optional<List<Patient>> list =  patientService.findPatientByName(firstName,lastName);
+		if(list.isPresent()) {
+			return ResponseEntity.ok(list.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
+	
 	@GetMapping(value = "/{firstName}/{lastName}/{dob}")
-	public Patient getPatient(@PathVariable("firstname")String firstName,
+	public ResponseEntity<Patient> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName,
 			                 @PathVariable("dob")Date dob) {
-		return patientService.findPatientByName(firstName,lastName,dob);
+		Optional<Patient> list =  patientService.findPatientByName(firstName,lastName,dob);
+		if(list.isPresent()) {
+			return ResponseEntity.ok(list.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping

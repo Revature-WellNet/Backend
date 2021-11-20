@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -17,9 +19,12 @@ public class DiagnosisForm {
 	private boolean resolutionStatus;
 	private Timestamp checkIn;
 	private Timestamp checkOut;
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
 	@JoinColumn(name = "patient_id")
+	@JsonIgnoreProperties("diagnosisForms")
 	private Patient patient;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "room_id")
 	private Room room;

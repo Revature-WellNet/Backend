@@ -16,19 +16,19 @@ public class PatientService {
 	@Autowired
 	private PatientDAO patientDAO;
 
-	public Patient findPatientById(int id) {
-		return patientDAO.findById(id).get();
+	public Optional<Patient> findPatientById(int id) {
+		return patientDAO.findById(id);
 	}
 
-	public List<Patient> findPatientByName(String firstname) {
-		return patientDAO.findByName(firstname).get();
+	public Optional<List<Patient>> findPatientByName(String firstname) {
+		return patientDAO.findByName(firstname);
 	}
 
-	public List<Patient> findPatientByName(String firstname, String lastname) {
-		return patientDAO.findByName(firstname, lastname).get();
+	public Optional<List<Patient>> findPatientByName(String firstname, String lastname) {
+		return patientDAO.findByName(firstname, lastname);
 	}
-	public Patient findPatientByName(String firstname, String lastname, Date dob) {
-		return patientDAO.findByName(firstname, lastname,dob).get();
+	public Optional<Patient> findPatientByName(String firstname, String lastname, Date dob) {
+		return patientDAO.findByName(firstname, lastname,dob);
 	}
 	
 	public Boolean addPatient (Patient patient) {
@@ -52,7 +52,7 @@ public class PatientService {
 	
 	public Boolean deletePatient (int  patientId) {
 		try {
-			Patient patient = findPatientById(patientId);
+			Patient patient = findPatientById(patientId).get();
 			if(patient == null) return false;
 			patientDAO.delete(patient);
 			return true;
