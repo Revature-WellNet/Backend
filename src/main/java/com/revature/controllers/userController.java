@@ -20,7 +20,7 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/user")
 public class userController {
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -30,9 +30,6 @@ public class userController {
 		this.userService = userService;
 	}
 	
-	
-
-
 	@GetMapping
 	public ResponseEntity<List<User>> findAllUsers(){
 		List<User> all = userService.findAllUsers();
@@ -45,8 +42,9 @@ public class userController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findById(@PathVariable("id") int id ){
-		Optional<User> optional = userService.findById(id);
+	public ResponseEntity<User> findById(@PathVariable("id") String id ){
+		
+		Optional<User> optional = userService.findByUserId(id);
 		
 		if(optional.isPresent())
 		{
@@ -58,10 +56,8 @@ public class userController {
 	
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User user){
-<<<<<<< HEAD:WellNet/src/main/java/com/revature/controllers/userController.java
+		System.out.println(user);
 
-=======
->>>>>>> 400dc4bb4527d8281c0fb7067d6180ae2aca07f3:src/main/java/com/revature/controllers/userController.java
 		String id = user.getId();
 		
 		if(id != null) {

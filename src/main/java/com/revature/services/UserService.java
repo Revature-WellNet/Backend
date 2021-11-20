@@ -31,13 +31,14 @@ public class UserService {
 		return userDAO.findAll();
 	}
 	
-	public Optional<User> findById(int id) {
-		return userDAO.findById(id);
+	public Optional<User> findByUserId(String id) {
+		
+		return userDAO.findByUserId(id);
 	}
 	
 	
-	public void deleteUser(int id) {
-		User user = findById(id).get();
+	public void deleteUser(String id) {
+		User user = findByUserId(id).get();
 		if(user!=null) {
 			userDAO.delete(user);
 //			return true;		
