@@ -16,6 +16,10 @@ public class PatientService {
 	@Autowired
 	private PatientDAO patientDAO;
 
+	public List<Patient> findAllPatients(){
+		return patientDAO.findAll();
+	}
+	
 	public Patient findPatientById(int id) {
 		return patientDAO.findById(id).get();
 	}
