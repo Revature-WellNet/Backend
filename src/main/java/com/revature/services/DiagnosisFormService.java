@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,29 +23,26 @@ public class DiagnosisFormService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public DiagnosisForm findDiagnosisFormById(int id) {
-		return diagnosisFormDAO.findById(id).get();
+	
+	public Optional<DiagnosisForm> findDiagnosisFormById(int id) {
+		return diagnosisFormDAO.findById(id);
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByPatient(int patientId) {
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByPatient(int patientId) {
 		Patient patient = patientDAO.findById(patientId).get();
 		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByPatient(patient).get();
+		Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByPatient(patient);
 		return list;
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByNurse(String nurseId) {
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByNurse(String nurseId) {
 		User nurse = userDAO.findById(nurseId).get();
-		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByNurse(nurse).get();
-		return list;
+		return diagnosisFormDAO.findByNurse(nurse);
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByDoctor(String doctorId) {
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByDoctor(String doctorId) {
 		User doctor = userDAO.findById(doctorId).get();
-		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByDoctor(doctor).get();
-		return list;
+		return diagnosisFormDAO.findByDoctor(doctor);
 	}
 
 
@@ -69,7 +67,7 @@ public class DiagnosisFormService {
 	
 	public Boolean deleteDiagnosisForm (int  diagnosisFormId) {
 		try {
-			DiagnosisForm diagnosisForm = findDiagnosisFormById(diagnosisFormId);
+			DiagnosisForm diagnosisForm = findDiagnosisFormById(diagnosisFormId).get();
 			if(diagnosisForm == null) return false;
 			diagnosisFormDAO.delete(diagnosisForm);
 			return true;
@@ -80,7 +78,6 @@ public class DiagnosisFormService {
 	}
 
 	public List<DiagnosisForm> findAllDiagnosis() {
-		
 		return  diagnosisFormDAO.findAll();
 	}
 	

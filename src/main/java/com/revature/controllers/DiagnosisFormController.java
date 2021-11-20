@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,23 +41,39 @@ public class DiagnosisFormController {
 	
 	
 	@GetMapping(value = "/{diagId}")
-	public DiagnosisForm getDiagnosisFormById(@PathVariable("diagId")int diagId) {
-		return diagnosisFormService.findDiagnosisFormById(diagId);
+	public ResponseEntity<DiagnosisForm> getDiagnosisFormById(@PathVariable("diagId")int diagId) {
+		Optional<DiagnosisForm> diag = diagnosisFormService.findDiagnosisFormById(diagId);
+		if(diag.isPresent()) {
+			return ResponseEntity.ok(diag.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping(value = "/patientId/{patientId}")
-	public List<DiagnosisForm> getDiagnosisFormByPatientId(@PathVariable("patientId")int patientId) {
-		return diagnosisFormService.findDiagnosisFormByPatient(patientId);
+	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId")int patientId) {
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patientId);
+		if(diags.isPresent()) {
+			return ResponseEntity.ok(diags.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping(value = "/nurseId/{nurseId}")
-	public List<DiagnosisForm> getDiagnosisFormByNurseId(@PathVariable("nurseId")String nurseId) {
-		return diagnosisFormService.findDiagnosisFormByNurse(nurseId);
+	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByNurseId(@PathVariable("nurseId")String nurseId) {
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurseId);
+		if(diags.isPresent()) {
+			return ResponseEntity.ok(diags.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping(value = "/doctorId/{doctorId}")
-	public List<DiagnosisForm> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
-		return diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
+	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
+		if(diags.isPresent()) {
+			return ResponseEntity.ok(diags.get());
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping
@@ -86,7 +103,7 @@ public class DiagnosisFormController {
 	public  ResponseEntity<DiagnosisForm> deleteDiagnosisForm(@PathVariable("id")int id) {
 		
 		if (diagnosisFormService.deleteDiagnosisForm(id)) {
-		return ResponseEntity.status(200).build();}
+		return ResponseEntity.status(200).build();} // = .ok()
 		else {
 		return ResponseEntity.status(400).build();}
 		
