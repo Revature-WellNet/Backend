@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Patient;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -39,6 +40,17 @@ public class userController {
 		}
 		
 		return ResponseEntity.ok(all);
+	}
+	
+	@GetMapping("/patient/doctor/{inputString}")
+	public ResponseEntity<List<Patient>> findPatientsByString(@PathVariable("inputString") String inputString) {
+		
+		System.out.println("String Received : " + inputString);
+		
+		List<Patient> patients = userService.findAllPatients();
+				
+		return ResponseEntity.status(201).body(patients);
+		
 	}
 	
 	@GetMapping("/{id}")

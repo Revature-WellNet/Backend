@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.Patient;
 import com.revature.models.Role;
 import com.revature.models.User;
+import com.revature.repos.PatientDAO;
 import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
 
@@ -16,12 +18,14 @@ public class UserService {
 	
 	private UserDAO userDAO;
 	private RoleDAO roleDAO;
+	private PatientDAO patientDAO;
 	
 	@Autowired
-	public UserService(UserDAO userDAO, RoleDAO roleDAO){
+	public UserService(UserDAO userDAO, RoleDAO roleDAO, PatientDAO patientDAO){
 		super();
 		this.userDAO = userDAO;
 		this.roleDAO = roleDAO;
+		this.patientDAO = patientDAO;
 	}
 	
 	public void addOrUpdateUser(User user) {
@@ -52,6 +56,12 @@ public class UserService {
 		}else {
 //			return false;
 		}
+	}
+	
+	public List<Patient> findAllPatients() {
+		
+		return patientDAO.findAll();
+		
 	}
 	
 	public void addOrUpdateRole(Role role) {
