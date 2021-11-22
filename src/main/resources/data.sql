@@ -1,5 +1,4 @@
 
-
 DROP TABLE IF EXISTS billionaires;
 CREATE TABLE billionaires (
   id INT AUTO_INCREMENT  PRIMARY KEY,

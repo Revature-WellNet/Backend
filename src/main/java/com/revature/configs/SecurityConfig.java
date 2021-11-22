@@ -90,6 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
 				.addFilterBefore((Filter) tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				http.headers().frameOptions().sameOrigin();
 	}
 	
 }

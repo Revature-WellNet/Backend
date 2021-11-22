@@ -10,6 +10,12 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+    
+    
     # alternative datasource: external mysql database example
 #    url: jdbc:mysql://localhost:3306/test
 #    username: root
@@ -20,6 +26,11 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+      
+server:
+  port: 8081
+  servlet:    context-path: /wellnet
+
 
 
 security:
@@ -62,6 +73,7 @@ security:
     - Cache-Control
     - Id-Token
   allowed-public-apis:
+    - /h2-console/**
     - /favicon.ico
     - /session/login
     - /public/**
