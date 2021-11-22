@@ -15,12 +15,36 @@ import com.revature.security.models.RoleConstants;
 import com.revature.security.services.RoleService;
 
 @RestController
-@RequestMapping("private")
+@RequestMapping("private") //name of mapping must not be "public" in order to be flagged for authentication
 public class AuthTestController {
 	
 	@Autowired
 	RoleService roleService;
 
+	@GetMapping("test")
+    ResponseEntity<String> getPublic(@AuthenticationPrincipal AuthUserDTO user) {
+        return ResponseEntity.ok("OK");
+    }
+	
+    @GetMapping("nurse-details")
+    @IsNurse //Add this annotation if you want to lock controller functions to particular roles
+             //not hooked up with registration yet so (don't do it yet)
+    public ResponseEntity<AuthUserDTO> getNurseInfo(@AuthenticationPrincipal AuthUserDTO user) //Add in your @RequestBody (i.e, @RequestBody Nurse nurse) as needed
+    {
+    	System.out.println("is a nurse!");
+    	return ResponseEntity.status(200).build();
+    }
+    
+    //@GetMapping("nurse")
+    //public ResponseEntity<Nurse> getLoggedInNurseInfo(@AuthenticationPrincipal AuthUserDTO user)
+    //{
+    //  Nurse nurse = userService.findNurseByUid(user.getUid()); 
+	//  if(nurse != null)
+	//     return ResponseEntity.ok(nurse);
+	//  else
+	//     return ResponseEntity.status(404).build();
+    //{
+	
     @GetMapping("user-details")
     public ResponseEntity<AuthUserDTO> getUserInfo(@AuthenticationPrincipal AuthUserDTO user) {
     	System.out.println("user: " + user.getEmail()); 	
@@ -48,13 +72,5 @@ public class AuthTestController {
     		return ResponseEntity.status(400).build();
     	}
     }
-    
-    @GetMapping("nurse-details")
-    @IsNurse
-    public ResponseEntity<AuthUserDTO> getNurseInfo(@AuthenticationPrincipal AuthUserDTO user)
-    {
-    	System.out.println("is a nurse!");
-    	return ResponseEntity.status(200).build();
-    }
-
+  
 }
