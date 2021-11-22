@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Avenger;
+
 import com.revature.models.Covid19Verification;
-import com.revature.models.Home;
 import com.revature.models.User;
 import com.revature.services.Covid19VerificationService;
 
 
-@CrossOrigin
+@CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
 @RequestMapping("/covid")
 public class Covid19VerificationController {

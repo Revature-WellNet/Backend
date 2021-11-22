@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.controllers.CovidVerification;
 import com.revature.models.Covid19Verification;
 import com.revature.models.Patient;
 import com.revature.models.Role;

@@ -27,6 +27,11 @@ public class Covid19Verification {
 		this.timestamp = timestamp;
 		this.covid = covid;
 	}
+	
+
+	public Covid19Verification() {
+		super();
+	}
 
 	public int getId() {
 		return id;

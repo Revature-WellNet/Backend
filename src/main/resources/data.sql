@@ -1,5 +1,8 @@
-DROP TABLE IF EXISTS billionaires;
 
+INSERT INTO COVID19VERIFICATION (ID, COVID, TIMESTAMP) VALUES 
+(1, FALSE, '1970-01-01 02:02:02');
+
+DROP TABLE IF EXISTS billionaires;
 CREATE TABLE billionaires (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   first_name VARCHAR(250) NOT NULL,
@@ -11,3 +14,4 @@ INSERT INTO billionaires (first_name, last_name, career) VALUES
   ('Aliko', 'Dangote', 'Billionaire Industrialist'),
   ('Bill', 'Gates', 'Billionaire Tech Entrepreneur'),
   ('Folrunsho', 'Alakija', 'Billionaire Oil Magnate');
+  
