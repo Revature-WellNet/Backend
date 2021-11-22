@@ -5,7 +5,6 @@ import java.util.List;
 import com.revature.models.Room;
 import com.revature.services.RoomService;
 
-import org.aspectj.weaver.Lint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
