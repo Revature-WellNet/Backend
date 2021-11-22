@@ -25,6 +25,7 @@ import com.revature.services.PatientService;
 @RestController
 @RequestMapping(value="/patient")
 public class PatientController {
+	
 	private PatientService patientService;
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class PatientController {
 	
 	@GetMapping(value = "/id/{id}")
 	public ResponseEntity<Patient> getPatient(@PathVariable("id") int id) {
-		System.out.println("In get int id.");
+		//System.out.println("In get int id.");
 		Optional<Patient> patient = patientService.findPatientById(id);
 		if(patient.isPresent()) {
 			return ResponseEntity.ok(patient.get());
@@ -106,10 +107,6 @@ public class PatientController {
 		return ResponseEntity.status(400).build();}
 		
 	}
-	
-	
-	
-	
 	
 	
 	@DeleteMapping(value = "/{id}")
