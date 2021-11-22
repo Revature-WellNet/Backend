@@ -1,5 +1,9 @@
 package com.revature.services;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import com.revature.models.Area;
 import com.revature.repositories.AreaRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +20,16 @@ public class AreaService {
         this.areaRepo = areaRepo;
     }
     
+    public List<Area> findAll(){
+        return this.areaRepo.findAll();
+    }
+
+    public Area findById(int id){
+        try{
+            return areaRepo.findById(id).get();
+        } catch (NoSuchElementException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
