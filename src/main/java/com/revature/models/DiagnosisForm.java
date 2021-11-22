@@ -20,8 +20,17 @@ public class DiagnosisForm {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+
+	@OneToOne
 	private Room room;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "nurse_id")
 	private User nurse;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "doctor_id")
 	private User doctor;
 	
 	public DiagnosisForm() {
@@ -38,24 +47,45 @@ public class DiagnosisForm {
 		this.checkOut = checkOut;
 	}
 	
-	public DiagnosisForm(int diagId, String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut,
-	Patient patient, Room room, User nurse, User doctor) {
+
+//	public DiagnosisForm(int diagId, String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut,
+//	Patient patient, Room room, User nurse, User doctor) {
+//		super();
+//		this.diagId = diagId;
+//		this.diagnosis = diagnosis;
+//		this.resolutionStatus = resolutionStatus;
+//		this.checkIn = checkIn;
+//		this.checkOut = checkOut;
+//		this.patient = patient;
+//		this.room = room;
+//		this.nurse = nurse;
+//		this.doctor = doctor; 
+//	}
+	
+
+	public DiagnosisForm(String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut, Patient patient,
+		User nurse, User doctor) {
 		super();
-		this.diagId = diagId;
+
 		this.diagnosis = diagnosis;
 		this.resolutionStatus = resolutionStatus;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.patient = patient;
+
 		this.room = room;
 		this.nurse = nurse;
 		this.doctor = doctor; 
 	}
 
+
+
+
 	public int getDiagId() {
 		return diagId;
 	}
 
+	
 	public void setDiagId(int diagId) {
 		this.diagId = diagId;
 	}
@@ -100,6 +130,7 @@ public class DiagnosisForm {
 		this.patient = patient;
 	}
 
+
 	public Room getRoom() {
 		return room;
 	}
@@ -107,6 +138,7 @@ public class DiagnosisForm {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
+
 
 	public User getNurse() {
 		return nurse;
