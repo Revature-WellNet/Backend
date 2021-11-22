@@ -33,11 +33,11 @@ security:
     max-age-in-minutes: 7200
     http-only: true
     secure: true
-    domain: ${DOMAIN}
+    domain: ${CORS_DOMAIN}
     path: /
   allow-credentials: true
   allowed-origins:
-    - https://${DOMAIN}
+    - https://${CORS_DOMAIN}
     - http://localhost:4200
   allowed-methods:
     - GET
@@ -67,3 +67,6 @@ security:
     - /public/**
   exposed-headers:
     - X-Xsrf-Token
+  valid-application-roles:
+    - ROLE_NURSE
+    - ROLE_DOCTOR

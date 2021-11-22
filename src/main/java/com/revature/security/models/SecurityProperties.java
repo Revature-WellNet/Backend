@@ -20,6 +20,8 @@ public class SecurityProperties {
 	List<String> exposedHeaders;
 	List<String> allowedMethods;
 	List<String> allowedPublicApis;
+	List<String> validApplicationRoles;
+	
 	public CookieProperties getCookieProps() {
 		return cookieProps;
 	}
@@ -68,5 +70,13 @@ public class SecurityProperties {
 	public void setAllowedPublicApis(List<String> allowedPublicApis) {
 		this.allowedPublicApis = allowedPublicApis;
 	}
+	public List<String> getValidApplicationRoles() {
+		return validApplicationRoles;
+	}
+	public void setValidApplicationRoles(List<String> validApplicationRoles) {
+		this.validApplicationRoles = validApplicationRoles;
+	}
+	
+	
 	
 }
