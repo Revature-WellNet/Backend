@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 public class Covid19Verifcation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +29,12 @@ public class Covid19Verifcation {
 		super();
 		this.timestamp = timestamp;
 		this.covid = covid;
+	}
+	
+
+	public Covid19Verifcation() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {

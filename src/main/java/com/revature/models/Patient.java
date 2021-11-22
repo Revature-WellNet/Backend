@@ -34,6 +34,7 @@ public class Patient {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "allergy_id")
     )
+    @JsonIgnoreProperties("patients")
     private List<Allergy> patientAllergies;
     
     @ManyToMany
@@ -42,6 +43,7 @@ public class Patient {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "vaccination_id")
     )
+    @JsonIgnoreProperties("patients")
     private List<Vaccination> patientVaccinations;
     
 	@JsonIgnoreProperties("patient")
