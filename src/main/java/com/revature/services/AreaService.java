@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.revature.models.Area;
-import com.revature.repositories.AreaRepo;
+import com.revature.repos.AreaRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
