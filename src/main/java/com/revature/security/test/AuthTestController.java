@@ -44,6 +44,18 @@ public class AuthTestController {
 	//  else
 	//     return ResponseEntity.status(404).build();
     //{
+    
+  //@GetMapping("nurse")
+    //public ResponseEntity<Nurse> updateLoggedInNurseInfo(@AuthenticationPrincipal AuthUserDTO user, @RequestBody Nurse updatedNurse)
+    //{
+    //  Nurse nurse = userService.findNurseByUid(user.getUid()); 
+	//  if(nurse == null) return ResponseEntity.status(404).build();  
+    //  if(nurse.getUid().equals(updatedNurse.getUid())) <- checks and makes sure that user is going to update themselves and not another nurse 
+    //     userService.updateNurse(updatedNurse);
+	//     return ResponseEntity.status(200).build();
+	//  else
+	//     return ResponseEntity.status(403).build();
+    //{
 	
     @GetMapping("user-details")
     public ResponseEntity<AuthUserDTO> getUserInfo(@AuthenticationPrincipal AuthUserDTO user) {
