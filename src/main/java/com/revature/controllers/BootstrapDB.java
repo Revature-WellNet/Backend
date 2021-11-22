@@ -1,10 +1,7 @@
 package com.revature.controllers;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.revature.models.*;
+import com.revature.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,40 +9,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Allergy;
-import com.revature.models.Area;
-import com.revature.models.BloodType;
-import com.revature.models.Covid19Verifcation;
-import com.revature.models.DiagnosisForm;
-import com.revature.models.Patient;
-import com.revature.models.Role;
-import com.revature.models.Room;
-import com.revature.models.Sex;
-import com.revature.models.User;
-import com.revature.models.Vaccination;
-import com.revature.repos.AllergyDAO;
-import com.revature.repos.AreaRepo;
-import com.revature.repos.BloodTypeDAO;
-import com.revature.repos.CovidVerificationDAO;
-import com.revature.repos.DiagnosisFormDAO;
-import com.revature.repos.PatientDAO;
-import com.revature.repos.RoleDAO;
-import com.revature.repos.RoomRepo;
-import com.revature.repos.SexDAO;
-import com.revature.repos.UserDAO;
-import com.revature.repos.VaccinationDAO;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping(value="/bootstrapDB")
+@RequestMapping(value="/public/bootstrapDB")
 public class BootstrapDB {
 
 	private  RoleDAO roleDao;
 	private  SexDAO sexDao;
 	private BloodTypeDAO bloodTypeDAO;
 	private VaccinationDAO vaccinationDAO;
-	private CovidVerificationDAO covidVerificationDAO;
+	private Covid19VerificationDAO covidVerificationDAO;
 	private AllergyDAO allergyDAO;
 	private AreaRepo areaDAO;
 	private RoomRepo roomDAO;
@@ -55,7 +34,7 @@ public class BootstrapDB {
 	
 	@Autowired
 	public BootstrapDB(RoleDAO roleDao, SexDAO sexDao, BloodTypeDAO bloodTypeDAO, 
-			VaccinationDAO vaccinationDAO, CovidVerificationDAO covidVerificationDAO,
+			VaccinationDAO vaccinationDAO, Covid19VerificationDAO covidVerificationDAO,
 			AllergyDAO allergyDAO, AreaRepo areaDAO, RoomRepo roomDAO, UserDAO userDAO,
 			PatientDAO patientDAO, DiagnosisFormDAO diagnosisFormDAO) {
 		
@@ -91,7 +70,7 @@ public class BootstrapDB {
 	
 	private Vaccination vaccination1 = new Vaccination(1,"Covid-19",null);
 	
-	private Covid19Verifcation covid19Verifcation = new Covid19Verifcation(1,
+	private Covid19Verification covid19Verification  = new Covid19Verification(1,
 									new Timestamp(System.currentTimeMillis()),false);
 	
 	private Allergy allergy1 = new Allergy(1,"Drug Allergy",null);
@@ -153,7 +132,7 @@ public class BootstrapDB {
 	}
 
 	private void addCovidVerification() {
-		covidVerificationDAO.save(covid19Verifcation);
+		covidVerificationDAO.save(covid19Verification);
 	}
 
 	private void addBloodType() {

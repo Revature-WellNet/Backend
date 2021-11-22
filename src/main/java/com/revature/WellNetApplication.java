@@ -9,6 +9,8 @@ public class WellNetApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WellNetApplication.class, args);
+		
+		System.err.println("=== Application Started ===");
 	}
 
 }

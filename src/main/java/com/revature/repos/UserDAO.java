@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.models.User;
 
-@Repository
-public interface UserDAO extends JpaRepository<User,String> {
-
-	Optional<User> findById(String id);
+public interface UserDAO extends JpaRepository<User, Integer>{
+	// TODO String?
+	public Optional<User> findByUserId(String id);
+	
 
 }
