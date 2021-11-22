@@ -55,7 +55,6 @@ public class userController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<User> findById(@PathVariable("id") String id ){
-		
 		Optional<User> optional = userService.findByUserId(id);
 		
 		if(optional.isPresent())
@@ -87,7 +86,6 @@ public class userController {
 		
 		return ResponseEntity.status(201).body(user);
 }
-	
 	
 	
 }

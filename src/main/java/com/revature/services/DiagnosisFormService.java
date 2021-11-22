@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,29 +23,37 @@ public class DiagnosisFormService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public DiagnosisForm findDiagnosisFormById(int id) {
-		return diagnosisFormDAO.findById(id).get();
+	
+	public Optional<DiagnosisForm> findDiagnosisFormById(int id) {
+		return diagnosisFormDAO.findById(id);
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByPatient(int patientId) {
-		Patient patient = patientDAO.findById(patientId).get();
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByPatient(int patientId) {
+		Optional<Patient> patient = patientDAO.findById(patientId);
+		if(patient.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByPatient(patient.get());
+			return list;
+			}
+		return null;
 		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByPatient(patient).get();
-		return list;
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByNurse(int nurseId) {
-		User nurse = userDAO.findById(nurseId).get();
-		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByNurse(nurse).get();
-		return list;
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByNurse(String nurseId) {
+		Optional<User> nurse = userDAO.findByUserId(nurseId);
+		if(nurse.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByNurse(nurse.get());
+			return list;
+		}
+		return null;
 	}
 	
-	public List<DiagnosisForm> findDiagnosisFormByDoctor(int doctorId) {
-		User doctor = userDAO.findById(doctorId).get();
-		
-		List<DiagnosisForm> list = diagnosisFormDAO.findByDoctor(doctor).get();
-		return list;
+	public Optional<List<DiagnosisForm>> findDiagnosisFormByDoctor(String doctorId) {
+		Optional<User> doctor = userDAO.findByUserId(doctorId);
+		if(doctor.isPresent()) {
+			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByDoctor(doctor.get());
+			return list;
+		}
+		return null;
 	}
 
 
@@ -69,7 +78,7 @@ public class DiagnosisFormService {
 	
 	public Boolean deleteDiagnosisForm (int  diagnosisFormId) {
 		try {
-			DiagnosisForm diagnosisForm = findDiagnosisFormById(diagnosisFormId);
+			DiagnosisForm diagnosisForm = findDiagnosisFormById(diagnosisFormId).get();
 			if(diagnosisForm == null) return false;
 			diagnosisFormDAO.delete(diagnosisForm);
 			return true;
@@ -77,6 +86,10 @@ public class DiagnosisFormService {
 			System.out.println(e.getStackTrace());
 			return false;
 		}
+	}
+
+	public List<DiagnosisForm> findAllDiagnosis() {
+		return  diagnosisFormDAO.findAll();
 	}
 	
 	
