@@ -52,11 +52,16 @@ public class PatientService {
 	
 	public Boolean deletePatient (int  patientId) {
 		try {
-			Patient patient = findPatientById(patientId).get();
-			if(patient == null) return false;
-			patientDAO.delete(patient);
-			return true;
+			Patient patient = patientDAO.findById(patientId).get();
+			if(patient == null) 
+				return false;
+			else {
+				System.out.println("Tao in delete else");
+				patientDAO.delete(patient);
+				return true;
+			}
 		} catch (Exception e) {
+			System.out.println("Tao in delete exception");
 			System.out.println(e.getStackTrace());
 			return false;
 		}
