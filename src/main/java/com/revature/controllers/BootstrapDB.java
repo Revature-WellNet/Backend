@@ -177,7 +177,7 @@ public class BootstrapDB {
 				dob, 6.0, 200.0, bloodType1, sex1, allergys, vaccinations, diagnosisForms);
 		patientDAO.save(patient1);
 		
-		DiagnosisForm diagnosisForm = new DiagnosisForm("Septicemia",false,
+		DiagnosisForm diagnosisForm = new DiagnosisForm("Septicemia", "mental instability, high respiratory rate, high blood pressure", "antibiotics", false,
 				new Timestamp(System.currentTimeMillis()), null, 
 				patient1, room1,nurse,doctor);
 		
