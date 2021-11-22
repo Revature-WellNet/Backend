@@ -1,4 +1,4 @@
-package com.revature.security.models;
+package com.revature.security.services;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.revature.security.models.SecurityProperties;
 
 import lombok.extern.slf4j.Slf4j;
 

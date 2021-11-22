@@ -22,9 +22,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
-import com.revature.security.models.AuthUser;
+import com.revature.security.models.AuthUserDTO;
 import com.revature.security.models.Credentials;
 import com.revature.security.models.SecurityProperties;
+import com.revature.security.services.SecurityService;
 import com.revature.utils.CookieUtils;
 
 @Component
@@ -52,8 +53,6 @@ public class SecurityFilter extends OncePerRequestFilter
         boolean strictServerSessionEnabled = securityProps.getFirebaseProps().isEnableStrictServerSession();
         Cookie sessionCookie = cookieUtils.getCookie("session");
         String token = securityService.getBearerToken(request);
-        System.out.println(token);
-        logger.info(token);
         try {
             if (sessionCookie != null) {
                 session = sessionCookie.getValue();
@@ -70,23 +69,20 @@ public class SecurityFilter extends OncePerRequestFilter
             e.printStackTrace();
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        AuthUser user = firebaseTokenToUserDto(decodedToken);
+        AuthUserDTO user = firebaseTokenToUserDto(decodedToken);
         if (user != null) {
-        	System.out.println("is here!: " + decodedToken.getClaims());
             decodedToken.getClaims().forEach((key, value) -> authorities.add(new SimpleGrantedAuthority(key)));
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,
                     new Credentials(type, decodedToken, token, session), authorities);
-            System.out.println("authentication: " + authentication.toString());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
     }
 
-    private AuthUser firebaseTokenToUserDto(FirebaseToken decodedToken) {
-    	AuthUser user = null;
+    private AuthUserDTO firebaseTokenToUserDto(FirebaseToken decodedToken) {
+    	AuthUserDTO user = null;
         if (decodedToken != null) {
-            user = new AuthUser();
-            System.out.println("email: " + decodedToken.getEmail());
+            user = new AuthUserDTO();
             user.setUid(decodedToken.getUid());
             user.setName(decodedToken.getName());
             user.setEmail(decodedToken.getEmail());

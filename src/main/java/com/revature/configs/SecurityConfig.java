@@ -1,4 +1,4 @@
-package com.revature.security;
+package com.revature.configs;
 
 
 import java.io.IOException;
@@ -32,6 +32,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.security.SecurityFilter;
 import com.revature.security.models.SecurityProperties;
 
 @Configuration
@@ -91,15 +92,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/**").allowedHeaders("*").allowedOrigins("http://localhost:4200").allowedMethods("*")
-//				.allowCredentials(true);
-//			}
-//		};
-//	}
-
 }

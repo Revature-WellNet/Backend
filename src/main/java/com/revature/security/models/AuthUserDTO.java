@@ -5,18 +5,15 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class AuthUser implements Serializable {
-
-	/**
-	 * 
-	 */
+public class AuthUserDTO implements Serializable {
 	private static final long serialVersionUID = 4408418647685225829L;
 	String uid;
 	String name;
 	String email;
 	boolean isEmailVerified;
 	String issuer;
-	String picture;
+	String picture; //for future use, does not need to implemented
+	
 	public String getUid() {
 		return uid;
 	}

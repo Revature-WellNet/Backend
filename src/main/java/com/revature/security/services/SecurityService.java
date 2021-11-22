@@ -1,4 +1,4 @@
-package com.revature.security;
+package com.revature.security.services;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.revature.security.models.AuthUser;
+import com.revature.security.models.AuthUserDTO;
 import com.revature.security.models.Credentials;
 import com.revature.security.models.SecurityProperties;
 import com.revature.utils.CookieUtils;
@@ -25,12 +25,12 @@ public class SecurityService {
     @Autowired
     SecurityProperties securityProps;
 
-    public AuthUser getUser() {
-    	AuthUser userPrincipal = null;
+    public AuthUserDTO getUser() {
+    	AuthUserDTO userPrincipal = null;
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Object principal = securityContext.getAuthentication().getPrincipal();
-        if (principal instanceof AuthUser) {
-            userPrincipal = ((AuthUser) principal);
+        if (principal instanceof AuthUserDTO) {
+            userPrincipal = ((AuthUserDTO) principal);
         }
         return userPrincipal;
     }

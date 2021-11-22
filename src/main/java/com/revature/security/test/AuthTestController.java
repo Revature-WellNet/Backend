@@ -1,4 +1,4 @@
-package com.revature.security.models;
+package com.revature.security.test;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.security.models.AuthUserDTO;
+import com.revature.security.models.IsNurse;
+import com.revature.security.models.RoleConstants;
+import com.revature.security.services.RoleService;
+
 @RestController
 @RequestMapping("private")
 public class AuthTestController {
@@ -17,20 +22,20 @@ public class AuthTestController {
 	RoleService roleService;
 
     @GetMapping("user-details")
-    public ResponseEntity<AuthUser> getUserInfo(@AuthenticationPrincipal AuthUser user) {
-    	System.out.println("user: " + user.getEmail());
+    public ResponseEntity<AuthUserDTO> getUserInfo(@AuthenticationPrincipal AuthUserDTO user) {
+    	System.out.println("user: " + user.getEmail()); 	
         return ResponseEntity.ok(user);
     }
     
     @GetMapping("random")
-    public ResponseEntity<AuthUser> getRandom(@AuthenticationPrincipal AuthUser user)
+    public ResponseEntity<AuthUserDTO> getRandom(@AuthenticationPrincipal AuthUserDTO user)
     {
     	System.out.println("user: " + user.getUid());
         return ResponseEntity.ok(user);
     }
     
     @PatchMapping("nurse")
-    public ResponseEntity<AuthUser> setNurseRole(@AuthenticationPrincipal AuthUser user)
+    public ResponseEntity<AuthUserDTO> setNurseRole(@AuthenticationPrincipal AuthUserDTO user)
     {
     	try {
         	roleService.addRole(user.getUid(), RoleConstants.ROLE_NURSE);
@@ -46,7 +51,7 @@ public class AuthTestController {
     
     @GetMapping("nurse-details")
     @IsNurse
-    public ResponseEntity<AuthUser> getNurseInfo(@AuthenticationPrincipal AuthUser user)
+    public ResponseEntity<AuthUserDTO> getNurseInfo(@AuthenticationPrincipal AuthUserDTO user)
     {
     	System.out.println("is a nurse!");
     	return ResponseEntity.status(200).build();
