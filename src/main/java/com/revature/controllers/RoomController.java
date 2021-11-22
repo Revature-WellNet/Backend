@@ -30,7 +30,7 @@ public class RoomController {
         return roomService.findAll();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public Room findById(@PathVariable("id") int id){
         return roomService.findById(id);
     }

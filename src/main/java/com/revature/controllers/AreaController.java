@@ -30,7 +30,7 @@ public class AreaController {
         return areaService.findAll();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public Area findById(@PathVariable("id") int id){
         return areaService.findById(id);
     }
