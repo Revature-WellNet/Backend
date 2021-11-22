@@ -47,6 +47,7 @@ public class DiagnosisForm {
 		this.checkOut = checkOut;
 	}
 	
+
 //	public DiagnosisForm(int diagId, String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut,
 //	Patient patient, Room room, User nurse, User doctor) {
 //		super();
@@ -65,14 +66,19 @@ public class DiagnosisForm {
 	public DiagnosisForm(String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut, Patient patient,
 		User nurse, User doctor) {
 		super();
+
 		this.diagnosis = diagnosis;
 		this.resolutionStatus = resolutionStatus;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.patient = patient;
+
+		this.room = room;
 		this.nurse = nurse;
-		this.doctor = doctor;
+		this.doctor = doctor; 
 	}
+
+
 
 
 	public int getDiagId() {
@@ -123,15 +129,17 @@ public class DiagnosisForm {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-//
-//	public Room getRoom() {
-//		return room;
-//	}
-//
-//	public void setRoom(Room room) {
-//		this.room = room;
-//	}
-//
+
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+
 	public User getNurse() {
 		return nurse;
 	}

@@ -86,7 +86,7 @@ public class userController {
 		userService.addOrUpdateUser(user);
 		
 		return ResponseEntity.status(201).body(user);
-	}
+}
 	
 	
 	
