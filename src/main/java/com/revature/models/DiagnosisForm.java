@@ -20,8 +20,17 @@ public class DiagnosisForm {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+
+	@OneToOne
 	private Room room;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "nurse_id")
 	private User nurse;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "doctor_id")
 	private User doctor;
 	
 	public DiagnosisForm() {
@@ -51,11 +60,26 @@ public class DiagnosisForm {
 //		this.nurse = nurse;
 //		this.doctor = doctor; 
 //	}
+	
+
+	public DiagnosisForm(String diagnosis, boolean resolutionStatus, Timestamp checkIn, Timestamp checkOut, Patient patient,
+		User nurse, User doctor) {
+		super();
+		this.diagnosis = diagnosis;
+		this.resolutionStatus = resolutionStatus;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.patient = patient;
+		this.nurse = nurse;
+		this.doctor = doctor;
+	}
+
 
 	public int getDiagId() {
 		return diagId;
 	}
 
+	
 	public void setDiagId(int diagId) {
 		this.diagId = diagId;
 	}
@@ -108,21 +132,21 @@ public class DiagnosisForm {
 //		this.room = room;
 //	}
 //
-//	public User getNurse() {
-//		return nurse;
-//	}
-//
-//	public void setNurse(User nurse) {
-//		this.nurse = nurse;
-//	}
-//
-//	public User getDoctor() {
-//		return doctor;
-//	}
-//
-//	public void setDoctor(User doctor) {
-//		this.doctor = doctor;
-//	}
+	public User getNurse() {
+		return nurse;
+	}
+
+	public void setNurse(User nurse) {
+		this.nurse = nurse;
+	}
+
+	public User getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
+	}
 	
 	
 	

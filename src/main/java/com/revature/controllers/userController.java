@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Patient;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class userController {
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -30,9 +31,6 @@ public class userController {
 		this.userService = userService;
 	}
 	
-	
-
-
 	@GetMapping
 	public ResponseEntity<List<User>> findAllUsers(){
 		List<User> all = userService.findAllUsers();
@@ -44,9 +42,21 @@ public class userController {
 		return ResponseEntity.ok(all);
 	}
 	
+	@GetMapping("/patient/doctor/{inputString}")
+	public ResponseEntity<List<Patient>> findPatientsByString(@PathVariable("inputString") String inputString) {
+		
+		System.out.println("String Received : " + inputString);
+		
+		List<Patient> patients = userService.findAllPatients();
+				
+		return ResponseEntity.status(201).body(patients);
+		
+	}
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findById(@PathVariable("id") int id ){
-		Optional<User> optional = userService.findById(id);
+	public ResponseEntity<User> findById(@PathVariable("id") String id ){
+		
+		Optional<User> optional = userService.findByUserId(id);
 		
 		if(optional.isPresent())
 		{
@@ -56,15 +66,25 @@ public class userController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
-		int String = user.getId();
+	
+		String id = user.getId();
 		
-		if(id!=null) {
+		System.out.println("ID : " + id);
+		System.out.println("User : " + user);
+		
+		if(id == null) {
+			
+			System.out.println("Bad Request");
+			
 			return ResponseEntity.badRequest().build();
 		}
 		
+			System.out.println("Good Request");
+		
 		userService.addOrUpdateUser(user);
+		
 		return ResponseEntity.status(201).body(user);
 	}
 	
