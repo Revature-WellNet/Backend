@@ -35,7 +35,7 @@ public class PatientService {
         return patientDAO.findByName(firstname, lastname);
     }
 
-    public Optional<Patient> findPatientByName(String firstname, String lastname, Date dob) {
+    public Optional<List<Patient>> findPatientByName(String firstname, String lastname, Date dob) {
         return patientDAO.findByName(firstname, lastname, dob);
     }
 

@@ -66,9 +66,10 @@ public class PatientController {
 //    }
 
     @GetMapping(value = "/firstname/{firstName}")
-    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname") String firstName) {
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName) {
         System.out.println("In get string firstName.");
         Optional<List<Patient>> list = patientService.findPatientByName(firstName);
+//        System.err.println(list);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
         }
@@ -76,8 +77,8 @@ public class PatientController {
     }
 
     @GetMapping(value = "/fullname/{firstName}/{lastName}")
-    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname") String firstName,
-                                                    @PathVariable("lastname") String lastName) {
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                                    @PathVariable("lastName") String lastName) {
         Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
@@ -86,10 +87,11 @@ public class PatientController {
     }
 
     @GetMapping(value = "/fullnamedob/{firstName}/{lastName}/{dob}")
-    public ResponseEntity<Patient> getPatient(@PathVariable("firstname") String firstName,
-                                              @PathVariable("lastname") String lastName,
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                              @PathVariable("lastName") String lastName,
                                               @PathVariable("dob") Date dob) {
-        Optional<Patient> list = patientService.findPatientByName(firstName, lastName, dob);
+        Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName, dob);
+        System.err.println(list);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
         }
