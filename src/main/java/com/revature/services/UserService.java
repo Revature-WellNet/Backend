@@ -12,7 +12,6 @@ import com.revature.models.User;
 import com.revature.repos.PatientDAO;
 import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
-
 @Service
 public class UserService {
 	
@@ -30,7 +29,6 @@ public class UserService {
 	
 	public void addOrUpdateUser(User user) {
 		
-		System.out.println("Adding User : " + user);
 		
 		
 		
@@ -66,6 +64,8 @@ public class UserService {
 	
 	public void addOrUpdateRole(Role role) {
 		roleDAO.save(role);
+	}		
+		
 	}
 	
-}
+
