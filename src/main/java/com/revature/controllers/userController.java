@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Patient;
 import com.revature.models.User;
+import com.revature.security.models.RoleConstants;
+import com.revature.security.services.RoleService;
 import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,6 +26,9 @@ public class userController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Autowired
 	public userController(UserService userService) {
@@ -65,27 +70,6 @@ public class userController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping("/registration")
-	public ResponseEntity<User> insert(@RequestBody User user){
-	
-		String id = user.getId();
-		
-		System.out.println("ID : " + id);
-		System.out.println("User : " + user);
-		
-		if(id == null) {
-			
-			System.out.println("Bad Request");
-			
-			return ResponseEntity.badRequest().build();
-		}
-		
-			System.out.println("Good Request");
-		
-		userService.addOrUpdateUser(user);
-		
-		return ResponseEntity.status(201).body(user);
-}
 	
 	
 }
