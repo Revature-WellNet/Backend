@@ -68,4 +68,15 @@ public class UserService {
 		roleDAO.save(role);
 	}
 	
+	public Optional<List<Object>> getDoctorPatientData(String firstName, String lastName) {
+	
+		Optional<List<Object>> results = userDAO.matchDoctorToUser(firstName, lastName);
+		
+		System.out.println(results);
+		
+		return results;
+		
+	}
+	
+	
 }

@@ -19,7 +19,7 @@ import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/public/user")
 public class userController {
 
 	@Autowired
@@ -65,6 +65,18 @@ public class userController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+	public ResponseEntity<List<Object>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+	
+		
+		List<Object> returner = userService.getDoctorPatientData(firstName, lastName).get();
+		
+		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
+		
+		else { return ResponseEntity.noContent().build(); }
+		
+	}
+	
 	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
 	
@@ -85,7 +97,10 @@ public class userController {
 		userService.addOrUpdateUser(user);
 		
 		return ResponseEntity.status(201).body(user);
-}
+	
+	}
+	
+	
 	
 	
 }
