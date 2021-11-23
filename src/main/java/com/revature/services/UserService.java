@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.Patient;
 import com.revature.models.Role;
 import com.revature.models.User;
+import com.revature.repos.PatientDAO;
 import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
 
@@ -16,14 +18,23 @@ public class UserService {
 	
 	private UserDAO userDAO;
 	private RoleDAO roleDAO;
+	private PatientDAO patientDAO;
 	
 	@Autowired
-	public UserService(UserDAO userDAO){
+	public UserService(UserDAO userDAO, RoleDAO roleDAO, PatientDAO patientDAO){
 		super();
 		this.userDAO = userDAO;
+		this.roleDAO = roleDAO;
+		this.patientDAO = patientDAO;
 	}
 	
 	public void addOrUpdateUser(User user) {
+		
+		System.out.println("Adding User : " + user);
+		
+		
+		
+		//roleDAO.save(user.getRole());
 		userDAO.save(user);
 	}
 	
@@ -31,19 +42,26 @@ public class UserService {
 		return userDAO.findAll();
 	}
 	
-	public Optional<User> findById(String id) {
-		return userDAO.findById(id);
+	public Optional<User> findByUserId(String id) {
+		
+		return userDAO.findByUserId(id);
 	}
 	
 	
 	public void deleteUser(String id) {
-		User user = findById(id).get();
+		User user = findByUserId(id).get();
 		if(user!=null) {
 			userDAO.delete(user);
 //			return true;		
 		}else {
 //			return false;
 		}
+	}
+	
+	public List<Patient> findAllPatients() {
+		
+		return patientDAO.findAll();
+		
 	}
 	
 	public void addOrUpdateRole(Role role) {

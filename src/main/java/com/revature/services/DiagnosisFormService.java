@@ -39,7 +39,7 @@ public class DiagnosisFormService {
 	}
 	
 	public Optional<List<DiagnosisForm>> findDiagnosisFormByNurse(String nurseId) {
-		Optional<User> nurse = userDAO.findById(nurseId);
+		Optional<User> nurse = userDAO.findByUserId(nurseId);
 		if(nurse.isPresent()) {
 			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByNurse(nurse.get());
 			return list;
@@ -48,7 +48,7 @@ public class DiagnosisFormService {
 	}
 	
 	public Optional<List<DiagnosisForm>> findDiagnosisFormByDoctor(String doctorId) {
-		Optional<User> doctor = userDAO.findById(doctorId);
+		Optional<User> doctor = userDAO.findByUserId(doctorId);
 		if(doctor.isPresent()) {
 			Optional<List<DiagnosisForm>> list = diagnosisFormDAO.findByDoctor(doctor.get());
 			return list;

@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,13 +14,10 @@ public class User {
 
 	@Id
 	private String userId;
-	
-//	private String username;
-//	private String password;
 	private String firstname;
 	private String lastname;
 	private String email;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Role role;
 	
 	public String getId() {

@@ -15,13 +15,14 @@ import com.revature.models.Patient;
 @Repository
 public interface PatientDAO extends JpaRepository<Patient, Integer> {
 	
+	
+	
 	@Query("FROM Patient p WHERE p.firstName = ?1")
 	Optional<List<Patient>> findByName(String firstname);
-	
+
 	@Query("FROM Patient p WHERE p.firstName = ?1 and p.lastName = ?2")
 	Optional<List<Patient>> findByName(String firstname, String lastname);
-	
+
 	@Query("FROM Patient p WHERE p.firstName = ?1 and p.lastName = ?2 and p.dob = ?3")
 	Optional<Patient> findByName(String firstname, String lastname, Date dob);
 }
-
