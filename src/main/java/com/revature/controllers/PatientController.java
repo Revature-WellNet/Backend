@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.sql.Date;// may have to change to .util
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,47 +25,83 @@ import com.revature.services.PatientService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="/diagnosis/patient")
+@RequestMapping(value = "/public/patient")
 public class PatientController {
-	private PatientService patientService;
-	
-	@Autowired
-	public PatientController(PatientService patientService) {
-		this.patientService= patientService;
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<Patient>> getAllPatient(){
-		List<Patient> all = patientService.findAllPatients();
-		
-		if(all.isEmpty()) {
-			return ResponseEntity.noContent().build();
-		}
-		
-		return ResponseEntity.ok(all);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public Patient getPatient(@PathVariable("id")int id) {
-		return patientService.findPatientById(id);
-	}
-	@GetMapping(value = "/{firstName}")
-	public List<Patient> getPatient(@PathVariable("firstname")String firstName){
-		return patientService.findPatientByName(firstName);
-	}
-	@GetMapping(value = "/{firstName}/{lastName}")
-	public List<Patient> getPatient(@PathVariable("firstname")String firstName,
-			                 @PathVariable("lastname")String lastName) {
-		return patientService.findPatientByName(firstName,lastName);
-	}
-	@GetMapping(value = "/{firstName}/{lastName}/{dob}")
-	public Patient getPatient(@PathVariable("firstname")String firstName,
-			                 @PathVariable("lastname")String lastName,
-			                 @PathVariable("dob")Date dob) {
-		return patientService.findPatientByName(firstName,lastName,dob);
-	}
-	
-	@GetMapping(value = "/allergies")
+
+
+    private PatientService patientService;
+
+    @Autowired
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Patient>> getAllPatient() {
+        List<Patient> all = patientService.findAllPatients();
+
+        if (all.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(all);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Patient> getPatient(@PathVariable("id") int id) {
+        Optional<Patient> patient = patientService.findPatientById(id);
+        if (patient.isPresent()) {
+            return ResponseEntity.ok(patient.get());
+        }
+
+        return ResponseEntity.noContent().build();
+    }
+
+//    @GetMapping(value = "/id/{id}")
+//    public ResponseEntity<Patient> getPatient(@PathVariable("id") int id) {
+//        //System.out.println("In get int id.");
+//        Optional<Patient> patient = patientService.findPatientById(id);
+//        if (patient.isPresent()) {
+//            return ResponseEntity.ok(patient.get());
+//        }
+//
+//        return ResponseEntity.noContent().build();
+//    }
+
+    @GetMapping(value = "/firstname/{firstName}")
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName) {
+        System.out.println("In get string firstName.");
+        Optional<List<Patient>> list = patientService.findPatientByName(firstName);
+//        System.err.println(list);
+        if (list.isPresent()) {
+            return ResponseEntity.ok(list.get());
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/fullname/{firstName}/{lastName}")
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                                    @PathVariable("lastName") String lastName) {
+        Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName);
+        if (list.isPresent()) {
+            return ResponseEntity.ok(list.get());
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/fullnamedob/{firstName}/{lastName}/{dob}")
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                              @PathVariable("lastName") String lastName,
+                                              @PathVariable("dob") Date dob) {
+        Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName, dob);
+        System.err.println(list);
+        if (list.isPresent()) {
+            return ResponseEntity.ok(list.get());
+        }
+        return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping(value = "/allergies")
 	public ResponseEntity<List<Allergy>> getAllAllergies() {
 		List<Allergy> all = patientService.findAllAllergies();
 		
@@ -77,46 +114,42 @@ public class PatientController {
 		
 		return ResponseEntity.ok(all);
 	}
-	
-	@PostMapping
-	public  ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
-		
-		if (patientService.addPatient(patient)) {
-		return ResponseEntity.status(201).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
-		
-	}
-	
-	@PutMapping
-	public  ResponseEntity<Patient> updatePatient(@RequestBody Patient patient){
-		
-		if (patientService.updatePatient(patient)) {
-		return ResponseEntity.status(200).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
-		
-	}
-	
-	
-	
-	
-	
-	
-	@DeleteMapping(value = "/{id}")
-	public  ResponseEntity<Patient> deletePatient(@PathVariable("id")int id) {
-		
-		if (patientService.deletePatient(id)) {
-		return ResponseEntity.status(200).build();}
-		else {
-		return ResponseEntity.status(400).build();}
-		
-	}
-	
-	
-	
+
+    @PostMapping
+    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
+
+        if (patientService.addPatient(patient)) {
+            return ResponseEntity.status(201).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+
+    @PutMapping
+    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+
+        if (patientService.updatePatient(patient)) {
+            return ResponseEntity.status(200).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Patient> deletePatient(@PathVariable("id") int id) {
+
+        if (patientService.deletePatient(id)) {
+            return ResponseEntity.status(200).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+
+
 }
 	
 
