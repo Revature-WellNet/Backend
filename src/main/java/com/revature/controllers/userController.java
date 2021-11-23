@@ -70,39 +70,6 @@ public class userController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping("/registration")
-	public ResponseEntity<User> insert(@RequestBody User user){
-	
-		String id = user.getId();
-		
-		System.out.println("ID : " + id);
-		System.out.println("User : " + user);
-		
-		if(id == null) {
-			
-			System.out.println("Bad Request");
-			
-			return ResponseEntity.badRequest().build();
-		}
-		
-			System.out.println("Good Request");
-		
-		try {
-			if(user.getRole().getRole().equals("nurse"))
-				roleService.addRole(id, RoleConstants.ROLE_NURSE);
-			else if(user.getRole().getRole().equals("doctor"))
-				roleService.addRole(id, RoleConstants.ROLE_DOCTOR);
-			else
-				return ResponseEntity.badRequest().build();
-			userService.addOrUpdateUser(user);
-			return ResponseEntity.status(201).body(user);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return ResponseEntity.badRequest().build();
-		}
-}
 	
 	
 }
