@@ -27,14 +27,11 @@ import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/public")
+@RequestMapping("/user")
 public class userController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private RoleService roleService;
 
 	@Autowired
 	public userController(UserService userService) {
@@ -75,22 +72,4 @@ public class userController {
 		
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-	@PostMapping("/signup")
-	@Transactional
-	public ResponseEntity<User> addUser(@RequestBody TokenHolder token){
-		
-		try {
-			userService.addUsr(token);
-		} catch (FirebaseAuthException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return ResponseEntity.status(201).body(null);
-}
-
-	
-	
 }

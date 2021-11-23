@@ -1,24 +1,17 @@
 package com.revature.services;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseToken;
 import com.revature.models.Patient;
 import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.repos.PatientDAO;
 import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
-import com.revature.security.models.AuthUserDTO;
-import com.revature.security.models.TokenHolder;
-
 @Service
 public class UserService {
 	
@@ -71,26 +64,7 @@ public class UserService {
 	
 	public void addOrUpdateRole(Role role) {
 		roleDAO.save(role);
-	}
-
-	public void addUsr(TokenHolder tkn) throws FirebaseAuthException {
-
-	AuthUserDTO user= new AuthUserDTO();
-		    	FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(tkn.getToken());
-		        if (decodedToken != null) {
-		            user = new AuthUserDTO();
-		            user.setUid(decodedToken.getUid());
-		            user.setName(decodedToken.getName());
-		            user.setEmail(decodedToken.getEmail());
-		            user.setPicture(decodedToken.getPicture());
-		            user.setIssuer(decodedToken.getIssuer());
-		            user.setEmailVerified(decodedToken.isEmailVerified());
-		           
-		            
-		        }
-		       
-		    }
-		
+	}		
 		
 	}
 	
