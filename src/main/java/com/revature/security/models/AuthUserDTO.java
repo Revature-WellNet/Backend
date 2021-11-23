@@ -1,10 +1,9 @@
 package com.revature.security.models;
 
 import java.io.Serializable;
+import java.util.Map;
 
-import lombok.Data;
 
-@Data
 public class AuthUserDTO implements Serializable {
 	private static final long serialVersionUID = 4408418647685225829L;
 	String uid;
@@ -13,9 +12,16 @@ public class AuthUserDTO implements Serializable {
 	boolean isEmailVerified;
 	String issuer;
 	String picture; //for future use, does not need to implemented
+	Map role;
 	
 	public String getUid() {
 		return uid;
+	}
+	public Map getRole() {
+		return role;
+	}
+	public void setRole(Map role) {
+		this.role = role;
 	}
 	public void setUid(String uid) {
 		this.uid = uid;
@@ -53,5 +59,11 @@ public class AuthUserDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	@Override
+	public String toString() {
+		return "AuthUserDTO [uid=" + uid + ", name=" + name + ", email=" + email + ", isEmailVerified="
+				+ isEmailVerified + ", issuer=" + issuer + ", picture=" + picture + "]";
+	}
+	
 	
 }
