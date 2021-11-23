@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Allergy;
 import com.revature.models.Patient;
 import com.revature.models.User;
+import com.revature.models.Vaccination;
 import com.revature.services.PatientService;
 
 
@@ -25,6 +27,7 @@ import com.revature.services.PatientService;
 @RestController
 @RequestMapping(value = "/public/patient")
 public class PatientController {
+
 
     private PatientService patientService;
 
@@ -97,6 +100,20 @@ public class PatientController {
         }
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping(value = "/allergies")
+	public ResponseEntity<List<Allergy>> getAllAllergies() {
+		List<Allergy> all = patientService.findAllAllergies();
+		
+		return ResponseEntity.ok(all);
+	}
+	
+	@GetMapping(value = "/vaccinations")
+	public ResponseEntity<List<Vaccination>> getAllVaccinations() {
+		List<Vaccination> all = patientService.findAllVaccinations();
+		
+		return ResponseEntity.ok(all);
+	}
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {

@@ -7,9 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.Allergy;
 import com.revature.models.DiagnosisForm;
 import com.revature.models.Patient;
+import com.revature.models.Vaccination;
+import com.revature.repos.AllergyDAO;
 import com.revature.repos.PatientDAO;
+import com.revature.repos.VaccinationDAO;
 
 @Service
 public class PatientService {
@@ -18,6 +22,10 @@ public class PatientService {
     private PatientDAO patientDAO;
     @Autowired
     private DiagnosisFormService diagnosisFormService;
+    @Autowired
+	private AllergyDAO allergyDAO;
+	@Autowired
+	private VaccinationDAO vaccinationDAO;
 
     public List<Patient> findAllPatients() {
         return patientDAO.findAll();
@@ -82,6 +90,16 @@ public class PatientService {
             return false;
         }
     }
+    
+    public List<Allergy> findAllAllergies(){
+		return allergyDAO.findAll();
+	}
+	
+	public List<Vaccination> findAllVaccinations(){
+		return vaccinationDAO.findAll();
+	}
+	
+
 
 //	public Optional<List<Patient>> findPatientByName(String firstname) {
 //		return patientDAO.findByFirstName(firstname);
