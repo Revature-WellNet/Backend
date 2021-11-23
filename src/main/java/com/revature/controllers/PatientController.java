@@ -21,7 +21,7 @@ import com.revature.models.Patient;
 import com.revature.services.PatientService;
 
 
-@CrossOrigin(origins="*", allowedHeaders="*")
+@CrossOrigin(origins="*", allowedHeaders="*") //these will most likely need to be specific for security to allow CORS.
 @RestController
 @RequestMapping(value="/patient")
 public class PatientController {
@@ -50,7 +50,6 @@ public class PatientController {
 		if(patient.isPresent()) {
 			return ResponseEntity.ok(patient.get());
 		}
-		
 		return ResponseEntity.noContent().build();
 	}
 	
@@ -78,21 +77,21 @@ public class PatientController {
 	public ResponseEntity<Patient> getPatient(@PathVariable("firstname")String firstName,
 			                 @PathVariable("lastname")String lastName,
 			                 @PathVariable("dob")Date dob) {
-		Optional<Patient> list =  patientService.findPatientByName(firstName,lastName,dob);
-		if(list.isPresent()) {
-			return ResponseEntity.ok(list.get());
+		Optional<Patient> patient =  patientService.findPatientByName(firstName,lastName,dob); 
+		if(patient.isPresent()) {
+			return ResponseEntity.ok(patient.get());
 		}
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(204).build();
 	}
 	
 	@PostMapping
 	public  ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
 		
 		if (patientService.addPatient(patient)) {
-		return ResponseEntity.status(201).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
+			return ResponseEntity.status(201).build();
+		}else {
+			return ResponseEntity.status(400).build();
+		}
 		
 	}
 	
@@ -100,29 +99,22 @@ public class PatientController {
 	public  ResponseEntity<Patient> updatePatient(@RequestBody Patient patient){
 		
 		if (patientService.updatePatient(patient)) {
-		return ResponseEntity.status(200).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
+			return ResponseEntity.status(200).build();
+		}else {
+			return ResponseEntity.status(400).build(); 
+		}
 		
 	}
-	
-	
-	
-	
-	
 	
 	@DeleteMapping(value = "/{id}")
 	public  ResponseEntity<Patient> deletePatient(@PathVariable("id")int id) {
 		
 		if (patientService.deletePatient(id)) {
-		return ResponseEntity.status(200).build();}
-		else {
-		return ResponseEntity.status(400).build();}
-		
+			return ResponseEntity.status(200).build();
+		}else {
+			return ResponseEntity.status(400).build(); 
+		}	
 	}
-	
-	
 	
 }
 	

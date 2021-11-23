@@ -1,0 +1,32 @@
+11/19 team leader standup
+team 1 - Yesterday, went over security options for validation and authentication. 
+	Firebase was selected as it creates the token for you to verify against their API. 
+	Did a bunch of research about using Spring Security. The team 1 channel has flow diagrams to depict how they intend to implement.
+	Today will continue looking into getting firebase and spring security working together. 
+	Assigning roles to firebase accounts and how to pass those role to our servers.
+	Time permitting, they begin working in pairs on implementation. 
+	
+team 2 - Made mock diagrams of their component views. Models, controllers and repo made for doctor and nurse. 
+	Registration page exists. Nurse home page has created a component. Email form validation implemented. 
+	Were told that the primary keys for doctors and nurses need to be strings as that it was firebase will generate.
+	Today, will continue working on doctor component. Will meet up with diagnosis team after lunch to share patient model.
+	
+team 3 - Designed the logo. Started working on covid verification(front end done) and the rooms page. Think they may be able to finish the covid form backend today. 
+	Want to meet up with team 2 as well to discuss the nurse and doctor models. 
+	
+team 4 - Yesterday, we worked on models for patient, diagnosis form. 
+	Their were a couple of dependencies that we needed to comment out to get things working. 
+	Today will get controllers working and hope to start to on the front end. 
+	Asked about whether the nurse page team will handle patient checkin or if team 4 will take care of this. 
+	
+11/22 team leader standup.
+
+team 1 - Researched atteching user roles. Chose to do in the backend by restricting the controllers. Will work on implementing the plan thruout the application. 
+
+team 2 - some work done. Have questions for other teams.
+
+team 3 - FE and BE done for covid verification. Working on Nurse selecting a room for a patient, backend is working. They are working on the UI for the FE portion. 
+
+team 4 - Pretty much full controller and service functionality for the backend. Today need to figure out how patient data gets to the diagnosis component. 
+	Will need to add more fields to the diagnosis models. 
+	
