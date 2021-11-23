@@ -23,7 +23,7 @@ import com.revature.services.Covid19VerificationService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping("/covid")
+@RequestMapping("/public/covid")
 public class Covid19VerificationController {
 	
 	@Autowired
