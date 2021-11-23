@@ -30,3 +30,24 @@ team 3 - FE and BE done for covid verification. Working on Nurse selecting a roo
 team 4 - Pretty much full controller and service functionality for the backend. Today need to figure out how patient data gets to the diagnosis component. 
 	Will need to add more fields to the diagnosis models. 
 	
+11/23
+
+Team 1 - yesterday, after merges, been working on have security services hook up to their needed points thruout the application. It's connected to registration,
+	which should persist themn to firebase and gen creds, then redirect to proper doctor or nurse pages. Had to refactor front end services for the interceptor to work.	
+	The interceptor is working so headers hould no longer be needed for any requests to the backed. Today they are working on login to navigate to user profile and implemenmting
+	local storage so logged in user is available across all components. Would like to find out how teams want this to occur. 
+	blockers? The interceptor was the big blocker but it is resolved. 
+	
+Team 2  - working on doctor and nurse pages. Working on getting patiens from backed by fn, fn+ln+dob. Displaying patient data on nurse pages. 
+	Had to refactor patient controller to return a list instead of single object. Today will continue working on the getByUsername, need information on security key.
+	Organising with security team to have someone swing by and show them how to get things working. 
+	blockers? Searching for patients by doctor id is challenging (it's a long value) so they will instead search by doctor name
+	
+Team 3 - Screening is ready for review. Room selection is being actively developed. The user interface is the main feature of focus for Rooms. 
+	Today will see if other groups could use help. Mario and Ben intend to finish the interface today or tomorrow which will involve integrating FE and BE. 
+	No real blockers. 
+	
+Team 4 - Backend was finished. Today working on diagnosis component posting a new diagnosis.
+	Blockers - don't have current patient and logged in user. Creating dummy data which is getting convoluted. 
+		can resolve with cooperation on how this data should be sent to the component. 
+	
