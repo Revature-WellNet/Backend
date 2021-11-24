@@ -14,49 +14,27 @@ public class Covid19Verification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private String userId;
 	private Timestamp timestamp;
 	private boolean covid;
 	
-	public Covid19Verification(int id, Timestamp timestamp, boolean covid) {
+	public Covid19Verification(int id, String userId, Timestamp timestamp, boolean covid) {
 		super();
 		this.id = id;
+		this.userId = userId;
 		this.timestamp = timestamp;
 		this.covid = covid;
 	}
 
-	public Covid19Verification(Timestamp timestamp, boolean covid) {
+	public Covid19Verification(String userId, Timestamp timestamp, boolean covid) {
 		super();
+		this.userId = userId;
 		this.timestamp = timestamp;
 		this.covid = covid;
 	}
-	
 
 	public Covid19Verification() {
 		super();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public boolean isCovid() {
-		return covid;
-	}
-
-	public void setCovid(boolean covid) {
-		this.covid = covid;
 	}
 
 	@Override
@@ -66,6 +44,7 @@ public class Covid19Verification {
 		result = prime * result + (covid ? 1231 : 1237);
 		result = prime * result + id;
 		result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -87,15 +66,47 @@ public class Covid19Verification {
 				return false;
 		} else if (!timestamp.equals(other.timestamp))
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Covid19Verifcation [id=" + id + ", timestamp=" + timestamp + ", covid=" + covid + "]";
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public boolean isCovid() {
+		return covid;
+	}
+
+	public void setCovid(boolean covid) {
+		this.covid = covid;
 	}
 	
-	
+
 	
 }
 

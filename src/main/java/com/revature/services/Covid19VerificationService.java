@@ -48,7 +48,9 @@ public class Covid19VerificationService {
 		}
 	}
 	
-
+	public Optional<Covid19Verification> findByUserId(String userId) {
+		return cvd.findByUserId(userId);
+	}
 	
 	
 	
