@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Entity
 public class Covid19Verification {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
+	@Id
 	private String userId;
 	private Timestamp timestamp;
 	private boolean covid;
