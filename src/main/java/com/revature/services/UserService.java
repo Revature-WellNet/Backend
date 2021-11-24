@@ -67,9 +67,9 @@ public class UserService {
 	}		
 		
 
-	public Optional<List<Object>> getDoctorPatientData(String firstName, String lastName) {
-	
-		Optional<List<Object>> results = userDAO.matchDoctorToUser(firstName, lastName);
+	public Optional<List<Patient>> getDoctorPatientData(String firstName, String lastName) {
+		System.out.println("Method Called");
+		Optional<List<Patient>> results = patientDAO.matchDoctorToUser(firstName, lastName);
 		
 		System.out.println(results);
 		
