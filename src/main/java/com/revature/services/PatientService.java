@@ -59,6 +59,7 @@ public class PatientService {
     public Boolean addPatient(Patient patient) {
     	
         try {
+        	System.out.println(patient);
             patientDAO.save(patient);
             return true;
         } catch (Exception e) {
