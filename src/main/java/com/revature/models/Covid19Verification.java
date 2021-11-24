@@ -7,25 +7,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
 @Entity
-public class Covid19Verifcation {
+public class Covid19Verification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private Timestamp timestamp;
 	private boolean covid;
 	
-	public Covid19Verifcation(int id, Timestamp timestamp, boolean covid) {
+	public Covid19Verification(int id, Timestamp timestamp, boolean covid) {
 		super();
 		this.id = id;
 		this.timestamp = timestamp;
 		this.covid = covid;
 	}
 
-	public Covid19Verifcation(Timestamp timestamp, boolean covid) {
+	public Covid19Verification(Timestamp timestamp, boolean covid) {
 		super();
 		this.timestamp = timestamp;
 		this.covid = covid;
+	}
+	
+
+	public Covid19Verification() {
+		super();
 	}
 
 	public int getId() {
@@ -70,7 +77,7 @@ public class Covid19Verifcation {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Covid19Verifcation other = (Covid19Verifcation) obj;
+		Covid19Verification other = (Covid19Verification) obj;
 		if (covid != other.covid)
 			return false;
 		if (id != other.id)
