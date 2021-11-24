@@ -75,10 +75,10 @@ public class userController {
 
 	
 	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
-	public ResponseEntity<List<Object>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
 	
 		
-		List<Object> returner = userService.getDoctorPatientData(firstName, lastName).get();
+		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
 		
 		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
 		
