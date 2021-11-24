@@ -23,7 +23,7 @@ import com.revature.services.Covid19VerificationService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping("/public/covid")
+@RequestMapping("/covid")
 public class Covid19VerificationController {
 	
 	@Autowired
@@ -71,7 +71,11 @@ public class Covid19VerificationController {
 		return ResponseEntity.status(201).build();
 	}
 	
-	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<Optional<Covid19Verification>> findCovid19VerificationByUserId(@PathVariable("userId") String id){
+		Optional<Covid19Verification> cv = cvs.findByUserId(id);
+		return ResponseEntity.status(200).body(cv);
+	}
 	
 	
 	
