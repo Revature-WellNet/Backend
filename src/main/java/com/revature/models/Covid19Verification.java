@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Entity
 public class Covid19Verification {
 	
-	private int id;
 	@Id
 	private String userId;
-	private Timestamp timestamp;
+	private int id;
+		private Timestamp timestamp;
 	private boolean covid;
 	
 	public Covid19Verification(int id, String userId, Timestamp timestamp, boolean covid) {
