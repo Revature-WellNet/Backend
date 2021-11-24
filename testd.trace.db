@@ -2662,3 +2662,10 @@ org.h2.jdbc.JdbcSQLException: Column "user_id" not found [42122-193]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:832)
 >>>>>>> 7cc1913639fabd89f5d247ca905a801a7cc4bc02
+2021-11-24 15:11:57 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PATIENT_ALLERGIES
+
+SELECT[*] * FROM PATIENT_VACCINATIONS "; SQL statement:
+select * from patient_allergies
+
+select * from patient_vaccinations [42000-193]
