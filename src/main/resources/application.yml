@@ -7,7 +7,7 @@ spring:
   application:
     name: visualizer
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./team1.txt
     username: sa
     password: password
   h2:
@@ -29,7 +29,8 @@ spring:
       
 server:
   port: 8081
-  servlet:    context-path: /wellnet
+  servlet:
+    context-path: /wellnet
 
 
 
@@ -74,6 +75,7 @@ security:
     - Id-Token
   allowed-public-apis:
     - /h2-console/**
+    - /wellnet/h2-console/**
     - /favicon.ico
     - /session/login
     - /public/**
