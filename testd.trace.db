@@ -1,0 +1,12 @@
+2021-11-24 00:01:35 jdbc[24]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PATIENT
+SELECT[*] * FROM PATIENT_ALLERGIES "; SQL statement:
+select * from patient
+select * from patient_allergies [42000-193]
+2021-11-24 00:29:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PATIENT_ALLERGIES
+
+SELECT[*] * FROM PATIENT "; SQL statement:
+select * from patient_allergies
+
+select * from patient [42000-193]

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Allergy;
+import com.revature.models.BloodType;
 import com.revature.models.Patient;
+import com.revature.models.Sex;
 import com.revature.models.User;
 import com.revature.models.Vaccination;
 import com.revature.services.PatientService;
@@ -104,7 +106,6 @@ public class PatientController {
     @GetMapping(value = "/allergies")
 	public ResponseEntity<List<Allergy>> getAllAllergies() {
 		List<Allergy> all = patientService.findAllAllergies();
-		
 		return ResponseEntity.ok(all);
 	}
 	
@@ -114,6 +115,31 @@ public class PatientController {
 		
 		return ResponseEntity.ok(all);
 	}
+	
+	@GetMapping("/bloodtype/{name}")
+	public ResponseEntity<BloodType> findBloodType(@PathVariable("name") String name ){
+		Optional<BloodType> optional = patientService.findBloodType(name);
+		
+		if(optional.isPresent())
+		{
+			return ResponseEntity.ok(optional.get());
+		}
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/sex/{name}")
+	public ResponseEntity<Sex> findSex(@PathVariable("name") String name ){
+		Optional<Sex> optional = patientService.findSex(name);
+		
+		if(optional.isPresent())
+		{
+			return ResponseEntity.ok(optional.get());
+		}
+		
+		return ResponseEntity.noContent().build();
+	}
+	
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {

@@ -56,14 +56,18 @@ public class BootstrapDB {
 	private Role role1 = new Role(1,"Nurse");
 	private Role role2 = new Role(2,"Doctor");
 	
-	private Sex sex1 = new Sex(1,"Male");
-	private Sex sex2 = new Sex(2,"Female");
-	private Sex sex3 = new Sex(3,"Other");
+	private Sex sex1 = new Sex(1,"M");
+	private Sex sex2 = new Sex(2,"F");
+	private Sex sex3 = new Sex(3,"NB");
 	
-	private BloodType bloodType1 = new BloodType(1,"A"); 
-	private BloodType bloodType2 = new BloodType(2,"B"); 
-	private BloodType bloodType3 = new BloodType(3,"AB"); 
-	private BloodType bloodType4 = new BloodType(4,"O"); 
+	private BloodType bloodType1 = new BloodType(1,"O-"); 
+	private BloodType bloodType2 = new BloodType(2,"O+"); 
+	private BloodType bloodType3 = new BloodType(3,"B-"); 
+	private BloodType bloodType4 = new BloodType(4,"B+");
+	private BloodType bloodType5 = new BloodType(5,"A-"); 
+	private BloodType bloodType6 = new BloodType(6,"A+"); 
+	private BloodType bloodType7 = new BloodType(7,"AB-"); 
+	private BloodType bloodType8 = new BloodType(8,"AB+");
 	
 	private User nurse = new User("1","Alice", "Foo", "alice@foo.com",role1);
 	private User doctor = new User("2","Bob", "Bar", "bob@bar.com",role2);
@@ -141,6 +145,10 @@ public class BootstrapDB {
 		bloodTypeDAO.save(bloodType2);
 		bloodTypeDAO.save(bloodType3);
 		bloodTypeDAO.save(bloodType4);
+		bloodTypeDAO.save(bloodType5);
+		bloodTypeDAO.save(bloodType6);
+		bloodTypeDAO.save(bloodType7);
+		bloodTypeDAO.save(bloodType8);
 	}
 
 	private void addVaccination() {
