@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,13 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.revature.models.Patient;
 import com.revature.models.User;
+
+import com.revature.security.models.TokenHolder;
+
+import com.revature.security.models.RoleConstants;
+import com.revature.security.services.RoleService;
+
 import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/public/user")
 public class userController {
 
 	@Autowired
@@ -31,7 +39,7 @@ public class userController {
 		this.userService = userService;
 	}
 	
-	@GetMapping
+	@GetMapping("/user")
 	public ResponseEntity<List<User>> findAllUsers(){
 		List<User> all = userService.findAllUsers();
 		
@@ -64,6 +72,19 @@ public class userController {
 		
 		return ResponseEntity.noContent().build();
 	}
+
+	
+	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+	public ResponseEntity<List<Object>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+	
+		
+		List<Object> returner = userService.getDoctorPatientData(firstName, lastName).get();
+		
+		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
+		
+		else { return ResponseEntity.noContent().build(); }
+		
+	}
 	
 	@PostMapping("/registration")
 	public ResponseEntity<User> insert(@RequestBody User user){
@@ -85,7 +106,9 @@ public class userController {
 		userService.addOrUpdateUser(user);
 		
 		return ResponseEntity.status(201).body(user);
-}
+	
+	}
+	
 	
 	
 }

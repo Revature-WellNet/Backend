@@ -75,6 +75,7 @@ security:
   allowed-public-apis:
     - /h2-console/**
     - /wellnet/h2-console/**
+    - /wellnet/user/public/**
     - /favicon.ico
     - /session/login
     - /public/**

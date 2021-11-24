@@ -186,9 +186,15 @@ public class BootstrapDB {
 	
 	}
 	
-	@GetMapping
-	public void setAllDB(){
+	@GetMapping(value="/filler/one")
+	public ResponseEntity<List<Patient>> setAllDB(){
+		
+		System.err.println("Populating H2 Database");
+		
 		this.run();
+		
+		return ResponseEntity.noContent().build();
+		
 	}
 	
 	@GetMapping(value="/allergy")
