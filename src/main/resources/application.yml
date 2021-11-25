@@ -7,7 +7,7 @@ spring:
   application:
     name: visualizer
   datasource:
-    url: jdbc:h2:file:./team1.txt
+    url: jdbc:h2:file:./h2_tables/team1
     username: sa
     password: password
   h2:
