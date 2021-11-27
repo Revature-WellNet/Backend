@@ -15,7 +15,7 @@ public class Covid19Verification {
 	@Id
 	private String userId;
 	private int id;
-		private Timestamp timestamp;
+	private Timestamp timestamp;
 	private boolean covid;
 	
 	public Covid19Verification(int id, String userId, Timestamp timestamp, boolean covid) {
