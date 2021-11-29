@@ -16,15 +16,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Allergy;
 import com.revature.models.Patient;
 import com.revature.models.User;
+import com.revature.models.Vaccination;
 import com.revature.services.PatientService;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/public/patient")
+@RequestMapping(value = "/patient")
 public class PatientController {
+
 
     private PatientService patientService;
 
@@ -66,9 +69,10 @@ public class PatientController {
 //    }
 
     @GetMapping(value = "/firstname/{firstName}")
-    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname") String firstName) {
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName) {
         System.out.println("In get string firstName.");
         Optional<List<Patient>> list = patientService.findPatientByName(firstName);
+//        System.err.println(list);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
         }
@@ -76,8 +80,8 @@ public class PatientController {
     }
 
     @GetMapping(value = "/fullname/{firstName}/{lastName}")
-    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstname") String firstName,
-                                                    @PathVariable("lastname") String lastName) {
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                                    @PathVariable("lastName") String lastName) {
         Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
@@ -86,15 +90,30 @@ public class PatientController {
     }
 
     @GetMapping(value = "/fullnamedob/{firstName}/{lastName}/{dob}")
-    public ResponseEntity<Patient> getPatient(@PathVariable("firstname") String firstName,
-                                              @PathVariable("lastname") String lastName,
+    public ResponseEntity<List<Patient>> getPatient(@PathVariable("firstName") String firstName,
+                                              @PathVariable("lastName") String lastName,
                                               @PathVariable("dob") Date dob) {
-        Optional<Patient> list = patientService.findPatientByName(firstName, lastName, dob);
+        Optional<List<Patient>> list = patientService.findPatientByName(firstName, lastName, dob);
+        System.err.println(list);
         if (list.isPresent()) {
             return ResponseEntity.ok(list.get());
         }
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping(value = "/allergies")
+	public ResponseEntity<List<Allergy>> getAllAllergies() {
+		List<Allergy> all = patientService.findAllAllergies();
+		
+		return ResponseEntity.ok(all);
+	}
+	
+	@GetMapping(value = "/vaccinations")
+	public ResponseEntity<List<Vaccination>> getAllVaccinations() {
+		List<Vaccination> all = patientService.findAllVaccinations();
+		
+		return ResponseEntity.ok(all);
+	}
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
