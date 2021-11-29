@@ -12,5 +12,6 @@
 ## /covid/user/{userId}:
 - Get request returns covid verification form associated with the user given in url. 
 
-Use Diagram
+# Use Diagram
+
 ![image](https://media.discordapp.net/attachments/910926852300865557/910943714153734214/unknown.png?width=859&height=469)
