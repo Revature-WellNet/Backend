@@ -37,4 +37,4 @@ build/
 *testd.mv.db
 *p3data.trace.db
 *p3data.mv.db
-*src/main/resources/application.yml
+**/application.yml
