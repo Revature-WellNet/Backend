@@ -29,6 +29,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.revature.models.Role;
 import com.revature.models.User;
+import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
 import com.revature.services.UserService;
 
@@ -40,6 +41,9 @@ class UserServiceTest {
 	
 	@Mock
 	private UserDAO userDAO;
+	
+	@Mock
+	private RoleDAO roleDAO;
 	
 	@Before
 	public void beforeAll() throws Exception {
@@ -90,16 +94,22 @@ class UserServiceTest {
         
         verify(userDAO, times(1)).delete(user1);
 	}
+	
+	@Test
+	void testAddOrUpdateRole() {
+		Role role = new Role(1, "nurse");
+
+        userService.addOrUpdateRole(role);;
+
+        verify(roleDAO, times(1)).save(role);
+	}
 
 	@Test
 	void testFindAllPatients() {
 //		fail("Not yet implemented");
 	}
 
-	@Test
-	void testAddOrUpdateRole() {
-//		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	void testGetDoctorPatientData() {
