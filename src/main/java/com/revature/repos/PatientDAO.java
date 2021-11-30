@@ -24,5 +24,5 @@ public interface PatientDAO extends JpaRepository<Patient, Integer> {
 	Optional<List<Patient>> findByName(String firstname, String lastname);
 
 	@Query("FROM Patient p WHERE p.firstName = ?1 and p.lastName = ?2 and p.dob = ?3")
-	Optional<Patient> findByName(String firstname, String lastname, Date dob);
+	Optional<List<Patient>> findByName(String firstname, String lastname, Date dob);
 }

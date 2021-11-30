@@ -9,4 +9,5 @@ import com.revature.models.Vaccination;
 @Repository
 public interface VaccinationDAO extends JpaRepository<Vaccination, Integer>{
 
+
 }
