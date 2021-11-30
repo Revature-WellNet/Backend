@@ -86,4 +86,43 @@ public class userController {
 		
 		return ResponseEntity.noContent().build();
 	}
+
+	
+	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+	
+		
+		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
+		
+		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
+		
+		else { return ResponseEntity.noContent().build(); }
+		
+	}
+	
+	@PostMapping("/registration")
+	public ResponseEntity<User> insert(@RequestBody User user){
+	
+		String id = user.getId();
+		
+		System.out.println("ID : " + id);
+		System.out.println("User : " + user);
+		
+		if(id == null) {
+			
+			System.out.println("Bad Request");
+			
+			return ResponseEntity.badRequest().build();
+		}
+		
+			System.out.println("Good Request");
+		
+		userService.addOrUpdateUser(user);
+		
+		return ResponseEntity.status(201).body(user);
+	
+	}
+	
+	
+	
 }
