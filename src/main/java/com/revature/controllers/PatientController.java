@@ -27,7 +27,7 @@ import com.revature.services.PatientService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/public/patient")
+@RequestMapping(value = "/patient")
 public class PatientController {
 
 
