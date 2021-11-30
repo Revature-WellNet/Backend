@@ -1,6 +1,8 @@
 package com.revature.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,18 +46,14 @@ class UserServiceTest {
 		MockitoAnnotations.openMocks(this);
 	}
 
-	
-
-	
-
-	@Test
-	void testUserService() {
-//		fail("Not yet implemented");
-	}
 
 	@Test
 	void testAddOrUpdateUser() {
-//		fail("Not yet implemented");
+        User user1 = new User("1", "firstname", "lastname", "email@em.com", new Role(1, "nurse"));
+
+        userService.addOrUpdateUser(user1);
+
+        verify(userDAO, times(1)).save(user1);
 	}
 
 	@Test
@@ -75,12 +73,22 @@ class UserServiceTest {
 	
 	@Test
 	void testFindByUserId() {
-//		fail("Not yet implemented");
+        User user1 = new User("1", "firstname", "lastname", "email@em.com", new Role(1, "nurse"));
+        when(userDAO.findByUserId("1")).thenReturn(java.util.Optional.of(user1));
+
+        User returnedUser = userService.findByUserId("1").get();
+        assertTrue(returnedUser.getFirstname().equals("firstname"));
 	}
 
 	@Test
 	void testDeleteUser() {
-//		fail("Not yet implemented");
+        User user1 = new User("1", "firstname", "lastname", "email@em.com", new Role(1, "nurse"));
+        when(userDAO.findByUserId("1")).thenReturn(java.util.Optional.of(user1));
+
+        userService.addOrUpdateUser(user1);
+        userService.deleteUser("1");
+        
+        verify(userDAO, times(1)).delete(user1);
 	}
 
 	@Test
