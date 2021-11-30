@@ -1,3 +1,4 @@
+
 spring:
   servlet:
     multipart:
@@ -83,4 +84,5 @@ security:
     - X-Xsrf-Token
   valid-application-roles:
     - ROLE_NURSE
+
     - ROLE_DOCTOR
