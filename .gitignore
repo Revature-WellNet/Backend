@@ -32,9 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
-### Database stuff ###
+
 *testd.trace.db
 *testd.mv.db
 *p3data.trace.db
 *p3data.mv.db
-**/application.yml
+*.yml
