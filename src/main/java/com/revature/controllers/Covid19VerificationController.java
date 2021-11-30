@@ -23,7 +23,7 @@ import com.revature.services.Covid19VerificationService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping("/public/covid")
+@RequestMapping("/covid")
 public class Covid19VerificationController {
 	
 	@Autowired
@@ -48,8 +48,8 @@ public class Covid19VerificationController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Covid19Verification>> findCovid19VerificationById(@PathVariable("id") int id){
-		Optional<Covid19Verification> cv = cvs.findById(id);
+	public ResponseEntity<Optional<List<Covid19Verification>>> findCovid19VerificationById(@PathVariable("id") int id){
+		Optional<List<Covid19Verification>> cv = cvs.findById(id);
 		return ResponseEntity.status(200).body(cv);
 	}
 	
@@ -66,12 +66,16 @@ public class Covid19VerificationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Covid19Verification> deleteCovid19Verification(@PathVariable("id") int id) {
-		cvs.deleteCovid19Verification(id);
+	public ResponseEntity<Covid19Verification> deleteCovid19Verification(@PathVariable("id") String userId) {
+		cvs.deleteCovid19Verification(userId);
 		return ResponseEntity.status(201).build();
 	}
 	
-	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<Optional<Covid19Verification>> findCovid19VerificationByUserId(@PathVariable("userId") String id){
+		Optional<Covid19Verification> cv = cvs.findByUserId(id);
+		return ResponseEntity.status(200).body(cv);
+	}
 	
 	
 	

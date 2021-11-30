@@ -25,30 +25,33 @@ public class Covid19VerificationService {
 	}
 	
 	
-	public void addOrUpdateCovid19Verification(Covid19Verification cv) {
+	public Covid19Verification addOrUpdateCovid19Verification(Covid19Verification cv) {
 		cvd.save(cv);
+		return cv;
 	}
 	
 	public List<Covid19Verification> findAllCovid19Verifications(){
 		return cvd.findAll();
 	}
 	
-	public Optional<Covid19Verification> findById(int id) {
+	public Optional<List<Covid19Verification>> findById(int id) {
 		return cvd.findById(id);
 	}
 	
 	
-	public void deleteCovid19Verification(int id) {
-		Covid19Verification cv = findById(id).get();
+	public boolean deleteCovid19Verification(String userId) {
+		Covid19Verification cv = findByUserId(userId).get();
 		if(cv!=null) {
 			cvd.delete(cv);
-//			return true;		
+		return true;	
 		}else {
-//			return false;
+		return false;
 		}
 	}
 	
-
+	public Optional<Covid19Verification> findByUserId(String userId) {
+		return cvd.findByUserId(userId);
+	}
 	
 	
 	

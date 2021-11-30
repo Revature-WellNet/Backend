@@ -66,6 +66,17 @@ public class UserService {
 		roleDAO.save(role);
 	}		
 		
+
+	public Optional<List<Patient>> getDoctorPatientData(String firstName, String lastName) {
+		System.out.println("Method Called");
+		Optional<List<Patient>> results = patientDAO.matchDoctorToUser(firstName, lastName);
+		
+		System.out.println(results);
+		
+		return results;
+		
 	}
 	
+	
+}
 
