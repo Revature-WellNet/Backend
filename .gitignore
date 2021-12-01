@@ -33,9 +33,6 @@ build/
 .vscode/
 
 
-*testd.trace.db
-*team1.mv.db
-*testd.mv.db
-*p3data.trace.db
-*p3data.mv.db
+### Database stuff ###
+*.db
 *.yml
