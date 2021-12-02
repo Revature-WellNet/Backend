@@ -5,24 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.firebase.auth.FirebaseAuthException;
 import com.revature.models.Patient;
 import com.revature.models.User;
-
-import com.revature.security.models.TokenHolder;
-
-import com.revature.security.models.RoleConstants;
-import com.revature.security.services.RoleService;
-
+import com.revature.security.models.AuthUserDTO;
 import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -33,10 +28,30 @@ public class userController {
 	@Autowired
 	private UserService userService;
 
+
 	@Autowired
 	public userController(UserService userService) {
 		super();
 		this.userService = userService;
+	}
+	
+	@PutMapping("/updateprofile")
+	public ResponseEntity<User> update(@RequestBody User user, @AuthenticationPrincipal AuthUserDTO authDTO){
+	
+		String id = user.getId();
+		
+		System.out.println("ID : " + id);
+		System.out.println("User : " + user);
+		
+		if(id == null || !id.equals(authDTO.getUid())) {
+			
+			System.out.println("Bad Request");
+			
+			return ResponseEntity.badRequest().build();
+		}	
+		System.out.println("Good Request");
+		userService.addOrUpdateUser(user);
+		return ResponseEntity.status(201).body(user);
 	}
 	
 	@GetMapping("/user")
@@ -72,4 +87,43 @@ public class userController {
 		
 		return ResponseEntity.noContent().build();
 	}
+
+	
+	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+	
+		
+		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
+		
+		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
+		
+		else { return ResponseEntity.noContent().build(); }
+		
+	}
+	
+	@PostMapping("/registration")
+	public ResponseEntity<User> insert(@RequestBody User user){
+	
+		String id = user.getId();
+		
+		System.out.println("ID : " + id);
+		System.out.println("User : " + user);
+		
+		if(id == null) {
+			
+			System.out.println("Bad Request");
+			
+			return ResponseEntity.badRequest().build();
+		}
+		
+			System.out.println("Good Request");
+		
+		userService.addOrUpdateUser(user);
+		
+		return ResponseEntity.status(201).body(user);
+	
+	}
+	
+	
+	
 }
