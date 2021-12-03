@@ -22,20 +22,16 @@ public class DiagnosisForm {
     private boolean resolutionStatus;
     private Timestamp checkIn;
     private Timestamp checkOut;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "patient_id")
     @JsonIgnoreProperties("diagnosisForms")
     private Patient patient;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private Room room;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nurse_id")
     private User nurse;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private User doctor;

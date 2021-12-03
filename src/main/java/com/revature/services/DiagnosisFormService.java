@@ -92,5 +92,17 @@ public class DiagnosisFormService {
 		return  diagnosisFormDAO.findAll();
 	}
 	
+//	public List<DiagnosisForm> findAllOpenDiagnosis() {
+//		List<DiagnosisForm>  dForms = diagnosisFormDAO.findAll();
+//		//new list
+////		for (all f in dForms) {
+////			if(f.resolutionStatus == false) {
+////				new list.append(f);
+////			}
+////			
+////		}
+//		//return new list
+//	}
+//	
 	
 }

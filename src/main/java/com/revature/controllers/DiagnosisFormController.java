@@ -34,11 +34,8 @@ public class DiagnosisFormController {
 		if(all.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
-		
 		return ResponseEntity.ok(all);
 	}
-	
-	
 	
 	@GetMapping(value = "/{diagId}")
 	public ResponseEntity<DiagnosisForm> getDiagnosisFormById(@PathVariable("diagId")int diagId) {
