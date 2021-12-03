@@ -79,10 +79,11 @@ public class userController {
 	@GetMapping("/{id}")
 	public ResponseEntity<User> findById(@PathVariable("id") String id ){
 		Optional<User> optional = userService.findByUserId(id);
-		
+		System.out.println(id +" : " + optional.isPresent());
 		if(optional.isPresent())
 		{
-			return ResponseEntity.ok(optional.get());
+			System.out.println("you're in the conditional");
+			return ResponseEntity.status(200).body(optional.get());
 		}
 		
 		return ResponseEntity.noContent().build();
