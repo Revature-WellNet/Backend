@@ -33,7 +33,6 @@ build/
 .vscode/
 
 
-### Database ###
-*.trace.db
-*.mv.db
+### Database stuff ###
+*.db
 *.yml
