@@ -110,6 +110,64 @@ public class PatientService {
 		return vaccinationDAO.findAll();
 	}
 	
+	public Boolean addAllergy(Allergy allergy){
+		try {
+        	
+            allergyDAO.save(allergy);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            return false;
+        }
+	}
+	
+	public Boolean addVaccine(Vaccination vaccine){
+		try {
+        	
+            vaccinationDAO.save(vaccine);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            return false;
+        }
+	}
+	
+	public Boolean deleteAllergy(String allergy) {
+        try {
+            Allergy deadAllergy = allergyDAO.findByAllergy(allergy).get();
+
+            if (deadAllergy == null)
+                return false;
+            else {
+
+                allergyDAO.delete(deadAllergy);
+                return true;
+            }
+        } catch (Exception e) {
+            
+            System.out.println(e.getStackTrace());
+            return false;
+        }
+    }
+	
+	public Boolean deleteVaccine(String vaccine) {
+        try {
+            Vaccination deadVaccine = vaccinationDAO.findByVaccination(vaccine).get();
+
+            if (deadVaccine == null)
+                return false;
+            else {
+
+                vaccinationDAO.delete(deadVaccine);
+                return true;
+            }
+        } catch (Exception e) {
+            
+            System.out.println(e.getStackTrace());
+            return false;
+        }
+    }
+	
 	public Optional<BloodType> findBloodType(String name) {
 		
 		return bloodtypeDAO.findByType(name);

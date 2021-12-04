@@ -174,6 +174,71 @@ public class PatientController {
         }
 
     }
+    
+    @PostMapping(value = "/allergies")
+    public ResponseEntity<Allergy> addAllergy(@RequestBody String allergy) {
+    	
+    	Allergy allergyObj = new Allergy(allergy, null);
+    	
+        if (patientService.addAllergy(allergyObj)) {
+            return ResponseEntity.status(201).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+    
+    @PostMapping(value = "/vaccinations")
+    public ResponseEntity<Vaccination> addVaccine(@RequestBody String vaccine) {
+    	
+    	Vaccination vaccineObj = new Vaccination(vaccine, null);
+
+        if (patientService.addVaccine(vaccineObj)) {
+            return ResponseEntity.status(201).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+
+    }
+    
+    @DeleteMapping(value = "allergies/{allergy}")
+    public ResponseEntity<Allergy> deleteAllergy(@PathVariable("allergy") String allergy) {
+    	
+    	System.out.println(allergy);
+    	List<Allergy> allAllergies = patientService.findAllAllergies();
+    	for(Allergy a : allAllergies) {
+    		if(a.getAllergy().equals(allergy)) {
+    			
+    			if(patientService.deleteAllergy(allergy)) {
+    	            return ResponseEntity.status(200).build();
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    	return ResponseEntity.status(400).build();
+
+
+    }
+    
+    @DeleteMapping(value = "vaccinations/{vaccine}")
+    public ResponseEntity<Allergy> deleteVaccine(@PathVariable("vaccine") String vaccine) {
+    	
+    	List<Vaccination> allVaccinations = patientService.findAllVaccinations();
+    	for(Vaccination v : allVaccinations) {
+    		if(v.getVaccination().equals(vaccine)) {		
+    			
+    			if(patientService.deleteVaccine(vaccine)) {
+    	            return ResponseEntity.status(200).build();
+    			}			
+    		}
+    		
+    	}
+    	
+    	return ResponseEntity.status(400).build();
+
+    }
 
 
 }
