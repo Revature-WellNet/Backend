@@ -25,6 +25,7 @@ public class RoleService {
 	public void addRole(String uid, String role) throws Exception {
 		try {
 			UserRecord user = firebaseAuth.getUser(uid);
+
 			Map<String, Object> claims = new HashMap<>();
 			user.getCustomClaims().forEach((k, v) -> claims.put(k, v));
 			if (securityProps.getValidApplicationRoles().contains(role)) {
@@ -32,27 +33,38 @@ public class RoleService {
 					claims.put(role, true);
 				}
 				firebaseAuth.setCustomUserClaims(uid, claims);
-				System.out.println("user's custom claims: " + user.getCustomClaims());
 			} else {
-				throw new Exception("Not a valid Application role, Allowed roles => "
+				throw new Exception("Invalid Application role, Allowed roles => "
 						+ securityProps.getValidApplicationRoles().toString());
 			}
 
-		} catch (FirebaseAuthException e) {
+		} catch (IllegalArgumentException | FirebaseAuthException e) {
+			throw new Exception("Invalid UID");
 		}
-
 	}
 
-	public void removeRole(String uid, String role) {
+	/**
+	 * This method is only used for testing
+	 * @param uid
+	 * @param role
+	 */
+	public void removeRole(String uid, String role) throws Exception{
 		try {
 			UserRecord user = firebaseAuth.getUser(uid);
 			Map<String, Object> claims = new HashMap<>();
-			user.getCustomClaims().forEach((k, v) -> claims.put(k, v));			
-			if (claims.containsKey(role)) {
-				claims.remove(role);
-			}
-			firebaseAuth.setCustomUserClaims(uid, claims);
-		} catch (FirebaseAuthException e) {
+			user.getCustomClaims().forEach((k, v) -> claims.put(k, v));	
+			if (securityProps.getValidApplicationRoles().contains(role)) {
+				if (claims.containsKey(role)) {
+					claims.remove(role);
+				}
+				firebaseAuth.setCustomUserClaims(uid, claims);
+			} else {
+				throw new Exception("Invalid Application role, Allowed roles => "
+						+ securityProps.getValidApplicationRoles().toString());
+			}		
+		} catch (IllegalArgumentException | FirebaseAuthException e) {
+			throw new Exception("Invalid UID");
 		}
+
 	}
 }
