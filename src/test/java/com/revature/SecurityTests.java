@@ -1,5 +1,6 @@
 package com.revature;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,17 +13,21 @@ import com.google.firebase.auth.UserRecord;
 import com.revature.models.Role;
 import com.revature.security.services.RoleService;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.revature.security.models.SecurityProperties;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
 class SecurityTests {
 
 	@Autowired
@@ -31,7 +36,8 @@ class SecurityTests {
 	@Autowired
 	private RoleService roleService;
 
-    private static Logger logger = LoggerFactory.getLogger(SecurityTests.class);
+	@Autowired
+	private SecurityProperties securityProps;
 
 	Role nurse = new Role("nurse");
 	String nurseStr = "ROLE_NURSE";
@@ -45,77 +51,101 @@ class SecurityTests {
 	String user5_UID = "PFmbjBYKnXSHQHqYDPFgxkoikTm2";
 	String user6_UID = "CbY6DVVXM1P6B9wqGXwOqvkx5sm2";
 
-	@Test
-	public void addRoleTest() throws FirebaseAuthException{
+	// not a valid user id
+	String user7_UID = "7777777777777777777777777777";
 
+
+	@Test
+	@Order(1)
+	public void addNurseRolePositiveTest() throws Exception {
 		// add nurse role to user 1
-		try {
-			roleService.addRole(user1_UID, nurseStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		roleService.addRole(user1_UID, nurseStr);
 
 		UserRecord user = firebaseAuth.getUser(user1_UID);
 
         // positive test
 		assertTrue(user.getCustomClaims().containsKey(nurseStr));
+	}
 
+	@Test
+	@Order(1)
+	public void addDoctorRolePositiveTest() throws Exception {
 		// add doctor role to user 2
-		try {
-			roleService.addRole(user2_UID, doctorStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		roleService.addRole(user2_UID, doctorStr);
+	
 		UserRecord user2 = firebaseAuth.getUser(user2_UID);
 
         // positive test
 		assertTrue(user2.getCustomClaims().containsKey(doctorStr));	
-
-
-        try {
-			roleService.addRole(user3_UID, "not-a-valid-input");
-		} catch (Exception e) {
-			e.printStackTrace();
-            // negative test
-            assertTrue(e != null);
-		}
 	}
 
 
+	@Test
+	@Order(1)
+	public void addInvalidRoleNegativeTest() {
+        try {
+			roleService.addRole(user3_UID, "invalid-id");
+		} catch (Exception e) {
+            // negative test
+            assertEquals(e.getMessage(), "Invalid Application role, Allowed roles => "
+			+ securityProps.getValidApplicationRoles().toString());
+		}
+	}
 
 	@Test
-	public void removeRoleTest() throws FirebaseAuthException{
-
-		// remove nurse role from user 1
-		try {
-			roleService.removeRole(user1_UID, nurseStr);
+	@Order(1)
+	public void addInvalidUserIDNegativeTest() throws FirebaseAuthException{
+        try {
+			roleService.addRole(user7_UID, nurseStr);
 		} catch (Exception e) {
-			e.printStackTrace();
+            // negative test
+            assertEquals(e.getMessage(), "Invalid UID");
 		}
+	}
+
+	@Test
+	@Order(2)
+	public void removeNurseRolePositiveTest() throws Exception{
+		// remove nurse role from user 1
+		roleService.removeRole(user1_UID, nurseStr);
 
 		UserRecord user = firebaseAuth.getUser(user1_UID);
 
 		assertFalse(user.getCustomClaims().containsKey(nurseStr));
+	}
 
+	@Test
+	@Order(2)
+	public void removeDoctorRolePositiveTest() throws Exception{
 		// remove doctor role from user 2
-		try {
-			roleService.removeRole(user2_UID, doctorStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		roleService.removeRole(user2_UID, doctorStr);
 
 		UserRecord user2 = firebaseAuth.getUser(user2_UID);
-
+		// positive test
 		assertFalse(user2.getCustomClaims().containsKey(doctorStr));
+	}
         
-
+	@Test
+	@Order(2)
+	public void removeInvalidRoleNegativeTest() throws FirebaseAuthException{
         try {
-			roleService.removeRole(user2_UID, "not-a-valid-input");
+			roleService.removeRole(user2_UID, "invalid-input");
+			
 		} catch (Exception e) {
-			e.printStackTrace();
             // negative test
-            assertTrue(e != null);
+            assertEquals(e.getMessage(), "Invalid Application role, Allowed roles => "
+			+ securityProps.getValidApplicationRoles().toString());
+		}
+	}
+
+	@Test
+	@Order(2)
+	public void removeInvalidUserIDNegativeTest() throws FirebaseAuthException{
+        try {
+			roleService.removeRole(user7_UID, nurseStr);
+		} catch (Exception e) {
+            // negative test
+            assertEquals(e.getMessage(), "Invalid UID");
 		}
 	}
 }
