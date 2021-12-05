@@ -3,6 +3,7 @@ package com.revature.security.services;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,30 +26,50 @@ public class SecurityService {
     @Autowired
     SecurityProperties securityProps;
 
+    /**
+     * Not currently being used in app
+     */
     public AuthUserDTO getUser() {
     	AuthUserDTO userPrincipal = null;
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        Object principal = securityContext.getAuthentication().getPrincipal();
+        Authentication auth = securityContext.getAuthentication();
+
+        if(auth==null){
+            return userPrincipal;
+        }
+        Object principal = auth.getPrincipal();
         if (principal instanceof AuthUserDTO) {
             userPrincipal = ((AuthUserDTO) principal);
         }
         return userPrincipal;
     }
 
+    /**
+     * Not currently being used in app
+     */
     public Credentials getCredentials() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
+
+        Authentication auth = securityContext.getAuthentication();
+
+        if(auth==null){
+            return null;
+        }
         return (Credentials) securityContext.getAuthentication().getCredentials();
     }
 
-    public boolean isPublic() {
-        return securityProps.getAllowedPublicApis().contains(httpServletRequest.getRequestURI());
-    }
+    /**
+     * Not currently being used in app
+     */
+    // public boolean isPublic() {
+    //     return securityProps.getAllowedPublicApis().contains(httpServletRequest.getRequestURI());
+    // }
 
     public String getBearerToken(HttpServletRequest request) {
         String bearerToken = null;
-        String authorization = request.getHeader("Authorization");
-        if (StringUtils.hasText(authorization) && authorization.startsWith("Bearer ")) {
-            bearerToken = authorization.substring(7);
+        String authorizationValue = request.getHeader("Authorization");
+        if (StringUtils.hasText(authorizationValue) && authorizationValue.startsWith("Bearer ")) {
+            bearerToken = authorizationValue.substring(7); // JWT
         }
         return bearerToken;
     }
