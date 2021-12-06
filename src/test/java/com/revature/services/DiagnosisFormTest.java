@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -55,8 +56,9 @@ public class DiagnosisFormTest {
 	private UserDAO userDAO;
 	
 	@Before
-	public  void beforeAll() throws Exception {
+	public void beforeAll() throws Exception {
 		MockitoAnnotations.openMocks(this);
+		
 		Allergy allergy = new Allergy(1,"drug allergy",null);
 		Vaccination vaccination = new Vaccination(1,"covid-19",null);
 		ArrayList<DiagnosisForm> diagnosisForms = new ArrayList<DiagnosisForm>();
@@ -68,9 +70,6 @@ public class DiagnosisFormTest {
         		diagnosisForms);
 		
 	}
-	
-
-	
 	
 	@Test
 	public void testFindById() {
@@ -101,16 +100,91 @@ public class DiagnosisFormTest {
 	
 	@Test
 	void testFindByDoctor() {
+		doctor = new User("2", "doctorfirst", "doctorlast", "doctor@em.com", new Role(2, "doctor"));
 	    List<DiagnosisForm> list = new ArrayList<DiagnosisForm>();
 		 DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
 					new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
 					nurse,doctor);
-		    list.add(df);
-	        when(diagnosisFormDAO.findByDoctor(doctor)).thenReturn(java.util.Optional.of(list));
-	        Optional<List<DiagnosisForm>> dfReturnList = diagFormService.findDiagnosisFormByDoctor("1");
-	        Assertions.assertEquals(1, dfReturnList.get().size());
-	        verify(diagnosisFormDAO, times(1)).findByDoctor(doctor);
+	    list.add(df);
+	    System.out.println(doctor.toString());
+	    when(userDAO.findByUserId(doctor.getId())).thenReturn(java.util.Optional.of(doctor));
+        when(diagnosisFormDAO.findByDoctor(doctor)).thenReturn(java.util.Optional.of(list));
+        Optional<List<DiagnosisForm>> dfReturnList = diagFormService.findDiagnosisFormByDoctor(doctor.getId());
+        Assertions.assertEquals(1, dfReturnList.get().size());
+        verify(diagnosisFormDAO, times(1)).findByDoctor(doctor);
 
+	}
+	
+	@Test
+	void testFindByNurse() {
+		nurse = new User("1", "nursefirst", "nurselast", "nurse@em.com", new Role(1, "nurse"));
+	    List<DiagnosisForm> list = new ArrayList<DiagnosisForm>();
+		 DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
+					new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+					nurse,doctor);
+	    list.add(df);
+	    System.out.println(nurse.toString());
+	    when(userDAO.findByUserId(nurse.getId())).thenReturn(java.util.Optional.of(nurse));
+        when(diagnosisFormDAO.findByNurse(nurse)).thenReturn(java.util.Optional.of(list));
+        Optional<List<DiagnosisForm>> dfReturnList = diagFormService.findDiagnosisFormByNurse(nurse.getId());
+        Assertions.assertEquals(1, dfReturnList.get().size());
+        verify(diagnosisFormDAO, times(1)).findByNurse(nurse);
+
+	}
+	
+	@Test
+	void testFindByPatient() {
+		Allergy allergy = new Allergy(1,"drug allergy",null);
+		Vaccination vaccination = new Vaccination(1,"covid-19",null);
+		ArrayList<DiagnosisForm> diagnosisForms = new ArrayList<DiagnosisForm>();
+        patient = new Patient(1,"patientfirst", "patientlast",new Date(900),72,170,new BloodType(1,"O+"),new Sex(1,"M"),
+        		new ArrayList<Allergy>(Arrays.asList(allergy)),new ArrayList<Vaccination>(Arrays.asList(vaccination)),
+        		diagnosisForms);
+	    List<DiagnosisForm> list = new ArrayList<DiagnosisForm>();
+		 DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
+					new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+					nurse,doctor);
+	    list.add(df);
+	    System.out.println(patient.toString());
+	    when(patientDAO.findById(patient.getPatientId())).thenReturn(java.util.Optional.of(patient));
+        when(diagnosisFormDAO.findByPatient(patient)).thenReturn(java.util.Optional.of(list));
+        Optional<List<DiagnosisForm>> dfReturnList = diagFormService.findDiagnosisFormByPatient(patient.getPatientId());
+        Assertions.assertEquals(1, dfReturnList.get().size());
+        verify(diagnosisFormDAO, times(1)).findByPatient(patient);
+	}
+	
+	@Test
+	void testAddDiag() {
+		DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
+				new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+				nurse,doctor);
+		
+		diagFormService.addDiagnosisForm(df);
+
+        verify(diagnosisFormDAO, times(1)).save(df);
+	}
+	
+	@Test
+	void testUpdateDiag() {
+		DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
+				new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+				nurse,doctor);
+		
+		diagFormService.updateDiagnosisForm(df);
+
+        verify(diagnosisFormDAO, times(1)).save(df);
+	}
+	
+	@Test
+	void testDeleteDiag() {
+		DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
+				new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+				nurse,doctor);
+		
+		when(diagFormService.findDiagnosisFormById(df.getDiagId())).thenReturn(java.util.Optional.of(df));
+		diagFormService.deleteDiagnosisForm(df.getDiagId());
+		verify(diagnosisFormDAO, times(1)).delete(df);
+		
 	}
 	
 }
