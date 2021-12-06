@@ -22,7 +22,7 @@ public class Room {
     @Column(unique = true, nullable = false)
     private int roomNumber;
     @JoinColumn(name="areaId", referencedColumnName = "areaId", nullable = false)
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     private Area area;
 
     public Room(int id, int roomNumber, Area area){

@@ -28,7 +28,7 @@ public class DiagnosisForm {
     @JsonIgnoreProperties("diagnosisForms")
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "room_id")
     private Room room;
 

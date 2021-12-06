@@ -68,10 +68,13 @@ public class DiagnosisFormService {
 	}
 	public Boolean updateDiagnosisForm (DiagnosisForm diagnosisForm) {
 		try {
+			
+			System.out.println(diagnosisForm);
+			
 			diagnosisFormDAO.save(diagnosisForm);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
