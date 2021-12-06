@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.integration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
