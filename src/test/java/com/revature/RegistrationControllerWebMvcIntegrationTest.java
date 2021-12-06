@@ -22,7 +22,7 @@ import com.revature.models.User;
 import com.revature.utils.JsonUtils;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class RegistrationControllerWebMvcIntegrationTest {
 
 	@Autowired

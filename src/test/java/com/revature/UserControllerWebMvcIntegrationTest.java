@@ -32,7 +32,7 @@ import com.revature.security.models.Credentials;
 import com.revature.utils.JsonUtils;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class UserControllerWebMvcIntegrationTest {
 
 	@Autowired
