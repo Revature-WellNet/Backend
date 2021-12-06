@@ -21,7 +21,7 @@ import com.revature.services.DiagnosisFormService;
 
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
-@RequestMapping(value="/public/diagnosis")
+@RequestMapping(value="/diagnosis")
 public class DiagnosisFormController {
 	
 	@Autowired
