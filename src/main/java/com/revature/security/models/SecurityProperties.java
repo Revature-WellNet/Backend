@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Component
 @ConfigurationProperties("security")
-@Data
+
 public class SecurityProperties {
 
 	CookieProperties cookieProps;

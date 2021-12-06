@@ -5,16 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Patient;
 import com.revature.models.User;
+import com.revature.security.models.AuthUserDTO;
 import com.revature.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,13 +28,33 @@ public class userController {
 	@Autowired
 	private UserService userService;
 
+
 	@Autowired
 	public userController(UserService userService) {
 		super();
 		this.userService = userService;
 	}
 	
-	@GetMapping
+	@PutMapping("/updateprofile")
+	public ResponseEntity<User> update(@RequestBody User user, @AuthenticationPrincipal AuthUserDTO authDTO){
+	
+		String id = user.getId();
+		
+		System.out.println("ID : " + id);
+		System.out.println("User : " + user);
+		
+		if(id == null || !id.equals(authDTO.getUid())) {
+			
+			System.out.println("Bad Request");
+			
+			return ResponseEntity.badRequest().build();
+		}	
+		System.out.println("Good Request");
+		userService.addOrUpdateUser(user);
+		return ResponseEntity.status(201).body(user);
+	}
+	
+	@GetMapping("/user")
 	public ResponseEntity<List<User>> findAllUsers(){
 		List<User> all = userService.findAllUsers();
 		
@@ -64,28 +87,17 @@ public class userController {
 		
 		return ResponseEntity.noContent().build();
 	}
+
 	
-	@PostMapping("/registration")
-	public ResponseEntity<User> insert(@RequestBody User user){
+	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
 	
-		String id = user.getId();
 		
-		System.out.println("ID : " + id);
-		System.out.println("User : " + user);
+		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
 		
-		if(id == null) {
-			
-			System.out.println("Bad Request");
-			
-			return ResponseEntity.badRequest().build();
-		}
+		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
 		
-			System.out.println("Good Request");
+		else { return ResponseEntity.noContent().build(); }
 		
-		userService.addOrUpdateUser(user);
-		
-		return ResponseEntity.status(201).body(user);
-}
-	
-	
+	}	
 }

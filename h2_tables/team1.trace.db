@@ -1,0 +1,6 @@
+2021-11-30 16:13:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (USER: ROLE_ROLE_ID INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."USER"("USER_ID","EMAIL","FIRSTNAME","LASTNAME","ROLE_ROLE_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-193]
+2021-11-30 16:13:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (USER: ROLE_ROLE_ID INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."USER"("USER_ID","EMAIL","FIRSTNAME","LASTNAME","ROLE_ROLE_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-193]
