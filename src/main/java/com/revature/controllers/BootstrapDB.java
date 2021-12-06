@@ -75,7 +75,7 @@ public class BootstrapDB {
 	private Vaccination vaccination1 = new Vaccination(1,"Covid-19",null);
 	
 	private Covid19Verification covid19Verification  = new Covid19Verification(1,
-									new Timestamp(System.currentTimeMillis()),false);
+									"abc", new Timestamp(System.currentTimeMillis()),false);
 	
 	private Allergy allergy1 = new Allergy(1,"Drug Allergy",null);
 	private Allergy allergy2 = new Allergy(2,"Food Allergy",null);
