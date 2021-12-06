@@ -99,31 +99,5 @@ public class userController {
 		
 		else { return ResponseEntity.noContent().build(); }
 		
-	}
-	
-	@PostMapping("/registration")
-	public ResponseEntity<User> insert(@RequestBody User user){
-	
-		String id = user.getId();
-		
-		System.out.println("ID : " + id);
-		System.out.println("User : " + user);
-		
-		if(id == null) {
-			
-			System.out.println("Bad Request");
-			
-			return ResponseEntity.badRequest().build();
-		}
-		
-			System.out.println("Good Request");
-		
-		userService.addOrUpdateUser(user);
-		
-		return ResponseEntity.status(201).body(user);
-	
-	}
-	
-	
-	
+	}	
 }
