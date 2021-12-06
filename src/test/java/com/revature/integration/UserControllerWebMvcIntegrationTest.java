@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.integration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -32,7 +32,7 @@ import com.revature.security.models.Credentials;
 import com.revature.utils.JsonUtils;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class UserControllerWebMvcIntegrationTest {
 
 	@Autowired
@@ -87,7 +87,7 @@ public class UserControllerWebMvcIntegrationTest {
 	    );
 	    SecurityContextHolder.getContext().setAuthentication(auth);
 		mvc.perform(put("/user/updateprofile")
-			.content(JsonUtils.asJsonString(new User(testUID1, "firstname", "lastname", "email", new Role(2, "doctor"))))
+			.content(JsonUtils.asJsonString(new User(testUID1, "firstname", "lastname", "100docs@gmail.com", new Role(2, "doctor"))))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated());
