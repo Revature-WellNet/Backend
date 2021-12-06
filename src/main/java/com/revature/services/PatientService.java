@@ -58,6 +58,18 @@ public class PatientService {
 
     public Boolean addPatient(Patient patient) {
     	
+    	List<Patient> allPatients = this.findAllPatients();    	
+    	for(Patient i : allPatients) {
+    		
+    		if(i.getFirstName().equals(patient.getFirstName()) && 
+    			i.getLastName().equals(patient.getLastName()) &&	
+    			i.getDob().equals(patient.getDob())) {
+    			
+    			return false; //Not allowed to have patients with the same First, last and DoB. Comes down to not expecting nurses to memorize unique patient keys
+    			
+    		}
+    	}
+    	
         try {
         	System.out.println(patient);
             patientDAO.save(patient);
