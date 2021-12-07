@@ -30,7 +30,7 @@ public class DiagnosisFormController {
 	@GetMapping
 	public ResponseEntity<List<DiagnosisForm>> findAllDiagnosisForm(){
 		List<DiagnosisForm> all = diagnosisFormService.findAllDiagnosis();
-		
+		System.out.println("in diag form GET with: " );
 		if(all.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -78,23 +78,23 @@ public class DiagnosisFormController {
 	
 	@PostMapping
 	public  ResponseEntity<DiagnosisForm> addDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm){
-		
+		System.out.println("in diag form POST with: "+ diagnosisForm);
 		if (diagnosisFormService.addDiagnosisForm(diagnosisForm)) {
-		return ResponseEntity.status(201).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
+			return ResponseEntity.status(201).build();
+		} else {
+			return ResponseEntity.status(400).build();
+		}
 		
 	}
 	
 	@PutMapping
 	public  ResponseEntity<DiagnosisForm> updateDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm){
-		
+		System.out.println("in diag form PUT with: "+ diagnosisForm);
 		if (diagnosisFormService.updateDiagnosisForm(diagnosisForm)) {
-		return ResponseEntity.status(200).build();}
-		
-		else {
-		return ResponseEntity.status(400).build();}
+			return ResponseEntity.status(200).build();
+		} else {
+			return ResponseEntity.status(400).build();
+		}
 		
 	}
 	

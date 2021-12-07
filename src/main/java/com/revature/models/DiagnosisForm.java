@@ -43,8 +43,24 @@ public class DiagnosisForm {
     public DiagnosisForm() {
         super();
     }
+    
+    
+    
+    public DiagnosisForm(String diagnosis, String symptoms, boolean resolutionStatus, Timestamp checkIn,
+			Patient patient, Room room, User nurse) {
+		super();
+		this.diagnosis = diagnosis;
+		this.symptoms = symptoms;
+		this.resolutionStatus = resolutionStatus;
+		this.checkIn = checkIn;
+		this.patient = patient;
+		this.room = room;
+		this.nurse = nurse;
+	}
 
-    public DiagnosisForm(int diagId, String diagnosis, String symptoms, String treatment, boolean resolutionStatus, Timestamp checkIn,
+
+
+	public DiagnosisForm(int diagId, String diagnosis, String symptoms, String treatment, boolean resolutionStatus, Timestamp checkIn,
                          Timestamp checkOut) {
         super();
         this.diagId = diagId;
