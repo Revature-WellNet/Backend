@@ -34,6 +34,7 @@ import com.revature.models.Room;
 import com.revature.models.Sex;
 import com.revature.models.User;
 import com.revature.models.Vaccination;
+import com.revature.repos.AreaRepo;
 import com.revature.repos.DiagnosisFormDAO;
 import com.revature.repos.PatientDAO;
 import com.revature.repos.UserDAO;
@@ -54,6 +55,10 @@ public class DiagnosisFormTest {
 	private PatientDAO patientDAO;
 	@Mock
 	private UserDAO userDAO;
+	@Mock
+	private AreaRepo areaRepo;
+	@Mock
+	private RoomService roomService;
 	
 	@Before
 	public void beforeAll() throws Exception {
@@ -155,10 +160,14 @@ public class DiagnosisFormTest {
 	
 	@Test
 	void testAddDiag() {
+		Area area = new Area (1,"areaone");
+		Room room = new Room(1,1,area);
 		DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
-				new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+				new Timestamp(System.currentTimeMillis()),null,patient,room,
 				nurse,doctor);
 		
+		when(areaRepo.findByName(df.getRoom().getArea().getName())).thenReturn(java.util.Optional.of(area));
+		when(roomService.findById(df.getRoom().getId())).thenReturn(room);
 		diagFormService.addDiagnosisForm(df);
 
         verify(diagnosisFormDAO, times(1)).save(df);
@@ -166,10 +175,12 @@ public class DiagnosisFormTest {
 	
 	@Test
 	void testUpdateDiag() {
+		Area area = new Area (1,"areaone");
+		Room room = new Room(1,1,area);
 		DiagnosisForm df = new DiagnosisForm(1,"diagnosis string","symptoms string","treatment string",false,
-				new Timestamp(System.currentTimeMillis()),null,patient,new Room(1,1,new Area (1,"areaone")),
+				new Timestamp(System.currentTimeMillis()),null,patient,room,
 				nurse,doctor);
-		
+		when(roomService.findById(df.getRoom().getId())).thenReturn(room);
 		diagFormService.updateDiagnosisForm(df);
 
         verify(diagnosisFormDAO, times(1)).save(df);
