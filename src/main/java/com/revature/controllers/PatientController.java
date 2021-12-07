@@ -152,28 +152,28 @@ public class PatientController {
 
     }
 
-    @PutMapping
-    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+//    @PutMapping
+//    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+//
+//        if (patientService.updatePatient(patient)) {
+//            return ResponseEntity.status(200).build();
+//        } else {
+//            return ResponseEntity.status(400).build();
+//        }
+//
+//    }
 
-        if (patientService.updatePatient(patient)) {
-            return ResponseEntity.status(200).build();
-        } else {
-            return ResponseEntity.status(400).build();
-        }
 
-    }
-
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Patient> deletePatient(@PathVariable("id") int id) {
-
-        if (patientService.deletePatient(id)) {
-            return ResponseEntity.status(200).build();
-        } else {
-            return ResponseEntity.status(400).build();
-        }
-
-    }
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity<Patient> deletePatient(@PathVariable("id") int id) {
+//
+//        if (patientService.deletePatient(id)) {
+//            return ResponseEntity.status(200).build();
+//        } else {
+//            return ResponseEntity.status(400).build();
+//        }
+//
+//    }
     
     @PostMapping(value = "/allergies")
     public ResponseEntity<Allergy> addAllergy(@RequestBody String allergy) {

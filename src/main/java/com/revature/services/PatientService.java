@@ -81,39 +81,39 @@ public class PatientService {
         }
     }
 
-    public Boolean updatePatient(Patient patient) {
-        try {
-            patientDAO.save(patient);
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            return false;
-        }
-    }
-
-    public Boolean deletePatient(int patientId) {
-        try {
-            Patient patient = patientDAO.findById(patientId).get();
-
-            if (patient == null)
-                return false;
-            else {
-                //System.out.println("Tao in delete else");
-                // Delete all DigF first
-                List<DiagnosisForm> diagL = diagnosisFormService.findDiagnosisFormByPatient
-                        (patient.getPatientId()).get();
-                for (DiagnosisForm diag : diagL)
-                    diagnosisFormService.deleteDiagnosisForm(diag.getDiagId());
-
-                patientDAO.delete(patient);
-                return true;
-            }
-        } catch (Exception e) {
-            //System.out.println("Tao in delete exception");
-            System.out.println(e.getStackTrace());
-            return false;
-        }
-    }
+//    public Boolean updatePatient(Patient patient) {
+//        try {
+//            patientDAO.save(patient);
+//            return true;
+//        } catch (Exception e) {
+//            System.out.println(e.getStackTrace());
+//            return false;
+//        }
+//    }
+//
+//    public Boolean deletePatient(int patientId) {
+//        try {
+//            Patient patient = patientDAO.findById(patientId).get();
+//
+//            if (patient == null)
+//                return false;
+//            else {
+//                //System.out.println("Tao in delete else");
+//                // Delete all DigF first
+//                List<DiagnosisForm> diagL = diagnosisFormService.findDiagnosisFormByPatient
+//                        (patient.getPatientId()).get();
+//                for (DiagnosisForm diag : diagL)
+//                    diagnosisFormService.deleteDiagnosisForm(diag.getDiagId());
+//
+//                patientDAO.delete(patient);
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            //System.out.println("Tao in delete exception");
+//            System.out.println(e.getStackTrace());
+//            return false;
+//        }
+//    }
     
     public List<Allergy> findAllAllergies(){
 		return allergyDAO.findAll();
