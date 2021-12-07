@@ -239,6 +239,17 @@ public class PatientController {
     	return ResponseEntity.status(400).build();
 
     }
+    
+    @GetMapping(value="/resolved")
+    public ResponseEntity<List<Patient>> getAllUnresolvedPatients() {
+        List<Patient> all = patientService.findPatientByResoved();
+
+        if (all.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(all);
+    }
 
 
 }

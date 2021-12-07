@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.sql.Date;// may have to change to .util 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -190,6 +191,18 @@ public class PatientService {
 		return sexDAO.findBySex(name);
 	}
 	
+	public List<Patient> findPatientByResoved() {
+
+        List<Patient> listP = new ArrayList<>();
+        for (Patient p : patientDAO.findAll())
+            for( DiagnosisForm df : p.getDiagnosisForms()){
+                if(df.isResolutionStatus() == false) {
+                    listP.add(p);
+                    break;
+                    }}
+
+        return listP;
+    }
 
 
 //	public Optional<List<Patient>> findPatientByName(String firstname) {

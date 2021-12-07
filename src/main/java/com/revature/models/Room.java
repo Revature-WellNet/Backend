@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int roomId;
     @Column(unique = true, nullable = false)
     private int roomNumber;
     @JoinColumn(name="areaId", referencedColumnName = "areaId", nullable = false)
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Area area;
 
     public Room(int id, int roomNumber, Area area){

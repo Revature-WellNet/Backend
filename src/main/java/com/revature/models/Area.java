@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class Area {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int areaId;
     @Column(unique = true, nullable = false)
     private String name;
