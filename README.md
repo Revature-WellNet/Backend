@@ -68,6 +68,44 @@ These are the possible incomming requests divided by controllers (each request b
 - Delete request deletes diagform where id = id
 
 ## PatientController
+/patient
+- get request returns all patients
+- post request takes a patient obj and adds it to the database  
+
+/patient/{id}
+- get request returns the patient corresponding to the sent id
+
+/patient/firstname/{firstName}
+- get request returns all patients corresponding to the sent first name
+
+/patient/firstname/{firstName}/{lastName}
+- get request returns all patients corresponding to the sent first name and last name
+
+/patient/firstname/{firstName}//{lastName}/{dob}
+- get request returns all patients corresponding to the sent first name, last name and date obj
+
+/patient/allergies
+- get request returns all allergies
+- post request creates a new allergy obj in the database
+
+/patient/vaccinations
+- get request returns all vaccinations
+- post request creates a new vaccination obj in the database
+
+/bloodtype/{name}
+- get request returns the bloodtype obj specified in the name
+
+/sex/{name}
+- get request returns the sex obj specified in the name
+
+/patient/allergies/{allergy}
+- delete request deletes the specified allergy
+
+/patient/vaccinations/{vaccine}
+- delete request deletes the specified vaccination
+
+/patient/resolved
+- get request returns all patients that have a false resolution status on a diagnosis form
 
 ## registrationController
 
