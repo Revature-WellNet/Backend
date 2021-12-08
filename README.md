@@ -65,7 +65,7 @@ These are the possible incomming requests divided by controllers (each request b
 - Get request returns all forms where doctor.id = doctorId
 
 /diagnosis/{id}
-Delete request deletes diagform where id = id
+- Delete request deletes diagform where id = id
 
 ## PatientController
 
