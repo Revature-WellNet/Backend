@@ -1,4 +1,4 @@
-To start the server and database for Wellnet, please follow these steps:
+To start the server for Wellnet, please follow these steps:
 
 1. Install SpringToolSuite (STS)
 2. Clone this repository onto your computer
