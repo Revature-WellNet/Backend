@@ -16,3 +16,46 @@
 ![image](https://user-images.githubusercontent.com/69606065/142472470-b9a2004d-4fc1-4d2e-9f29-c23fdaf7eac1.png)
 
 > [Back To Top](#backend)
+
+The server is made up of several main parts:  
+  1. Controllers to handle incoming requests.  
+  2. Services for the controllers to call to send and receive data  
+  3. Repos for services to use to presist data in  the H2 database  
+  4. Utility classes to be used anywhere throughout the server  
+  5. A security package to validate incoming requests  
+
+The server is not currently configured to send requests, but it can receive them.
+These are the possible incomming requests divided by controllers (each request begins with a /wellnet):
+
+# AreaController:
+
+# BootstrapDB:
+
+## /public/bootstrapDB/filler/one
+- Get request fills the database with sample data
+
+# Covid19Verification URIs:
+
+## /covid:
+- Get request returns list of all covid verification forms.
+- Post request adds or updates covid verification form.
+- Put request replaces covid verification form. 
+
+## /covid/{id}:
+- Get request returns covid verification form with id from url. 
+- Delete request deletes covid verification form with id from url. 
+
+## /covid/user/{userId}:
+- Get request returns covid verification form associated with the user given in url.
+
+# DiagnosisFormController
+
+# PatientController
+
+# registrationController
+
+# RoomController
+
+# userController
+
+
