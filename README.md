@@ -109,6 +109,9 @@ These are the possible incomming requests divided by controllers (each request b
 
 ## registrationController
 
+/public/registration
+- post request adds the user object to the database
+
 ## RoomController
 
 ## userController
