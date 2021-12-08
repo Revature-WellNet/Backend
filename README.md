@@ -27,35 +27,35 @@ The server is made up of several main parts:
 The server is not currently configured to send requests, but it can receive them.
 These are the possible incomming requests divided by controllers (each request begins with a /wellnet):
 
-# AreaController:
+## AreaController:
 
-# BootstrapDB:
+## BootstrapDB:
 
 ## /public/bootstrapDB/filler/one
 - Get request fills the database with sample data
 
-# Covid19Verification URIs:
+## Covid19Verification URIs:
 
-## /covid:
+ /covid:  
 - Get request returns list of all covid verification forms.
 - Post request adds or updates covid verification form.
 - Put request replaces covid verification form. 
 
-## /covid/{id}:
+ /covid/{id}:  
 - Get request returns covid verification form with id from url. 
 - Delete request deletes covid verification form with id from url. 
 
-## /covid/user/{userId}:
+ /covid/user/{userId}:  
 - Get request returns covid verification form associated with the user given in url.
 
-# DiagnosisFormController
+## DiagnosisFormController
 
-# PatientController
+## PatientController
 
-# registrationController
+## registrationController
 
-# RoomController
+## RoomController
 
-# userController
+## userController
 
 
