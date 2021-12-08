@@ -9,10 +9,10 @@ To start the server for Wellnet, please follow these steps:
 To access the database:
 1. Run the app in STS
 2. Open a browser and navigate to http://localhost:8081/wellnet/h2-console
-3. Enter this into the console: 
-     Saved Settings: Generic H2 (Embedded)
-     Setting Name: Generic H2 (Embedded)
-     Driver Class: org.h2.Driver
-     JDBC URL: jdbc:h2:file:./p3data
-     User Name: sa
-     Password: password
+3. Enter this into the console:  
+     Saved Settings: Generic H2 (Embedded)  
+     Setting Name: Generic H2 (Embedded)  
+     Driver Class: org.h2.Driver  
+     JDBC URL: jdbc:h2:file:./p3data  
+     User Name: sa  
+     Password: password  
