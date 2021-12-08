@@ -50,6 +50,25 @@ These are the possible incomming requests divided by controllers (each request b
 
 ## DiagnosisFormController
 
+/diagnosis/
+- Get request will return all diagnosis forms
+- Post request adds diagform in request body to DB
+- Put request updates diagform in request body in DB
+
+/diagnosis/patientId/{patientId}
+- Get request returns all forms where patientId = patientId
+
+/diagnosis/nurseId/{nurseId}
+- Get request returns all forms where nurse.id = nurseId
+
+/diagnosis/doctorId/{doctorId}
+- Get request returns all forms where doctor.id = doctorId
+
+/diagnosis/{id}
+Delete request deletes diagform where id = id
+52
+​
+
 ## PatientController
 
 ## registrationController
