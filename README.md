@@ -121,6 +121,8 @@ These are the possible incomming requests divided by controllers (each request b
 /user/doctorPatientMap/{firstName}/{lastName}
 - get request returns the list of patients that the logged in doctor has already seen
 
-##Additional Notes:
-There are more functions in handlers that are not being used. Only used functions are logged here.
+## Additional Notes:
+There are more functions in handlers that are not being used. Only used functions are logged here.  
+
+Our unit tests are in src/test/java. We currently have 73% test coverage of the service layer. We're using eclEmma to calculate test coverage. You can install it by going to help in STS, going to the eclipse market place and installing it as a plugin. It will then show up when you right click a file as "Coverage As". 
 
