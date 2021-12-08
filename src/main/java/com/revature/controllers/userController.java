@@ -65,6 +65,7 @@ public class userController {
 		return ResponseEntity.ok(all);
 	}
 	
+	//Not in use
 	@GetMapping("/patient/doctor/{inputString}")
 	public ResponseEntity<List<Patient>> findPatientsByString(@PathVariable("inputString") String inputString) {
 		
