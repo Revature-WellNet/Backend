@@ -66,8 +66,6 @@ These are the possible incomming requests divided by controllers (each request b
 
 /diagnosis/{id}
 Delete request deletes diagform where id = id
-52
-​
 
 ## PatientController
 
