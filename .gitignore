@@ -35,5 +35,5 @@ build/
 
 
 ### Database stuff ###
-*.db
-*.yml
+
+.DS_Store
