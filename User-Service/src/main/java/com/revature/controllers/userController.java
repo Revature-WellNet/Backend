@@ -66,16 +66,16 @@ public class userController {
 	}
 	
 	//Not in use
-	@GetMapping("/patient/doctor/{inputString}")
-	public ResponseEntity<List<Patient>> findPatientsByString(@PathVariable("inputString") String inputString) {
-		
-		System.out.println("String Received : " + inputString);
-		
-		List<Patient> patients = userService.findAllPatients();
-				
-		return ResponseEntity.status(201).body(patients);
-		
-	}
+//	@GetMapping("/patient/doctor/{inputString}")
+//	public ResponseEntity<List<Patient>> findPatientsByString(@PathVariable("inputString") String inputString) {
+//		
+//		System.out.println("String Received : " + inputString);
+//		
+//		List<Patient> patients = userService.findAllPatients();
+//				
+//		return ResponseEntity.status(201).body(patients);
+//		
+//	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<User> findById(@PathVariable("id") String id ){
@@ -90,15 +90,16 @@ public class userController {
 	}
 
 	
-	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
-	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+//	@GetMapping("/doctorPatientMap/{firstName}/{lastName}")
+//	public ResponseEntity<List<Patient>> findDoctorPatientMapping(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName) {
+//	
+//		
+//		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
+//		
+//		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
+//		
+//		else { return ResponseEntity.noContent().build(); }
+//		
+//	}	
 	
-		
-		List<Patient> returner = userService.getDoctorPatientData(firstName, lastName).get();
-		
-		if (returner.size() > 0) { return ResponseEntity.ok(returner); }
-		
-		else { return ResponseEntity.noContent().build(); }
-		
-	}	
 }
