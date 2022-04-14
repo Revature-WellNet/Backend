@@ -17,12 +17,9 @@ import com.revature.services.UserService;
 @RestController
 @RequestMapping("/public")
 public class registrationController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private RoleService roleService;
 
 	@Autowired
 	public registrationController(UserService userService) {
@@ -31,35 +28,19 @@ public class registrationController {
 	}
 
 	@PostMapping("/registration")
-	public ResponseEntity<User> insert(@RequestBody User user){
-	
+	public ResponseEntity<User> insert(@RequestBody User user) {
+
 		String id = user.getId();
-		
+
 		System.out.println("ID : " + id);
 		System.out.println("User : " + user);
-		
-		if(id == null) {
-			
+
+		if (id == null) {
 			System.out.println("Bad Request");
-			
 			return ResponseEntity.badRequest().build();
 		}
-		
-			System.out.println("Good Request");
-		
-		try {
-			if(user.getRole().getRole().equals("nurse"))
-				roleService.addRole(id, RoleConstants.ROLE_NURSE);
-			else if(user.getRole().getRole().equals("doctor"))
-				roleService.addRole(id, RoleConstants.ROLE_DOCTOR);
-			else
-				return ResponseEntity.badRequest().build();
-			userService.addOrUpdateUser(user);
-			return ResponseEntity.status(201).body(user);
-		}
-		catch(Exception e)
-		{
-			return ResponseEntity.badRequest().build();
-		}
-}
+		System.out.println("Good Request");
+		userService.addOrUpdateUser(user);
+		return ResponseEntity.status(201).body(user);
+	}
 }
