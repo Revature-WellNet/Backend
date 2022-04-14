@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.models.Patient;
-import com.revature.models.Role;
 import com.revature.models.User;
 import com.revature.repos.UserDAO;
 

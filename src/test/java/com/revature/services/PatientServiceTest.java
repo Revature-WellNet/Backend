@@ -315,7 +315,7 @@ public class PatientServiceTest {
         vaccinationList.add(this.vaccination1);
         
     	DiagnosisForm daignosisForm = new DiagnosisForm(1, "bad", "very bad", "drugs", false, new Timestamp(500), new Timestamp(500), patient1, null, null, null);
-        
+        diagnosisList.add(daignosisForm);
         when(patientDAO.findAll()).thenReturn(list);
 
         //test

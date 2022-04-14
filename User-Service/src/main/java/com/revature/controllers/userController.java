@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Patient;
 import com.revature.models.User;
 import com.revature.security.models.AuthUserDTO;
 import com.revature.services.UserService;

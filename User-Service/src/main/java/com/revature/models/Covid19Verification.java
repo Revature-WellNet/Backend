@@ -12,13 +12,13 @@ import javax.persistence.Id;
 public class Covid19Verification {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private int userId;
+	private String id;
+	private String userId;
 	private Timestamp timestamp;
 	private boolean covid;
 
-	public Covid19Verification(int id, int userId, Timestamp timestamp, boolean covid) {
+	
+	public Covid19Verification(String id, String userId, Timestamp timestamp, boolean covid) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -26,12 +26,16 @@ public class Covid19Verification {
 		this.covid = covid;
 	}
 
-	public Covid19Verification(int userId, Timestamp timestamp, boolean covid) {
+
+
+	public Covid19Verification(String userId, Timestamp timestamp, boolean covid) {
 		super();
 		this.userId = userId;
 		this.timestamp = timestamp;
 		this.covid = covid;
 	}
+
+
 
 	public Covid19Verification() {
 		super();
@@ -55,19 +59,19 @@ public class Covid19Verification {
 				&& userId == other.userId;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
