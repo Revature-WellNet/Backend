@@ -31,10 +31,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
+import com.revature.models.Allergy;
+import com.revature.models.BloodType;
+import com.revature.models.DiagnosisForm;
+import com.revature.models.Patient;
 import com.revature.models.Role;
+import com.revature.models.Sex;
 import com.revature.models.User;
-
+import com.revature.models.Vaccination;
+import com.revature.repos.PatientDAO;
 import com.revature.repos.RoleDAO;
 import com.revature.repos.UserDAO;
 import com.revature.services.UserService;
@@ -51,7 +56,9 @@ class UserServiceTest {
 	@Mock
 	private RoleDAO roleDAO;
 	
-		
+	@Mock
+	private PatientDAO patientDAO;
+	
 	@Before
 	public void beforeAll() throws Exception {
 		MockitoAnnotations.openMocks(this);
@@ -119,6 +126,18 @@ class UserServiceTest {
 
 	
 
+	@Test
+	void testGetDoctorPatientData() {
+//        User user1 = new User("1", "firstname", "lastname", "email@em.com", new Role(2, "doctor"));
 
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        Date date = null;
+        Patient patient = new Patient(1, "patientName", "PatientLastname", date, 6.0, 150.0, new BloodType(), new Sex(), new ArrayList<Allergy>(), new ArrayList<Vaccination>(),new ArrayList<DiagnosisForm>()); 
+        List<Patient> list = new ArrayList<>();
+        list.add(patient);
+        Optional<List<Patient>> optionalList = Optional.of(list);
+        when(patientDAO.matchDoctorToUser("firstName", "lastName")).thenReturn(optionalList);
+        assertTrue(userService.getDoctorPatientData("firstName", "lastName").get().get(0).getFirstName().equals("patientName"));
+	}
 
 }
