@@ -36,4 +36,3 @@ build/
 
 ### Database stuff ###
 *.db
-*.yml
