@@ -13,7 +13,14 @@ public class AuthUserDTO implements Serializable {
 	String issuer;
 	String picture; //for future use, does not need to implemented
 	Map role;
+	Map specialization;
 	
+	public Map getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(Map specialization) {
+		this.specialization = specialization;
+	}
 	public String getUid() {
 		return uid;
 	}
