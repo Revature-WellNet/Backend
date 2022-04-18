@@ -17,6 +17,9 @@ spring:
       settings:
         web-allow-others: true
       path: /h2-console
+  sql:
+    init:
+      mode: always
     
     
     # alternative datasource: external mysql database example
@@ -27,6 +30,7 @@ spring:
   jpa:
     # remove the next line, if you use mysql:
     database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
       
