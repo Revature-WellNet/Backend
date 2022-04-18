@@ -22,4 +22,5 @@ public interface DiagnosisFormRepo extends JpaRepository<DiagnosisForm, Integer>
 
 	@Query("FROM DiagnosisForm d WHERE d.doctor = ?1")
 	Optional<List<DiagnosisForm>> findByDoctor(User doctor);
+	
 }
