@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,8 @@ public class User {
 	private String email;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Role role;
-	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+	private Specialization specialization;
 	public String getId() {
 		return userId;
 	}
@@ -50,22 +53,15 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + userId + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", role="
-				+ role + "]";
-	}
 	
 	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
+				+ ", role=" + role + ", specialization=" + specialization + "]";
+	}
+	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		return result;
+		return Objects.hash(email, firstname, lastname, role, specialization, userId);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -76,35 +72,24 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (userId != other.userId)
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		return true;
+		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname)
+				&& Objects.equals(lastname, other.lastname) && Objects.equals(role, other.role)
+				&& Objects.equals(specialization, other.specialization) && Objects.equals(userId, other.userId);
 	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(String id, String firstname, String lastname, String email, Role role) {
+	public User(String id, String firstname, String lastname, String email, Role role, Specialization specialization) {
+		super();
+		this.userId = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.role = role;
+		this.specialization = specialization;
+	}
+	public User(String id, String firstname, String lastname, String email, Role role){
 		super();
 		this.userId = id;
 		this.firstname = firstname;
