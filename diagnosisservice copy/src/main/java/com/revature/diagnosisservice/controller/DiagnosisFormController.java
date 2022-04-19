@@ -1,6 +1,5 @@
 package com.revature.diagnosisservice.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +31,17 @@ public class DiagnosisFormController {
 //	@Autowired
 //	private RestTemplate restTemplate;
 
+	
 	@GetMapping
 	public ResponseEntity<List<DiagnosisForm>> findAllDiagnosisForms() {
 		List<DiagnosisForm> all = diagnosisFormService.findAllDiagnosisForms();
-//		System.out.println("in diag form GET with: " );
 		if (all.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(all);
 	}
 
+	
 	@GetMapping("/{diagId}")
 	public ResponseEntity<DiagnosisForm> getDiagnosisFormById(@PathVariable("diagId") int diagId) {
 		Optional<DiagnosisForm> diag = diagnosisFormService.findDiagnosisFormById(diagId);
@@ -51,6 +51,7 @@ public class DiagnosisFormController {
 		return ResponseEntity.noContent().build();
 	}
 
+	
 	@GetMapping("/patientId/{patientId}")
 
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId") int patientId) {
@@ -65,10 +66,11 @@ public class DiagnosisFormController {
 		return ResponseEntity.noContent().build();
 	}
 
+	
 	@GetMapping("/nurseId/{nurseId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByUserId(@PathVariable("nurseId")String nurseId) {
 
-		//User user = restTemplate.getForObject("http://" + userId, User.class);
+		//User user = restTemplate.getForObject("http://" + nurseId, User.class);
 		User nurse = new User("2", "second", "user", "user2@work.com", null);
 
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurse);
@@ -78,10 +80,11 @@ public class DiagnosisFormController {
 		return ResponseEntity.noContent().build();
 	}
 
+	
 	@GetMapping(value = "/doctorId/{doctorId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
 		
-		//User user = restTemplate.getForObject("http://" + userId, User.class);
+		//User user = restTemplate.getForObject("http://" + doctorId, User.class);
 		User doctor = new User("1", "first", "user", "user1@work.com", null);
 		
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctor);
@@ -90,6 +93,7 @@ public class DiagnosisFormController {
 		}
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	@PostMapping
 	public ResponseEntity<DiagnosisForm> addDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm) {
@@ -101,31 +105,25 @@ public class DiagnosisFormController {
 		}
 	}
 
+	
 	@PutMapping
 	public ResponseEntity<DiagnosisForm> updateDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm) {
-//		System.out.println("in diag form PUT with: " + diagnosisForm);
 		if (diagnosisFormService.updateDiagnosisForm(diagnosisForm)) {
 			return ResponseEntity.status(200).build();
 		} else {
 			return ResponseEntity.status(400).build();
 		}
-
 	}
 
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<DiagnosisForm> deleteDiagnosisForm(@PathVariable("id") int id) {
-
 		if (diagnosisFormService.deleteDiagnosisForm(diagnosisFormService.findDiagnosisFormById(id).get())) {
 			return ResponseEntity.status(200).build();
-		} // = .ok()
-		else {
+		} else {
 			return ResponseEntity.status(400).build();
 		}
-
 	}
 
-	// Make new patient instead of "Movie movie = restTemplate"
-	// At end return Diagnosis form with new patient filled in
-	// Can make skeleton of rest api like in movie database
 
 }
