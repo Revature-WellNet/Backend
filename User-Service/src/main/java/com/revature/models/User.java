@@ -23,6 +23,8 @@ public class User {
 	private Role role;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Specialization specialization;
+	
+	
 	public String getId() {
 		return userId;
 	}
@@ -52,6 +54,13 @@ public class User {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public Specialization getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
 	}
 	
 	@Override

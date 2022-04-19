@@ -24,11 +24,7 @@ public class UserService {
 	}
 	
 	public void addOrUpdateUser(User user) {
-		
-		
-		
-		
-		//roleDAO.save(user.getRole());
+		System.out.println(user.getSpecialization());
 		userDAO.save(user);
 	}
 	
