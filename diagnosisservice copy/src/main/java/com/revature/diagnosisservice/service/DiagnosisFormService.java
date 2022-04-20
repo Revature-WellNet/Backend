@@ -8,12 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.diagnosisservice.model.DiagnosisForm;
 import com.revature.diagnosisservice.model.Patient;
-import com.revature.diagnosisservice.model.Room;
 import com.revature.diagnosisservice.model.User;
-//import com.revature.diagnosisservice.repo.AreaRepo;
-//import com.revature.diagnosisservice.repo.DiagnosisFormDAO;
-//import com.revature.diagnosisservice.repo.PatientDAO;
-//import com.revature.diagnosisservice.repo.UserDAO;
 import com.revature.diagnosisservice.repo.DiagnosisFormRepo;
 
 @Service

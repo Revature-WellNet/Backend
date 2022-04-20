@@ -56,7 +56,7 @@ public class DiagnosisFormController {
 
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId") int patientId) {
 
-		//Patient patient = restTemplate.getForObject("http://" + patientId, Patient.class);
+		//Patient patient = restTemplate.getForObject("http://patient-service/patientId" + patientId, Patient.class);
 		Patient patient = new Patient(1, "initial", "patient", null, 56, 123, null, null, null ,null, null);
 
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patient);
