@@ -14,115 +14,116 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.revature.diagnosisservice.model.DiagnosisForm;
+import com.revature.diagnosisservice.model.Patient;
+import com.revature.diagnosisservice.model.User;
 import com.revature.diagnosisservice.service.DiagnosisFormService;
 
-@CrossOrigin(origins="*", allowedHeaders="*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value="/diagnosis")
+@RequestMapping("/diagnosis")
 public class DiagnosisFormController {
-	
+
 	@Autowired
 	private DiagnosisFormService diagnosisFormService;
-	
-	@Autowired
-	private RestTemplate restTemplate;
-	
-	
-	//Mock Patient
-	
-	
-	//Mock User
-	
-	
+
+//	@Autowired
+//	private RestTemplate restTemplate;
+
 	
 	@GetMapping
-	public ResponseEntity<List<DiagnosisForm>> findAllDiagnosisForm(){
-		List<DiagnosisForm> all = diagnosisFormService.findAllDiagnosis();
-		System.out.println("in diag form GET with: " );
-		if(all.isEmpty()) {
+	public ResponseEntity<List<DiagnosisForm>> findAllDiagnosisForms() {
+		List<DiagnosisForm> all = diagnosisFormService.findAllDiagnosisForms();
+		if (all.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
-		
 		return ResponseEntity.ok(all);
 	}
+
 	
-	
-	
-	@GetMapping(value = "/{diagId}")
-	public ResponseEntity<DiagnosisForm> getDiagnosisFormById(@PathVariable("diagId")int diagId) {
+	@GetMapping("/{diagId}")
+	public ResponseEntity<DiagnosisForm> getDiagnosisFormById(@PathVariable("diagId") int diagId) {
 		Optional<DiagnosisForm> diag = diagnosisFormService.findDiagnosisFormById(diagId);
-		if(diag.isPresent()) {
+		if (diag.isPresent()) {
 			return ResponseEntity.ok(diag.get());
 		}
 		return ResponseEntity.noContent().build();
 	}
+
 	
-	@GetMapping(value = "/patientId/{patientId}")
-	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId")int patientId) {
-		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patientId);
+	@GetMapping("/patientId/{patientId}")
+
+	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId") int patientId) {
+
+		//Patient patient = restTemplate.getForObject("http://" + patientId, Patient.class);
+		Patient patient = new Patient(1, "initial", "patient", null, 56, 123, null, null, null ,null, null);
+
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patient);
+		if (diags != null) {
+			return ResponseEntity.ok(diags.get());
+		}
+		return ResponseEntity.noContent().build();
+	}
+
+	
+	@GetMapping("/nurseId/{nurseId}")
+	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByUserId(@PathVariable("nurseId")String nurseId) {
+
+		//User user = restTemplate.getForObject("http://" + nurseId, User.class);
+		User nurse = new User("2", "second", "user", "user2@work.com", null);
+
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurse);
 		if(diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
 		return ResponseEntity.noContent().build();
 	}
-	
-	@GetMapping(value = "/nurseId/{nurseId}")
-	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByNurseId(@PathVariable("nurseId")String nurseId) {
-		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurseId);
-		if(diags != null) {
-			return ResponseEntity.ok(diags.get());
-		}
-		return ResponseEntity.noContent().build();
-	}
+
 	
 	@GetMapping(value = "/doctorId/{doctorId}")
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
-		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctorId);
+		
+		//User user = restTemplate.getForObject("http://" + doctorId, User.class);
+		User doctor = new User("1", "first", "user", "user1@work.com", null);
+		
+		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctor);
 		if(diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
 		return ResponseEntity.noContent().build();
 	}
 	
+	
 	@PostMapping
-	public  ResponseEntity<DiagnosisForm> addDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm){
-		System.out.println("in diag form POST with: "+ diagnosisForm);
-		if (diagnosisFormService.addDiagnosisForm(diagnosisForm)) {
+	public ResponseEntity<DiagnosisForm> addDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm) {
+		System.out.println("in diag form POST with: " + diagnosisForm);
+		if (diagnosisFormService.saveDiagnosisForm(diagnosisForm)) {
 			return ResponseEntity.status(201).build();
 		} else {
 			return ResponseEntity.status(400).build();
 		}
-		
 	}
+
 	
 	@PutMapping
-	public  ResponseEntity<DiagnosisForm> updateDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm){
-		System.out.println("in diag form PUT with: "+ diagnosisForm);
+	public ResponseEntity<DiagnosisForm> updateDiagnosisForm(@RequestBody DiagnosisForm diagnosisForm) {
 		if (diagnosisFormService.updateDiagnosisForm(diagnosisForm)) {
 			return ResponseEntity.status(200).build();
 		} else {
 			return ResponseEntity.status(400).build();
 		}
-		
 	}
+
 	
-	
-	@DeleteMapping(value = "/{id}")
-	public  ResponseEntity<DiagnosisForm> deleteDiagnosisForm(@PathVariable("id")int id) {
-		
-		if (diagnosisFormService.deleteDiagnosisForm(id)) {
-		return ResponseEntity.status(200).build();} // = .ok()
-		else {
-		return ResponseEntity.status(400).build();}
-		
+	@DeleteMapping("/{id}")
+	public ResponseEntity<DiagnosisForm> deleteDiagnosisForm(@PathVariable("id") int id) {
+		if (diagnosisFormService.deleteDiagnosisForm(diagnosisFormService.findDiagnosisFormById(id).get())) {
+			return ResponseEntity.status(200).build();
+		} else {
+			return ResponseEntity.status(400).build();
+		}
 	}
-	
-	
-	//Make new patient instead of "Movie move = restTemplate"
-	//At end return Diagnosis form with new patient filled in
-	//Can make skeleton of rest api like in movie database
-	
+
+
 }

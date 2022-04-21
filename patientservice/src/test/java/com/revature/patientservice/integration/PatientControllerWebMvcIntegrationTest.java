@@ -1,7 +1,8 @@
-package com.revature.integration;
+package com.revature.patientservice.integration;
+
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runner.RunWith;
@@ -24,16 +26,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
-//import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.patientservice.model.Patient;
-//import com.revature.utils.JsonUtils;
+import com.revature.patientservice.utils.JsonUtils;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
@@ -45,24 +48,16 @@ public class PatientControllerWebMvcIntegrationTest {
 	
 	private MockMvc mvc;
 	
-	public static String asJsonString(final Object obj) {
-	    try {
-	        return new ObjectMapper().writeValueAsString(obj);
-	    } catch (Exception e) {
-	        throw new RuntimeException(e);
-	    }
-	}
-	
 	@Before
 	public void setup()
 	{
 		mvc = MockMvcBuilders
 			.webAppContextSetup(context)
-			//.apply(springSecurity())
+			.apply(springSecurity())
 			.build();
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatients() throws Exception
@@ -81,7 +76,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatientById() throws Exception
@@ -100,7 +95,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatientByFirstName() throws Exception
@@ -119,7 +114,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatientByFullName() throws Exception
@@ -138,7 +133,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatientByFullNameDOB() throws Exception
@@ -158,7 +153,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetAllergies() throws Exception
@@ -177,7 +172,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetVaccinations() throws Exception
@@ -196,7 +191,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetBloodType() throws Exception
@@ -215,7 +210,7 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetSexType() throws Exception
@@ -234,13 +229,13 @@ public class PatientControllerWebMvcIntegrationTest {
 		.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(2)
 	public void givenAuthPostPatientPositiveTest() throws Exception
 	{
 		mvc.perform(post("/patient")
-			.content(asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
+			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated());
@@ -251,20 +246,20 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthPostPatient() throws Exception
 	{
 		mvc.perform(post("/patient")
-			.content(asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
+			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(2)
 	public void givenAuthPutPatient() throws Exception
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
 		MvcResult result = mvc.perform(put("/patient")
-			.content(asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
+			.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andReturn();
@@ -276,13 +271,13 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthPutPatient() throws Exception
 	{
 		mvc.perform(put("/patient")
-				.content(asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
+				.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(3)
 	public void givenAuthDeletePatient() throws Exception
@@ -305,7 +300,7 @@ public class PatientControllerWebMvcIntegrationTest {
 				.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(2)
 	public void givenAuthAddAllergy() throws Exception
@@ -330,7 +325,7 @@ public class PatientControllerWebMvcIntegrationTest {
 			.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(2)
 	public void givenAuthAddVaccine() throws Exception
@@ -355,7 +350,7 @@ public class PatientControllerWebMvcIntegrationTest {
 			.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(3)
 	public void givenAuthDeleteAllergy() throws Exception
@@ -378,7 +373,7 @@ public class PatientControllerWebMvcIntegrationTest {
 			.andExpect(status().isUnauthorized());
 	}
 	
-	//@WithMockUser
+	@WithMockUser
 	@Test
 	@Order(3)
 	public void givenAuthDeleteVaccine() throws Exception

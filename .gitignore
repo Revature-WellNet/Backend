@@ -37,3 +37,7 @@ build/
 ### Database stuff ###
 *.db
 *.yml
+
+### mac hidden files ###
+.DS_Store
+.metadata

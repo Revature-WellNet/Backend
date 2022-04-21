@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.patientservice.model.Allergy;
 import com.revature.patientservice.model.BloodType;
 import com.revature.patientservice.model.DiagnosisForm;
+import com.revature.patientservice.model.DiagnosisFormList;
 import com.revature.patientservice.model.Sex;
 import com.revature.patientservice.model.User;
 import com.revature.patientservice.model.Vaccination;
@@ -165,7 +166,10 @@ public class PatientService {
         List<Patient> listP = new ArrayList<>();
         //List<DiagnosisForm> 
         for (Patient p : patientDAO.findAll()) {
-            List<DiagnosisForm> dForms = restTemplate.getForObject("http://diagnosisform-service/patientId/" + p.getPatientId(), List.class);
+        	String url = "http://diagnosisform-service/patientId/" + p.getPatientId();
+        	DiagnosisFormList dFormsList = restTemplate.getForObject(url, DiagnosisFormList.class);
+            System.out.println(dFormsList);
+        	List<DiagnosisForm> dForms = dFormsList.getDiagnosisForms();
             for( DiagnosisForm df: dForms){
                 if(df.isResolutionStatus() == false) {
                     listP.add(p);

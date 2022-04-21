@@ -16,10 +16,11 @@ public interface DiagnosisFormRepo extends JpaRepository<DiagnosisForm, Integer>
 
 	@Query("FROM DiagnosisForm d WHERE d.patient = ?1")
 	Optional<List<DiagnosisForm>> findByPatient( Patient patient);
-
+	
 	@Query("FROM DiagnosisForm d WHERE d.nurse = ?1")
 	Optional<List<DiagnosisForm>> findByNurse(User nurse);
 
 	@Query("FROM DiagnosisForm d WHERE d.doctor = ?1")
 	Optional<List<DiagnosisForm>> findByDoctor(User doctor);
+	
 }
