@@ -2,6 +2,9 @@ package com.revature.service;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,10 +26,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.client.RestTemplate;
 
 import com.revature.patientservice.model.Allergy;
 import com.revature.patientservice.model.BloodType;
 import com.revature.patientservice.model.DiagnosisForm;
+import com.revature.patientservice.model.DiagnosisFormList;
 import com.revature.patientservice.model.Patient;
 import com.revature.patientservice.model.Role;
 import com.revature.patientservice.model.Sex;
@@ -59,6 +64,9 @@ public class PatientServiceTest {
 	
 	@Mock
 	private SexDAO sexDAO;
+	
+	@Mock
+	public RestTemplate restTemplate;
 	
 	 Patient patient1 = new Patient();
 	 List<Patient> list = new ArrayList<Patient>();
@@ -303,7 +311,7 @@ public class PatientServiceTest {
 		List<Allergy> allergyList = new ArrayList<Allergy>();
 		List<Vaccination> vaccinationList = new ArrayList<Vaccination>();
 		List<DiagnosisForm> diagnosisList = new ArrayList<DiagnosisForm>();	
-	
+		DiagnosisFormList response = new DiagnosisFormList();
         this.patient1 = new Patient(1, "firstname", "lastname", date,
         		77.0, 200.0, new BloodType(1, "O-"), new Sex(1, "M"), allergyList, vaccinationList);
         list.add(this.patient1);
@@ -314,10 +322,12 @@ public class PatientServiceTest {
         this.vaccination1 = new Vaccination(1, "Covid", list);
         vaccinationList.add(this.vaccination1);
         
-    	DiagnosisForm daignosisForm = new DiagnosisForm();
-        
+    	DiagnosisForm diagnosisForm = new DiagnosisForm();
+        diagnosisList.add(diagnosisForm);
+        response.setDiagnosisForms(diagnosisList);
+    	diagnosisForm.setResolutionStatus(false);
         when(patientDAO.findAll()).thenReturn(list);
-
+        when(restTemplate.getForObject(anyString(), any())).thenReturn(response);
         //test
         List<Patient> favList = patientService.findPatientByResoved();
         Assertions.assertEquals(1, favList.size());
