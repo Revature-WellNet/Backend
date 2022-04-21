@@ -1,7 +1,7 @@
 package com.revature.integration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -61,11 +61,11 @@ public class DiagnosisFormControllerTest {
 	{
 		mvc = MockMvcBuilders
 			.webAppContextSetup(context)
-			.apply(springSecurity())
+			//.apply(springSecurity())
 			.build();
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void findAllDianosisFormTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -78,7 +78,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void getDiagnosisFormByIdTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -91,7 +91,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void getDiagnosisFormByPatientIdTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -104,7 +104,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void getDiagnosisFormByNurseIdTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -117,7 +117,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void getDiagnosisFormByDoctorIdTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -130,7 +130,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	@Order(1)
 	public void addDiagnosisFormTest() throws Exception{
@@ -154,7 +154,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	public void updateDiagnosisFormTest() throws Exception{
 		ArrayList<Integer> appropriateStatusCodes = 
@@ -177,7 +177,7 @@ public class DiagnosisFormControllerTest {
 				.getStatus()));
 	}
 	
-	@WithMockUser(value=testUID1)
+	//@WithMockUser(value=testUID1)
 	@Test
 	@Order(2)
 	public void deleteDiagnosisForm() throws Exception{

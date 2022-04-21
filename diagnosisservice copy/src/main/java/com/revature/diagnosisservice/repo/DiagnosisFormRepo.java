@@ -15,7 +15,7 @@ import com.revature.diagnosisservice.model.User;
 public interface DiagnosisFormRepo extends JpaRepository<DiagnosisForm, Integer> {
 
 	@Query("FROM DiagnosisForm d WHERE d.patient = ?1")
-	Optional<List<DiagnosisForm>> findByPatient( Patient patient);
+	Optional<List<DiagnosisForm>> findByPatient(Patient patient);
 	
 	@Query("FROM DiagnosisForm d WHERE d.nurse = ?1")
 	Optional<List<DiagnosisForm>> findByNurse(User nurse);

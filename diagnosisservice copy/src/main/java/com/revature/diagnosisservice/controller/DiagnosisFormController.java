@@ -57,7 +57,7 @@ public class DiagnosisFormController {
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId") int patientId) {
 
 		//Patient patient = restTemplate.getForObject("http://patient-service/patientId" + patientId, Patient.class);
-		Patient patient = new Patient(1, "initial", "patient", null, 56, 123, null, null, null ,null, null);
+		Patient patient = new Patient(2, "initial", "patient", null, 56, 123, null, null, null ,null, null);
 
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patient);
 		if (diags != null) {
@@ -71,7 +71,7 @@ public class DiagnosisFormController {
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByUserId(@PathVariable("nurseId")String nurseId) {
 
 		//User user = restTemplate.getForObject("http://" + nurseId, User.class);
-		User nurse = new User("2", "second", "user", "user2@work.com", null);
+		User nurse = new User("3", "second", "user", "user2@work.com", null);
 
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByNurse(nurse);
 		if(diags != null) {
@@ -85,7 +85,7 @@ public class DiagnosisFormController {
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByDoctorId(@PathVariable("doctorId")String doctorId) {
 		
 		//User user = restTemplate.getForObject("http://" + doctorId, User.class);
-		User doctor = new User("1", "first", "user", "user1@work.com", null);
+		User doctor = new User("4", "first", "user", "user1@work.com", null);
 		
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByDoctor(doctor);
 		if(diags != null) {
