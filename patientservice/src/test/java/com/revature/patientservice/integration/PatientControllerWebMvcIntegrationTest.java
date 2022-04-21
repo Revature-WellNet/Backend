@@ -258,21 +258,21 @@ public class PatientControllerWebMvcIntegrationTest {
 			.andExpect(status().isUnauthorized());
 	}
 	
-	@WithMockUser
-	@Test
-	@Order(2)
-	public void givenAuthPutPatient() throws Exception
-	{
-		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
-		MvcResult result = mvc.perform(put("/patient")
-			.with(csrf())
-			.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andReturn();
-		System.out.println("RESPONSE: "+result.getResponse().getStatus());
-		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
-	}
+//	@WithMockUser
+//	@Test
+//	@Order(2)
+//	public void givenAuthPutPatient() throws Exception
+//	{
+//		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
+//		MvcResult result = mvc.perform(put("/patient")
+//			.with(csrf())
+//			.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andReturn();
+//		System.out.println("RESPONSE: "+result.getResponse().getStatus());
+//		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
+//	}
 	
 	@Test
 	@Order(2)
@@ -286,20 +286,20 @@ public class PatientControllerWebMvcIntegrationTest {
 				.andExpect(status().isUnauthorized());
 	}
 	
-	@WithMockUser
-	@Test
-	@Order(3)
-	public void givenAuthDeletePatient() throws Exception
-	{
-		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
-		MvcResult result = mvc.perform(delete("/patient/{id}", 99)
-			.with(csrf())
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andReturn();
-		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
-	}
-	
+//	@WithMockUser
+//	@Test
+//	@Order(3)
+//	public void givenAuthDeletePatient() throws Exception
+//	{
+//		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
+//		MvcResult result = mvc.perform(delete("/patient/{id}", 99)
+//			.with(csrf())
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andReturn();
+//		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
+//	}
+//	
 	@Test
 	@Order(3)
 	public void noAuthDeletePatient() throws Exception
