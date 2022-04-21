@@ -88,7 +88,7 @@ public class DiagnosisTests {
 	}
 	
 	@Test
-	public void testFindByDiagnosisId() {
+	void testFindByDiagnosisId() {
 		
 		DiagnosisForm d1 = new DiagnosisForm(1, "sick", "coughing", "rest", false, new Timestamp(System.currentTimeMillis()), null, patient, room, nurse, doctor);
         when(diagnosisFormRepo.findById(1)).thenReturn(java.util.Optional.of(d1));

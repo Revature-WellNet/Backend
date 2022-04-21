@@ -42,7 +42,7 @@ public class DiagnosisFormControllerTest {
 	//check and make sure that these entries are still in there. If not, replace
 	//them with any entry that is inside them.
 	
-	private static final String testUID1 = "ooApve7PoQP9Lbk5irFdy2D5BeE3";
+//	private static final String testUID1 = "ooApve7PoQP9Lbk5irFdy2D5BeE3";
 	private static final String testUID2 = "xQEMPrMTdkMNkKM5eBwr8fAZaJS2";
 	
 //	int diagId, String diagnosis, String symptoms, String treatment, boolean resolutionStatus, Timestamp checkIn,
