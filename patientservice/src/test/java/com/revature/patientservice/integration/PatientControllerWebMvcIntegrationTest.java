@@ -2,12 +2,14 @@ package com.revature.patientservice.integration;
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.revature.patientservice.model.Patient;
-import com.revature.patientservice.utils.JsonUtils;
+import com.revature.utils.JsonUtils;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
@@ -235,6 +237,8 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void givenAuthPostPatientPositiveTest() throws Exception
 	{
 		mvc.perform(post("/patient")
+			.with(csrf())
+
 			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
@@ -246,6 +250,8 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthPostPatient() throws Exception
 	{
 		mvc.perform(post("/patient")
+			.with(csrf())
+
 			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
@@ -259,10 +265,12 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
 		MvcResult result = mvc.perform(put("/patient")
+			.with(csrf())
 			.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andReturn();
+		System.out.println("RESPONSE: "+result.getResponse().getStatus());
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
@@ -271,6 +279,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthPutPatient() throws Exception
 	{
 		mvc.perform(put("/patient")
+				.with(csrf())
 				.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
@@ -284,6 +293,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
 		MvcResult result = mvc.perform(delete("/patient/{id}", 99)
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andReturn();
@@ -295,6 +305,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthDeletePatient() throws Exception
 	{
 		mvc.perform(delete("/patient/{id}", 99)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized());
@@ -307,6 +318,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(201, 400)); 
 		MvcResult result = mvc.perform(post("/patient/allergies")
+				.with(csrf())
 				.content("integration-allergy")
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
@@ -319,6 +331,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthAddAllergy() throws Exception
 	{
 		mvc.perform(post("/patient/allergies")
+			.with(csrf())
 			.content("integration-allergy")
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
@@ -332,6 +345,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(201, 400)); 
 		MvcResult result = mvc.perform(post("/patient/vaccinations")
+			.with(csrf())
 			.content("integration-vaccine")
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
@@ -344,6 +358,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthAddVaccine() throws Exception
 	{
 		mvc.perform(post("/patient/vaccinations")
+			.with(csrf())
 			.content("integration-vaccine")
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
@@ -357,6 +372,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
 		MvcResult result = mvc.perform(delete("/patient/allergies/{allergy}", "integration-allergy")
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andReturn();
@@ -368,6 +384,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthDeleteAllergy() throws Exception
 	{
 		mvc.perform(delete("/patient/allergies/{allergy}", "integration-allergy")
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isUnauthorized());
@@ -380,6 +397,7 @@ public class PatientControllerWebMvcIntegrationTest {
 	{
 		ArrayList<Integer> appropriateStatusCodes = new ArrayList<Integer>(Arrays.asList(200, 400)); 
 		MvcResult result = mvc.perform(delete("/patient/vaccinations/{vaccine}", "integration-vaccine")
+			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andReturn();
@@ -391,6 +409,8 @@ public class PatientControllerWebMvcIntegrationTest {
 	public void noAuthDeleteVaccine() throws Exception
 	{
 		mvc.perform(post("/patient/vaccinations/{vaccine}", "integration-vaccine")
+				.with(csrf())
+
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isUnauthorized());

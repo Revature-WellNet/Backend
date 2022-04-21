@@ -1,4 +1,4 @@
-package com.revature.patientservice.utils;
+package com.revature.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
