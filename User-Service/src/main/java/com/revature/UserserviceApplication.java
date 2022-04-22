@@ -2,6 +2,8 @@ package com.revature;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 //import com.revature.models.BloodType;
 //import com.revature.repos.AllergyDAO;
@@ -16,8 +18,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import com.revature.repos.UserDAO;
 //import com.revature.repos.VaccinationDAO;
 
+@EnableEurekaClient
 @SpringBootApplication
-public class WellNetApplication {
+public class UserserviceApplication {
 //	
 //
 //	private static RoleDAO roleDao;
@@ -72,7 +75,7 @@ public class WellNetApplication {
 		
 //		addBloodType();
 		
-		SpringApplication.run(WellNetApplication.class, args);
+		SpringApplication.run(UserserviceApplication.class, args);
 		
 		System.err.println("=== Application Started ===");
 	}
