@@ -14,9 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="post")
-
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Post {
 	
 	@Id
@@ -33,6 +36,7 @@ public class Post {
 	private LocalDateTime posted;
 	
 	@OneToMany (fetch = FetchType.EAGER, mappedBy = "root")
+	@JsonIgnore
 	private List<Comment> comments;
 	
 	@JoinColumn(name="userId")
