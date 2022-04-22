@@ -1,0 +1,6 @@
+#FileLock
+#Thu Apr 21 09:44:34 PDT 2022
+hostName=jasmyns-mbp.lan
+id=1804d02c970d49382d105cfd4351e4ed74bf9907a75
+method=file
+server=192.168.1.196\:50898

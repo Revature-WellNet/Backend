@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +25,15 @@ public class PostService {
 		return postRepository.findAll();
 	}
 	
-	public Optional<Post> findPostById(int id){
-		return postRepository.findById(id);
+	public Post findPostById(int id){
+		return postRepository.getById(id);
 	}
 	
 	public Post addPost(Post p) {
+//		Post post = new Post();
+//		post.setPosted();
+//		post.setAuthor(p.getAuthor());
+//		post.setComments(p.getComments());
 		return postRepository.save(p);
 	}
 	
