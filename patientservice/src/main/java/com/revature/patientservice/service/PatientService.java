@@ -166,7 +166,7 @@ public class PatientService {
         List<Patient> listP = new ArrayList<>();
         //List<DiagnosisForm> 
         for (Patient p : patientDAO.findAll()) {
-        	String url = "http://diagnosisform-service/patientId/" + p.getPatientId();
+        	String url = "http://localhost:8097/patientId/" + p.getPatientId();
         	DiagnosisFormList dFormsList = restTemplate.getForObject(url, DiagnosisFormList.class);
             System.out.println(dFormsList);
         	List<DiagnosisForm> dForms = dFormsList.getDiagnosisForms();
