@@ -1,0 +1,93 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 215MB
+  application:
+    name: visualizer
+  datasource:
+    url: jdbc:h2:file:./p3data
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+    
+    
+    # alternative datasource: external mysql database example
+#    url: jdbc:mysql://localhost:3306/test
+#    username: root
+#    password: root
+
+  jpa:
+    # remove the next line, if you use mysql:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+      
+server:
+  port: 8091
+  servlet:
+    context-path: /wellnet
+
+
+
+security:
+  firebase-props:
+    database-url: ${FIREBASE_DATABASE}
+    enable-strict-server-session: false
+    enable-check-session-revoked: false
+    enable-logout-everywhere: false
+    session-expiry-in-days: 5
+  cookie-props:
+    max-age-in-minutes: 7200
+    http-only: true
+    secure: true
+    domain: ${CORS_DOMAIN}
+    path: /
+  allow-credentials: true
+  allowed-origins:
+    - https://${CORS_DOMAIN}
+    - http://localhost:4200
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - Authorization
+    - Origin
+    - Content-Type
+    - Accept
+    - Accept-Encoding
+    - Accept-Language
+    - Access-Control-Allow-Origin
+    - Access-Control-Allow-Headers
+    - Access-Control-Request-Method
+    - X-Requested-With
+    - X-Auth-Token
+    - X-Xsrf-Token
+    - Cache-Control
+    - Id-Token
+  allowed-public-apis:
+    - /h2-console/**
+    - /wellnet/h2-console/**
+    - /favicon.ico
+    - /session/login
+    - /public/**
+  exposed-headers:
+    - X-Xsrf-Token
+  valid-application-roles:
+    - ROLE_NURSE
+
+    - ROLE_DOCTOR
