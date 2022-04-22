@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,9 +23,9 @@ public class User {
 	private String email;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Role role;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+
+	@Enumerated(EnumType.ORDINAL)
 	private Specialization specialization;
-	
 	
 	public String getId() {
 		return userId;
@@ -55,7 +57,6 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
 	public Specialization getSpecialization() {
 		return specialization;
 	}
@@ -63,11 +64,13 @@ public class User {
 		this.specialization = specialization;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
 				+ ", role=" + role + ", specialization=" + specialization + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(email, firstname, lastname, role, specialization, userId);
@@ -83,15 +86,18 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname)
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(role, other.role)
-				&& Objects.equals(specialization, other.specialization) && Objects.equals(userId, other.userId);
+				&& specialization == other.specialization && Objects.equals(userId, other.userId);
 	}
+	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(String id, String firstname, String lastname, String email, Role role, Specialization specialization) {
+
+	public User(String userId, String firstname, String lastname, String email, Role role,
+			Specialization specialization) {
 		super();
-		this.userId = id;
+		this.userId = userId;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
