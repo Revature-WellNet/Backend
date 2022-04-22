@@ -1,3 +1,4 @@
+
 spring:
   servlet:
     multipart:
@@ -7,9 +8,20 @@ spring:
   application:
     name: visualizer
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./p3data
     username: sa
     password: password
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+    
+    
     # alternative datasource: external mysql database example
 #    url: jdbc:mysql://localhost:3306/test
 #    username: root
@@ -18,8 +30,15 @@ spring:
   jpa:
     # remove the next line, if you use mysql:
     database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
+      
+server:
+  port: 8099
+  servlet:
+    context-path: /wellnet
+
 
 
 security:
@@ -33,11 +52,11 @@ security:
     max-age-in-minutes: 7200
     http-only: true
     secure: true
-    domain: ${DOMAIN}
+    domain: ${CORS_DOMAIN}
     path: /
   allow-credentials: true
   allowed-origins:
-    - https://${DOMAIN}
+    - https://${CORS_DOMAIN}
     - http://localhost:4200
   allowed-methods:
     - GET
@@ -62,8 +81,14 @@ security:
     - Cache-Control
     - Id-Token
   allowed-public-apis:
+    - /h2-console/**
+    - /wellnet/h2-console/**
     - /favicon.ico
     - /session/login
     - /public/**
   exposed-headers:
     - X-Xsrf-Token
+  valid-application-roles:
+    - ROLE_NURSE
+
+    - ROLE_DOCTOR
