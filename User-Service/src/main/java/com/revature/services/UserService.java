@@ -47,9 +47,7 @@ public class UserService {
 //			return false;
 		}
 	}
-	
-
-	
+		
 	public void addOrUpdateRole(Role role) {
 		roleDAO.save(role);
 	}		
