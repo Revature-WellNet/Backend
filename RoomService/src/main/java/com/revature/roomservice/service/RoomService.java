@@ -43,7 +43,7 @@ public class RoomService {
 
 		try {
 
-			return restTemplate.getForObject("http://localhost:8093/area/name/" + name, Area.class);
+			return restTemplate.getForObject("http://localhost:8091/area/name/" + name, Area.class);
 		} catch (NoSuchElementException e) {
 
 			e.printStackTrace();
