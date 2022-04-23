@@ -106,6 +106,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+			<finalName>room-service-docker</finalName>
 	</build>
 
 </project>
