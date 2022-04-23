@@ -105,7 +105,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>area-service-docker</finalName>
 	</build>
 
 </project>
