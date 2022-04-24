@@ -25,7 +25,7 @@ import com.revature.repos.PostRepository;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = "http;//localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
 
 	@Autowired
@@ -65,7 +65,7 @@ public class PostController {
 	}
 
 	@DeleteMapping("/{id}")
-	public Map<String, Boolean> deletPost(@PathVariable(value = "id") Integer id) {
+	public Map<String, Boolean> deletePost(@PathVariable(value = "id") Integer id) {
 		Post post = postRepository.findById(id).get();
 		postRepository.delete(post);
 		Map<String, Boolean> response = new HashMap<>();

@@ -25,7 +25,7 @@ import com.revature.repos.CommentRepository;
 
 @RestController
 @RequestMapping("/comments")
-@CrossOrigin(origins ="http;//localhost:4200")
+@CrossOrigin(origins ="http://localhost:4200")
 public class CommentController {
 
 	@Autowired
