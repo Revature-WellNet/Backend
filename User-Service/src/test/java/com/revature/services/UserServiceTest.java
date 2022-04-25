@@ -1,6 +1,8 @@
 package com.revature.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -36,6 +38,7 @@ import com.revature.models.BloodType;
 import com.revature.models.DiagnosisForm;
 import com.revature.models.Patient;*/
 import com.revature.models.Role;
+import com.revature.models.Specialization;
 /*import com.revature.models.Sex;*/
 import com.revature.models.User;
 /*import com.revature.models.Vaccination;
@@ -119,6 +122,70 @@ class UserServiceTest {
         verify(roleDAO, times(1)).save(role);
 	}
 
+	@Test
+	void testEqualsTrue() {
+		User sixConstructor = new User("abc","Bob","Jones","BobJones@gmail.com", new Role(1, "nurse"), Specialization.Radiologist);
+		User sixConstructorCopy = new User("abc","Bob","Jones","BobJones@gmail.com", new Role(1, "nurse"), Specialization.Radiologist);
+		assertTrue(sixConstructor.equals(sixConstructorCopy));
+	}
+	
+	@Test
+	void testEqualsFalse() {
+		User sixConstructor = new User("abc","Bob","Jones","BobJones@gmail.com", new Role(1, "nurse"), Specialization.Radiologist);
+		User sixConstructorBadCopy = new User("abcd","Bob","Jones","BobJones@gmail.com", new Role(1, "nurse"), Specialization.Radiologist);
+		assertFalse(sixConstructor.equals(sixConstructorBadCopy));
+	}
+	@Test
+	void testId()
+	{
+		User myUser = new User();
+		myUser.setId("Hi");
+		assertTrue("Hi" == myUser.getId());
+	}
+	@Test
+	void testFirstname()
+	{
+		User myUser = new User();
+		myUser.setFirstname("Hi");
+		assertTrue("Hi" == myUser.getFirstname());
+	}
+	@Test
+	void testLastname()
+	{
+		User myUser = new User();
+		myUser.setLastname("Hi");
+		assertSame("Hi",myUser.getLastname());
+	}
+	@Test
+	void testEmail()
+	{
+		User myUser = new User();
+		myUser.setEmail("Hi");
+		assertSame("Hi", myUser.getEmail());
+	}
+	@Test
+	void testRole()
+	{
+		User myUser = new User();
+		myUser.setRole(new Role(1, "nurse"));
+		assertSame(new Role(1, "nurse"), myUser.getRole());
+	}
+	@Test
+	void testSpecialization()
+	{
+		User myUser = new User();
+		myUser.setSpecialization(Specialization.General_Practicioner);
+		assertSame(myUser.getSpecialization(), Specialization.General_Practicioner);
+	}
+	@Test
+	void testtoString()
+	{
+		User fourArgUser = new User("Bob", "Jones", "BobJones@gmail.com", new Role(1, "nurse"));
+		fourArgUser.setId("abc");
+		fourArgUser.setSpecialization(Specialization.Pediatrician);
+		assertSame(fourArgUser.toString(), "User [userId=" + "abc" + ", firstname=" + "Bob" + ", lastname=" + "Jones" + ", email=" + "BobJones@gmail.com"
+				+ ", role=" + new Role(1,"nurse") + ", specialization=" + Specialization.Pediatrician + "]");
+	}
 //	@Test
 //	void testFindAllPatients() {
 ////		fail("Not yet implemented");
