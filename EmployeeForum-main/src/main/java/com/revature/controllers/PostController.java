@@ -51,6 +51,7 @@ public class PostController {
 	@PostMapping("/add")
 	public ResponseEntity<Post> addPost(@RequestBody Post p) {
 		postRepository.save(p);
+		System.out.println(p);
 		return new ResponseEntity<>(p, HttpStatus.CREATED);
 	}
 

@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,9 +40,10 @@ public class Post {
 	@JsonIgnore
 	private List<Comment> comments;
 	
-	@JoinColumn(name="userId")
-	@ManyToOne
-	private User author;
+//	@JoinColumn(name="userId")
+//	@ManyToOne
+	@Column
+	private String authorId;
 
 	public Integer getpId() {
 		return pId;
@@ -87,12 +89,23 @@ public class Post {
 		this.comments = comments;
 	}
 
-	public User getAuthor() {
-		return author;
+	public String getAuthorId() {
+		return authorId;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setAuthorId(String authorId) {
+		this.authorId = authorId;
+	}
+
+	public Post(Integer pId, String title, String description, LocalDateTime posted, List<Comment> comments,
+			String authorId) {
+		super();
+		this.pId = pId;
+		this.title = title;
+		this.description = description;
+		this.posted = posted;
+		this.comments = comments;
+		this.authorId = authorId;
 	}
 
 	public Post() {
@@ -100,20 +113,30 @@ public class Post {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Post(Integer pId, String title, String description, LocalDateTime posted, List<Comment> comments,
-			User author) {
-		super();
-		this.pId = pId;
-		this.title = title;
-		this.description = description;
-		this.posted = posted;
-		this.comments = comments;
-		this.author = author;
+	@Override
+	public int hashCode() {
+		return Objects.hash(authorId, comments, description, pId, posted, title);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Post other = (Post) obj;
+		return Objects.equals(authorId, other.authorId) && Objects.equals(comments, other.comments)
+				&& Objects.equals(description, other.description) && Objects.equals(pId, other.pId)
+				&& Objects.equals(posted, other.posted) && Objects.equals(title, other.title);
 	}
 
 	@Override
 	public String toString() {
 		return "Post [pId=" + pId + ", title=" + title + ", description=" + description + ", posted=" + posted
-				+ ", comments=" + comments + ", author=" + author + "]";
+				+ ", comments=" + comments + ", authorId=" + authorId + "]";
 	}
+
+	
 }

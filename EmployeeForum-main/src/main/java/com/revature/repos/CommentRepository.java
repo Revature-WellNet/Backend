@@ -15,6 +15,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	
 	public Optional<Comment> findByRoot(Post root);
 	
-	public List<Comment> findByAuthor(User author);
+//	public List<Comment> findByAuthor(User author);
 
 }
