@@ -44,10 +44,10 @@ public class CommentController {
 	}
 
 	
-	@GetMapping("user/{user}")
-	public List<Comment> findCommentByUser(@PathVariable User user) {
-		return commentRepository.findByAuthor(user);
-	}
+//	@GetMapping("user/{user}")
+//	public List<Comment> findCommentByUser(@PathVariable User user) {
+//		return commentRepository.findByAuthor(user);
+//	}
 
 	@PostMapping("/add")
 	public ResponseEntity<Comment> addComment(@RequestBody Comment c) {
@@ -58,7 +58,7 @@ public class CommentController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Comment> updateComment(@PathVariable Integer id, @RequestBody Comment c) {
 		Comment comment = commentRepository.findById(id).get();
-		comment.setAuthor(c.getAuthor());
+		comment.setAuthorId(c.getAuthorId());
 		comment.setBody(c.getBody());
 		comment.setCreated();
 		comment.setRoot(c.getRoot());
