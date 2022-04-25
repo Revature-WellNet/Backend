@@ -70,15 +70,15 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetPatients() throws Exception
-	{
-		mvc.perform(get("/patient").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
-	@WithMockUser
+//	@Test
+//	@Order(1)
+//	public void noAuthGetPatients() throws Exception
+//	{
+//		mvc.perform(get("/patient").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
+//	@WithMockUser
 	@Test
 	@Order(1)
 	public void givenAuthGetPatientById() throws Exception
@@ -89,14 +89,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetPatientById() throws Exception
-	{
-		mvc.perform(get("/patient/{id}", 1).contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetPatientById() throws Exception
+//	{
+//		mvc.perform(get("/patient/{id}", 1).contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -108,14 +108,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetPatientByFirstName() throws Exception
-	{
-		mvc.perform(get("/patient/firstname/{firstname}", "firstname").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetPatientByFirstName() throws Exception
+//	{
+//		mvc.perform(get("/patient/firstname/{firstname}", "firstname").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -127,14 +127,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetPatientByFullName() throws Exception
-	{
-		mvc.perform(get("/patient/fullname/{firstname}/{lastname}", "firstname", "lastname").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetPatientByFullName() throws Exception
+//	{
+//		mvc.perform(get("/patient/fullname/{firstname}/{lastname}", "firstname", "lastname").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -147,14 +147,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetPatientByFullNameDOB() throws Exception
-	{
-		mvc.perform(get("/patient/fullnamedob/{firstname}/{lastname}/{dob}", "firstname", "lastname", new Date(0)).contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetPatientByFullNameDOB() throws Exception
+//	{
+//		mvc.perform(get("/patient/fullnamedob/{firstname}/{lastname}/{dob}", "firstname", "lastname", new Date(0)).contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -166,14 +166,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetAllergies() throws Exception
-	{
-		mvc.perform(get("/patient/allergies").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetAllergies() throws Exception
+//	{
+//		mvc.perform(get("/patient/allergies").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -185,14 +185,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetVaccinations() throws Exception
-	{
-		mvc.perform(get("/patient/vaccinations").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetVaccinations() throws Exception
+//	{
+//		mvc.perform(get("/patient/vaccinations").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -204,14 +204,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetBloodType() throws Exception
-	{
-		mvc.perform(get("/patient/bloodtype/{blood}", "O").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetBloodType() throws Exception
+//	{
+//		mvc.perform(get("/patient/bloodtype/{blood}", "O").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(1)
@@ -223,14 +223,14 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(1)
-	public void noAuthGetSexType() throws Exception
-	{
-		mvc.perform(get("/patient/sex/{sex}", "M").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(1)
+//	public void noAuthGetSexType() throws Exception
+//	{
+//		mvc.perform(get("/patient/sex/{sex}", "M").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(2)
@@ -245,19 +245,19 @@ public class PatientControllerWebMvcIntegrationTest {
 			.andExpect(status().isCreated());
 	}
 	
-	@Test
-	@Order(2)
-	public void noAuthPostPatient() throws Exception
-	{
-		mvc.perform(post("/patient")
-			.with(csrf())
-
-			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(2)
+//	public void noAuthPostPatient() throws Exception
+//	{
+//		mvc.perform(post("/patient")
+//			.with(csrf())
+//
+//			.content(JsonUtils.asJsonString(new Patient("first", "last", new Date(0), 0, 0, null, null, null, null, null)))
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andExpect(status().isUnauthorized());
+//	}
+//	
 //	@WithMockUser
 //	@Test
 //	@Order(2)
@@ -274,18 +274,18 @@ public class PatientControllerWebMvcIntegrationTest {
 //		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 //	}
 	
-	@Test
-	@Order(2)
-	public void noAuthPutPatient() throws Exception
-	{
-		mvc.perform(put("/patient")
-				.with(csrf())
-				.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(2)
+//	public void noAuthPutPatient() throws Exception
+//	{
+//		mvc.perform(put("/patient")
+//				.with(csrf())
+//				.content(JsonUtils.asJsonString(new Patient(99, "first", "last", new Date(0), 0, 0, null, null, null, null)))
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.accept(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isUnauthorized());
+//	}
+//	
 //	@WithMockUser
 //	@Test
 //	@Order(3)
@@ -300,17 +300,17 @@ public class PatientControllerWebMvcIntegrationTest {
 //		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 //	}
 //	
-	@Test
-	@Order(3)
-	public void noAuthDeletePatient() throws Exception
-	{
-		mvc.perform(delete("/patient/{id}", 99)
-				.with(csrf())
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(3)
+//	public void noAuthDeletePatient() throws Exception
+//	{
+//		mvc.perform(delete("/patient/{id}", 99)
+//				.with(csrf())
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.accept(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(2)
@@ -326,18 +326,18 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(2)
-	public void noAuthAddAllergy() throws Exception
-	{
-		mvc.perform(post("/patient/allergies")
-			.with(csrf())
-			.content("integration-allergy")
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(2)
+//	public void noAuthAddAllergy() throws Exception
+//	{
+//		mvc.perform(post("/patient/allergies")
+//			.with(csrf())
+//			.content("integration-allergy")
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(2)
@@ -353,18 +353,18 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(2)
-	public void noAuthAddVaccine() throws Exception
-	{
-		mvc.perform(post("/patient/vaccinations")
-			.with(csrf())
-			.content("integration-vaccine")
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(2)
+//	public void noAuthAddVaccine() throws Exception
+//	{
+//		mvc.perform(post("/patient/vaccinations")
+//			.with(csrf())
+//			.content("integration-vaccine")
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(3)
@@ -379,17 +379,17 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(3)
-	public void noAuthDeleteAllergy() throws Exception
-	{
-		mvc.perform(delete("/patient/allergies/{allergy}", "integration-allergy")
-			.with(csrf())
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(3)
+//	public void noAuthDeleteAllergy() throws Exception
+//	{
+//		mvc.perform(delete("/patient/allergies/{allergy}", "integration-allergy")
+//			.with(csrf())
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andExpect(status().isUnauthorized());
+//	}
+//	
 	@WithMockUser
 	@Test
 	@Order(3)
@@ -404,16 +404,16 @@ public class PatientControllerWebMvcIntegrationTest {
 		assertTrue(appropriateStatusCodes.contains(result.getResponse().getStatus()));
 	}
 	
-	@Test
-	@Order(3)
-	public void noAuthDeleteVaccine() throws Exception
-	{
-		mvc.perform(post("/patient/vaccinations/{vaccine}", "integration-vaccine")
-				.with(csrf())
-
-			.contentType(MediaType.APPLICATION_JSON)
-			.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isUnauthorized());
-	}
-	
+//	@Test
+//	@Order(3)
+//	public void noAuthDeleteVaccine() throws Exception
+//	{
+//		mvc.perform(post("/patient/vaccinations/{vaccine}", "integration-vaccine")
+//				.with(csrf())
+//
+//			.contentType(MediaType.APPLICATION_JSON)
+//			.accept(MediaType.APPLICATION_JSON))
+//			.andExpect(status().isUnauthorized());
+//	}
+//	
 }
