@@ -1,4 +1,4 @@
-package com.revature.roomservice.model;
+package com.revature.areaservice.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +7,6 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
-
-@Data
-public class Role {
-	private int roleId;
-	private String role;
+public enum Specialization {
+	General_Practicioner, Primary_Care, Pediatrician, Radiologist, General_Surgeon;
 }
