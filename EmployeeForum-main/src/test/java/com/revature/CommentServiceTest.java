@@ -18,8 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.revature.models.Comment;
 import com.revature.models.Post;
-import com.revature.models.Role;
-import com.revature.models.User;
 import com.revature.repos.CommentRepository;
 import com.revature.services.CommentService;
 
@@ -41,8 +39,8 @@ public class CommentServiceTest {
 	@Test
 	public void getCommentsTest() {
 		List<Comment> comments = new ArrayList<Comment>();
-		User userNurse = new User("1", "Name", "Last", "Email", new Role(1, "nurse"));
-		User userDoctor = new User("2", "Name", "Last", "Email", new Role(2, "doctor"));
+		String userNurse = ""; // = new User("1", "Name", "Last", "Email", new Role(1, "nurse"));
+		String userDoctor = ""; // = new User("2", "Name", "Last", "Email", new Role(2, "doctor"));
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userNurse);
 		Post post2 = new Post(2, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(100, "This is a comment", LocalDateTime.now(), userNurse, post);
@@ -61,7 +59,7 @@ public class CommentServiceTest {
 	@Test 
 	public void getCommentsByIdTest() {
 		List<Comment> comments = new ArrayList<Comment>();
-		User userNurse = new User("1", "Name", "Last", "Email", new Role(1, "nurse"));
+		String userNurse = "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userNurse);
 		Comment comment = new Comment(100, "This is a comment", LocalDateTime.now(), userNurse, post);
 		comments.add(comment);
@@ -72,27 +70,11 @@ public class CommentServiceTest {
 		assertEquals("This is a comment", c.getBody());
 	}
 	
-	@Test 
-	public void getCommentsByUser() {
-		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("2", "Name", "Last", "Email", new Role(2, "doctor"));
-		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
-		Comment comment = new Comment(100, "This is a comment", LocalDateTime.now(), userDoctor, post);
-		Comment comment2 = new Comment(200, "This is a second comment", LocalDateTime.now(), userDoctor, post);
-		comments.add(comment);
-		comments.add(comment2);
-		
-		when(commentRepository.findByAuthor(userDoctor)).thenReturn(comments);
-		List<Comment> commentsList = commentService.findCommentByUser(userDoctor);
-		
-		assertEquals(2, commentsList.size());
-		verify(commentRepository, times(1)).findByAuthor(userDoctor);
-	}
 	
 	@Test
 	public void addCommentTest() {
 		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor= "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);
@@ -104,7 +86,7 @@ public class CommentServiceTest {
 	@Test
 	public void updateCommentTest() {
 		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor= "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);
@@ -117,7 +99,7 @@ public class CommentServiceTest {
 	@Test
 	public void deleteCommentTest() {
 		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor= "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);

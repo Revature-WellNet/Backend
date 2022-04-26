@@ -28,9 +28,9 @@ public class CommentService {
 		return commentRepository.getById(id);
 	}
 	
-	public List<Comment> findCommentByUser(User user) {
-		return commentRepository.findByAuthor(user);
-	}
+//	public List<Comment> findCommentByUser(User user) {
+//		return commentRepository.findByAuthor(user);
+//	}
 	
 	public Comment addComment(Comment c) {
 //		Comment comment = new Comment();

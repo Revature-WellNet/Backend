@@ -18,8 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.revature.models.Comment;
 import com.revature.models.Post;
-import com.revature.models.Role;
-import com.revature.models.User;
 import com.revature.repos.PostRepository;
 import com.revature.services.PostService;
 
@@ -40,8 +38,8 @@ public class PostServiceTest {
 	public void getPostTest() {
 		List<Post> post = new ArrayList<Post>();
 		List<Comment> comments = new ArrayList<Comment>();
-		User userNurse = new User("1", "Name", "Last", "Email", new Role(1, "nurse"));
-		User userDoctor = new User("2", "Name", "Last", "Email", new Role(2, "doctor"));
+		String userNurse = "";
+		String userDoctor = "";
 		Post post1 = new Post(1, "Title for post1", "Description goes here", LocalDateTime.now(), comments, userNurse);
 		Post post2 = new Post(2, "Title for post2", "Description goes here", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(100, "This is a comment", LocalDateTime.now(), userNurse, post1);
@@ -63,7 +61,7 @@ public class PostServiceTest {
 	{
 		List<Post> posts = new ArrayList<Post>();
 		List<Comment> comments = new ArrayList<Comment>();
-		User userNurse = new User("1", "Name", "Last", "Email", new Role(1, "nurse"));
+		String userNurse = "";
 		Post post = new Post(1, "Title", "This is a description", LocalDateTime.now(), comments, userNurse);
 		Comment comment = new Comment(100, "This is a comment", LocalDateTime.now(), userNurse, post);
 		comments.add(comment);
@@ -77,7 +75,7 @@ public class PostServiceTest {
 	public void addPostTest() {
 		List<Post> posts = new ArrayList<Post>();
 		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor = "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);
@@ -91,7 +89,7 @@ public class PostServiceTest {
 	public void updatePostTest() {
 		List<Post> posts = new ArrayList<Post>();
 		List<Comment> comments = new ArrayList<Comment>();
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor = "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);
@@ -105,8 +103,7 @@ public class PostServiceTest {
 	public void deletePostTest() {
 		List<Post> posts = new ArrayList<Post>();
 		List<Comment> comments = new ArrayList<Comment>();
-		
-		User userDoctor = new User("1", "Name", "Last", "Email", new Role(1, "doctor"));
+		String userDoctor = "";
 		Post post = new Post(1, "This is the title", "This is a description", LocalDateTime.now(), comments, userDoctor);
 		Comment comment = new Comment(200, "This is a comment", LocalDateTime.now(), userDoctor, post);
 		comments.add(comment);
