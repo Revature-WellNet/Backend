@@ -162,11 +162,11 @@ public class PatientService {
 		return sexDAO.findBySex(name);
 	}
 	
-	public List<Patient> findPatientByResoved() {
+	public List<Patient> findPatientByResolved() {
         List<Patient> listP = new ArrayList<>();
         //List<DiagnosisForm> 
         for (Patient p : patientDAO.findAll()) {
-        	String url = "http://localhost:8097/patientId/" + p.getPatientId();
+        	String url = "http://patient-service/patientId/" + p.getPatientId();
         	DiagnosisFormList dFormsList = restTemplate.getForObject(url, DiagnosisFormList.class);
             System.out.println(dFormsList);
         	List<DiagnosisForm> dForms = dFormsList.getDiagnosisForms();

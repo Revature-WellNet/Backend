@@ -329,7 +329,7 @@ public class PatientServiceTest {
         when(patientDAO.findAll()).thenReturn(list);
         when(restTemplate.getForObject(anyString(), any())).thenReturn(response);
         //test
-        List<Patient> favList = patientService.findPatientByResoved();
+        List<Patient> favList = patientService.findPatientByResolved();
         Assertions.assertEquals(1, favList.size());
 
         verify(patientDAO, times(1)).findAll();
