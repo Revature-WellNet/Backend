@@ -13,7 +13,7 @@ import com.revature.models.User;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	
-	public Optional<Comment> findByRoot(Post root);
+	public List<Comment> findByRoot(Post root);
 	
 //	public List<Comment> findByAuthor(User author);
 
