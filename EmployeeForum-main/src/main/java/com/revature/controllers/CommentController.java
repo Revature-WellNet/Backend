@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Comment;
+import com.revature.models.Post;
 import com.revature.models.User;
 import com.revature.repos.CommentRepository;
+import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/comments")
@@ -30,11 +32,19 @@ public class CommentController {
 
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	private PostService postService;
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public List<Comment> findAllComments() {
 		return commentRepository.findAll();
+	}
+	
+	@GetMapping("/post/{id}")
+	public List<Comment> findCommentByPost(@PathVariable Integer id) {
+		Post p = postService.findPostById(id);
+		return commentRepository.findByRoot(p);
 	}
 
 	@GetMapping("/{id}")
