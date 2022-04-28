@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -166,17 +167,18 @@ public class PatientService {
         List<Patient> listP = new ArrayList<>();
         //List<DiagnosisForm> 
         for (Patient p : patientDAO.findAll()) {
-        	String url = "http://patient-service/patientId/" + p.getPatientId();
-        	DiagnosisFormList dFormsList = restTemplate.getForObject(url, DiagnosisFormList.class);
-            System.out.println(dFormsList);
-        	List<DiagnosisForm> dForms = dFormsList.getDiagnosisForms();
-            for( DiagnosisForm df: dForms){
-                if(df.isResolutionStatus() == false) {
+        	String url = "http://localhost:8097/wellnet/diagnosis/patientId/" + p.getPatientId();
+        	ResponseEntity<DiagnosisForm[]> response = restTemplate.getForEntity(url, DiagnosisForm[].class);
+        	DiagnosisForm[] dFormsList = response.getBody();
+            for( DiagnosisForm df: dFormsList){
+            	System.out.println("\n\n\n\n\nn\n\n\nn\n\n\n" + df);
+                if(!df.isResolutionStatus()) {
                     listP.add(p);
                     break;
                 }
         	}
         }
+        System.out.println("\n\n\n\nnn\n\n\n\n\n\n\n" + listP);
         return listP;
     }
 

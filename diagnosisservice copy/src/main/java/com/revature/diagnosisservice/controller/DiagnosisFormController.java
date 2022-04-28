@@ -1,5 +1,7 @@
 package com.revature.diagnosisservice.controller;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.revature.diagnosisservice.model.DiagnosisForm;
 import com.revature.diagnosisservice.model.Patient;
@@ -28,8 +31,8 @@ public class DiagnosisFormController {
 	@Autowired
 	private DiagnosisFormService diagnosisFormService;
 
-//	@Autowired
-//	private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	
 	@GetMapping
@@ -51,15 +54,15 @@ public class DiagnosisFormController {
 		return ResponseEntity.noContent().build();
 	}
 
-	
 	@GetMapping("/patientId/{patientId}")
-
 	public ResponseEntity<List<DiagnosisForm>> getDiagnosisFormByPatientId(@PathVariable("patientId") int patientId) {
 
-		//Patient patient = restTemplate.getForObject("http://patient-service/patientId" + patientId, Patient.class);
-		Patient patient = new Patient(2, "initial", "patient", null, 56, 123, null, null, null ,null, null);
-
+		Patient patient = restTemplate.getForObject("http://localhost:8095/patient/" + patientId, Patient.class);
+		//Patient patient = new Patient(2, "initial", "patient", null, 56, 123, null, null, null ,null, null);
+		System.out.println(patient);
 		Optional<List<DiagnosisForm>> diags = diagnosisFormService.findDiagnosisFormByPatient(patient);
+		System.out.println(diags);
+		System.out.println(diags.get());
 		if (diags != null) {
 			return ResponseEntity.ok(diags.get());
 		}
